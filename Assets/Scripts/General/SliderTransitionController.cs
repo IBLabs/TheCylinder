@@ -1,9 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
@@ -16,7 +10,7 @@ public class SliderTransitionController : ITransitionController
 {
     public Slider slider;
     public float transitionDuration = 1f;
-    public Ease transitionEase = Ease.Linear; // Add a public variable for the easing type
+    public Ease transitionEase = Ease.Linear;
 
     private bool isTransitioning;
 
