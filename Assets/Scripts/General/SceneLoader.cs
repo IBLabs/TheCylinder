@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.Netcode;
 
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -14,6 +15,9 @@ public class SceneLoader : MonoBehaviour
     [Header("Interaction")]
     public InputActionProperty nextSceneAction;
     public InputActionProperty previousSceneAction;
+
+    [Header("Events")]
+    public UnityEvent<float> TransitionWillStart;
 
     private string[] scenesToSkip = { "NetworkScene", "NetworkBootstrapScene" };
 
@@ -47,6 +51,8 @@ public class SceneLoader : MonoBehaviour
 
     private IEnumerator LoadNextSceneWithTransition()
     {
+        TransitionWillStart?.Invoke(transitionController.transitionDuration);
+
         yield return transitionController.FadeToBlackAsync();
 
         PerformLoadNextScene();
