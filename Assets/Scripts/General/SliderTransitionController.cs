@@ -20,13 +20,20 @@ public class SliderTransitionController : ITransitionController
 
     private bool isTransitioning;
 
+    private void Start()
+    {
+        FadeToScene();
+    }
+
     public override void FadeToScene()
     {
         if (isTransitioning) return;
 
         isTransitioning = true;
 
-        slider.DOValue(0f, transitionDuration).SetEase(transitionEase).OnComplete(() =>
+        slider.direction = Slider.Direction.RightToLeft;
+
+        slider.DOValue(0f, transitionDuration).From(1f).SetEase(transitionEase).OnComplete(() =>
         {
             isTransitioning = false;
         });
@@ -38,7 +45,9 @@ public class SliderTransitionController : ITransitionController
 
         isTransitioning = true;
 
-        slider.DOValue(1f, transitionDuration).SetEase(transitionEase).OnComplete(() =>
+        slider.direction = Slider.Direction.LeftToRight;
+
+        slider.DOValue(1f, transitionDuration).From(0f).SetEase(transitionEase).OnComplete(() =>
         {
             isTransitioning = false;
         });
