@@ -11,15 +11,27 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
+using Unity.VisualScripting;
 
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class TestRelay : MonoBehaviour
 {
     [SerializeField] private TMP_InputField joinCodeInputField;
+    [SerializeField] private Button joinButton;
+    [SerializeField] private TextMeshProUGUI connectedText;
 
     public UnityEvent<string> OnRelayJoinCodeReceived;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            JoinRelay();
+        }
+    }
 
     public async void CreateRelay()
     {
@@ -49,7 +61,14 @@ public class TestRelay : MonoBehaviour
     public void JoinRelay()
     {
         string joinCode = joinCodeInputField.text;
-        JoinRelay(joinCode);
+        if (!string.IsNullOrEmpty(joinCode) && System.Text.RegularExpressions.Regex.IsMatch(joinCode, @"^[a-zA-Z0-9]{6}$"))
+        {
+            JoinRelay(joinCode);
+        }
+        else
+        {
+            Debug.Log("Invalid join code");
+        }
     }
 
     private async void JoinRelay(string joinCode)
@@ -63,6 +82,9 @@ public class TestRelay : MonoBehaviour
             RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
 
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
+
+            NetworkManager.Singleton.OnClientConnectedCallback += HandleClientConnect;
+            NetworkManager.Singleton.OnClientDisconnectCallback += HandleClientDisconnect;
 
             NetworkManager.Singleton.StartClient();
         }
@@ -92,5 +114,23 @@ public class TestRelay : MonoBehaviour
         {
             CreateRelay();
         }
+    }
+
+    private void HandleClientConnect(ulong clientId)
+    {
+        connectedText.gameObject.SetActive(true);
+
+        RemoveNetworkManagerListeners();
+    }
+
+    private void HandleClientDisconnect(ulong clientId)
+    {
+        RemoveNetworkManagerListeners();
+    }
+
+    private void RemoveNetworkManagerListeners()
+    {
+        NetworkManager.Singleton.OnClientConnectedCallback -= HandleClientConnect;
+        NetworkManager.Singleton.OnClientDisconnectCallback -= HandleClientDisconnect;
     }
 }

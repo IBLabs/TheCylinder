@@ -8,6 +8,7 @@ public class BuildConfigurator : MonoBehaviour
 {
     private static readonly string[] scenes = new string[] {
         "Assets/Scenes/Utilities/NetworkBootstrapScene.unity",
+        "Assets/Scenes/Minigames/RigidbodyTestScene/RigidbodyTestScene.unity",
         "Assets/Scenes/Minigames/TVShowSetScene/TVShowSetScene.unity",
         "Assets/Scenes/Minigames/SocketsScene/SocketsScene.unity",
         "Assets/Scenes/Minigames/NosePickScene/NosePickScene.unity",
@@ -47,7 +48,7 @@ public class BuildConfigurator : MonoBehaviour
         SetPlayerSettingsForMacBuild();
 
         string[] macScenes = scenes;
-        BuildPipeline.BuildPlayer(macScenes, "Builds/MacOSBuild2", BuildTarget.StandaloneOSX, BuildOptions.None);
+        BuildPipeline.BuildPlayer(macScenes, "Builds/PAGMAR Desktop Client", BuildTarget.StandaloneOSX, BuildOptions.None);
     }
 
     private static void UpdatePlatformIdentifier(string newIdentifier)
