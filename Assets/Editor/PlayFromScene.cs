@@ -2,6 +2,18 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
+public class NetworkBootstrapScenePlayer : MonoBehaviour
+{
+
+    [MenuItem("Tools/Play Network Lobby")]
+    public static void PlayNetworkLobby()
+    {
+        EditorSceneManager.OpenScene("Assets/Scenes/Utilities/NetworkBootstrapScene.unity");
+        EditorApplication.isPlaying = true;
+
+    }
+}
+
 public class PlayFromScene : EditorWindow
 {
     private string sceneName = "YourSceneName"; // Default scene name
