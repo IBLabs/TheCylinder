@@ -8,7 +8,12 @@ public class NetworkRigidbodySpawner : MonoBehaviour
 
     public void SpawnTargetObject()
     {
-        var instance = Instantiate(targetPrefab, transform.position, transform.rotation);
+        SpawnTargetObject(transform.position);
+    }
+
+    public void SpawnTargetObject(Vector3 position)
+    {
+        var instance = Instantiate(targetPrefab, position, transform.rotation);
 
         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
         instanceNetworkObject.Spawn(destroyWithScene: true);

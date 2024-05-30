@@ -3402,13 +3402,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1147478307}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64ed74b540dff44e9acc6db94aa9dcf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverAddressInputField: {fileID: 0}
-  useConsole: 0
+  useConsole: 1
   uiConsoleLoggerPrefab: {fileID: 3809832072226563602, guid: 205de0671e40742bf89f30fd5046a1e2,
     type: 3}
 --- !u!4 &1147478309
