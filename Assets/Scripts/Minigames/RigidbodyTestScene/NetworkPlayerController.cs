@@ -1,31 +1,53 @@
+using DG.Tweening;
+
 using Unity.Netcode;
 
 using UnityEngine;
 
 public class NetworkPlayerController : NetworkBehaviour
 {
-    private CharacterController characterController; // CharacterController reference
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float gravity = 9.8f;
 
-    // Start is called before the first frame update
+    private CharacterController characterController;
+    private Camera playerCamera;
+    private Transform cameraPivotTransform;
+
     void Start()
     {
-        // Get the CharacterController component if it exists
         characterController = GetComponent<CharacterController>();
+        cameraPivotTransform = GameObject.FindGameObjectWithTag("CameraPivot").transform;
+        playerCamera = cameraPivotTransform.GetComponentInChildren<Camera>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // if (!IsOwner) return;
+        if (Input.GetKeyDown(KeyCode.LeftBracket))
+        {
+            RotateCamera(false);
+        }
+        else if (Input.GetKeyDown(KeyCode.RightBracket))
+        {
+            RotateCamera(true);
+        }
 
-        float moveSpeed = 5f; // Adjust the movement speed as needed
-        float gravity = 9.8f; // Adjust the gravity value as needed
+        // if (!IsOwner) return;
 
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
         Vector3 movementDirection = new Vector3(horizontalInput, 0f, verticalInput);
         movementDirection.Normalize();
+
+        Vector3 cameraForward = playerCamera.transform.forward;
+        cameraForward.y = 0;
+        cameraForward.Normalize();
+
+        Vector3 cameraRight = playerCamera.transform.right;
+        cameraRight.y = 0;
+        cameraRight.Normalize();
+
+        movementDirection = cameraForward * movementDirection.z + cameraRight * movementDirection.x;
 
         if (characterController != null)
         {
@@ -40,5 +62,10 @@ public class NetworkPlayerController : NetworkBehaviour
         {
             transform.Translate(movementDirection * moveSpeed * Time.deltaTime);
         }
+    }
+
+    private void RotateCamera(bool clockwise)
+    {
+        cameraPivotTransform.DORotate(new Vector3(0, clockwise ? 90f : -90f, 0), 0.5f).SetRelative(true).SetEase(Ease.OutQuad);
     }
 }

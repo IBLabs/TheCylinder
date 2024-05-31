@@ -1,30 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
-
-using Unity.XR.CoreUtils;
-
 using UnityEngine;
 using UnityEngine.AI;
 
 public class SimpleNavmeshAgentController : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    [SerializeField] private float wanderRadius = 10f;
 
-    private NavMeshAgent _agent;
+    [SerializeField] private float minWanderTimer = 1f;
+    [SerializeField] private float maxWanderTimer = 3f;
 
-    void Start()
+    private NavMeshAgent agent;
+    private float _timer;
+    private float _currentTime;
+
+    private void Start()
     {
-        _agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
+    }
 
-        if (target == null)
+    private void Update()
+    {
+        _timer += Time.deltaTime;
+
+        if (_timer >= _currentTime)
         {
-            var xrOrigin = FindFirstObjectByType<XROrigin>();
-            if (xrOrigin != null)
-            {
-                target = xrOrigin.transform;
-            }
+            Vector3 newPos = RandomNavmeshLocation(wanderRadius);
+            agent.SetDestination(newPos);
+            _timer = 0f;
+            _currentTime = Random.Range(minWanderTimer, maxWanderTimer);
         }
+    }
 
-        _agent.SetDestination(target.position);
+    private Vector3 RandomNavmeshLocation(float radius)
+    {
+        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        randomDirection += transform.position;
+        NavMeshHit navHit;
+        NavMesh.SamplePosition(randomDirection, out navHit, radius, -1);
+        return navHit.position;
     }
 }

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36289eb8f73e4116a263db32c009725, type: 3}
   m_Name: ProductionPlatformIdentifier
   m_EditorClassIdentifier: 
-  identifier: MAC1_BUILD
+  identifier: VR_BUILD

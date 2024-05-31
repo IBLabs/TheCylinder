@@ -34,7 +34,17 @@ public class ClickSpawner : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            PerformSpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId);
+            if (NetworkManager.Singleton != null)
+            {
+                PerformSpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId);
+            }
+
+            // for single-scene debugging purposes
+            else
+            {
+                Debug.Log("network manager is null, spawning regularly");
+                Instantiate(targetPlayerPrefab, transform.position, transform.rotation);
+            }
         }
     }
 
