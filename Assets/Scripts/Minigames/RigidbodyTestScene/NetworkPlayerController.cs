@@ -3,69 +3,108 @@ using DG.Tweening;
 using Unity.Netcode;
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class NetworkPlayerController : NetworkBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private float gravity = 9.8f;
+    [SerializeField] private bool gravityEnabled = true;
+    [SerializeField] private InputActionProperty moveAction;
+    [SerializeField] private Camera playerCamera;
 
     private CharacterController characterController;
-    private Camera playerCamera;
-    private Transform cameraPivotTransform;
+
+    void Awake()
+    {
+        characterController = GetComponent<CharacterController>();
+
+        if (characterController != null && NetworkManager.Singleton != null)
+        {
+            characterController.enabled = false;
+        }
+    }
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
-        cameraPivotTransform = GameObject.FindGameObjectWithTag("CameraPivot").transform;
-        playerCamera = cameraPivotTransform.GetComponentInChildren<Camera>();
+        var cameraGameObject = GameObject.FindGameObjectWithTag("DesktopCamera");
+        if (cameraGameObject != null)
+        {
+            playerCamera = cameraGameObject.GetComponent<Camera>();
+        }
+
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        if (IsOwner)
+        {
+            var simplePlayerSpawner = FindAnyObjectByType<SimplePlayerSpawner>();
+            if (simplePlayerSpawner != null)
+            {
+                transform.position = simplePlayerSpawner.transform.position;
+            }
+
+            if (characterController != null)
+            {
+                characterController.enabled = true;
+            }
+
+            base.OnNetworkSpawn();
+        }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftBracket))
+        if (Input.GetKeyDown(KeyCode.KeypadPlus) || Input.GetKeyDown(KeyCode.Plus))
         {
-            RotateCamera(false);
+            moveSpeed += .1f;
+            Debug.Log("Move speed increased to: " + moveSpeed);
         }
-        else if (Input.GetKeyDown(KeyCode.RightBracket))
+        else if (Input.GetKeyDown(KeyCode.KeypadMinus) || Input.GetKeyDown(KeyCode.Minus))
         {
-            RotateCamera(true);
+            moveSpeed -= .1f;
+            Debug.Log("Move speed decreased to: " + moveSpeed);
         }
 
-        // if (!IsOwner) return;
+        if (!IsOwner && NetworkManager.Singleton != null) return;
 
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        Vector2 moveInput = moveAction.action.ReadValue<Vector2>();
+
+        float horizontalInput = moveInput.x;
+        float verticalInput = moveInput.y;
 
         Vector3 movementDirection = new Vector3(horizontalInput, 0f, verticalInput);
         movementDirection.Normalize();
 
-        Vector3 cameraForward = playerCamera.transform.forward;
-        cameraForward.y = 0;
-        cameraForward.Normalize();
+        if (playerCamera != null)
+        {
+            Vector3 cameraForward = playerCamera.transform.forward;
+            cameraForward.y = 0;
+            cameraForward.Normalize();
 
-        Vector3 cameraRight = playerCamera.transform.right;
-        cameraRight.y = 0;
-        cameraRight.Normalize();
+            Vector3 cameraRight = playerCamera.transform.right;
+            cameraRight.y = 0;
+            cameraRight.Normalize();
 
-        movementDirection = cameraForward * movementDirection.z + cameraRight * movementDirection.x;
+            movementDirection = cameraForward * movementDirection.z + cameraRight * movementDirection.x;
+        }
 
         if (characterController != null)
         {
             characterController.Move(movementDirection * moveSpeed * Time.deltaTime);
 
-            if (!characterController.isGrounded)
+            if (movementDirection != Vector3.zero)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+                transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime * rotationSpeed);
+            }
+
+            if (!characterController.isGrounded && gravityEnabled)
             {
                 characterController.Move(Vector3.down * gravity * Time.deltaTime);
             }
         }
-        else
-        {
-            transform.Translate(movementDirection * moveSpeed * Time.deltaTime);
-        }
-    }
-
-    private void RotateCamera(bool clockwise)
-    {
-        cameraPivotTransform.DORotate(new Vector3(0, clockwise ? 90f : -90f, 0), 0.5f).SetRelative(true).SetEase(Ease.OutQuad);
     }
 }

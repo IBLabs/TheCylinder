@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using TMPro;
@@ -11,11 +9,14 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
-using Unity.VisualScripting;
 
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class TestRelay : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class TestRelay : MonoBehaviour
     [SerializeField] private TextMeshProUGUI connectedText;
 
     public UnityEvent<string> OnRelayJoinCodeReceived;
+    public UnityEvent<ulong> OnClientConnected;
 
     void Update()
     {
@@ -120,6 +122,8 @@ public class TestRelay : MonoBehaviour
     {
         connectedText.gameObject.SetActive(true);
 
+        OnClientConnected?.Invoke(clientId);
+
         RemoveNetworkManagerListeners();
     }
 
@@ -134,3 +138,20 @@ public class TestRelay : MonoBehaviour
         NetworkManager.Singleton.OnClientDisconnectCallback -= HandleClientDisconnect;
     }
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(TestRelay))]
+public class MyComponentEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        TestRelay myComponent = (TestRelay)target;
+        if (GUILayout.Button("Trigger OnClientConnected"))
+        {
+            myComponent.OnClientConnected.Invoke(0);
+        }
+    }
+}
+#endif
