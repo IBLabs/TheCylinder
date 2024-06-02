@@ -188,7 +188,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 2169423574052550924}
   m_HandleRect: {fileID: 0}
@@ -213,5 +213,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 3429744871274344637}
-  transitionDuration: 1
-  transitionEase: 8
+  transitionDuration: 0.5
+  transitionEase: 13

@@ -5005,6 +5005,60 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1801636352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1801636354}
+  - component: {fileID: 1801636353}
+  m_Layer: 0
+  m_Name: Lobby_TableWallsColliderMesh1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!64 &1801636353
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801636352}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3253526844970356465, guid: a5e5df17969f246c0997452c92c880d4, type: 3}
+--- !u!4 &1801636354
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801636352}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: -1.157, z: 0.41}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1815237689
 GameObject:
   m_ObjectHideFlags: 0
@@ -6773,16 +6827,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TransitionSlider
       objectReference: {fileID: 0}
-    - target: {fileID: 6930416543991815870, guid: fc81d38f5b250466f9545e44433b6ec5,
-        type: 3}
-      propertyPath: transitionEase
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 6930416543991815870, guid: fc81d38f5b250466f9545e44433b6ec5,
-        type: 3}
-      propertyPath: transitionDuration
-      value: 0.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6836,3 +6880,4 @@ SceneRoots:
   - {fileID: 1145825049}
   - {fileID: 1970496222}
   - {fileID: 427986364}
+  - {fileID: 1801636354}

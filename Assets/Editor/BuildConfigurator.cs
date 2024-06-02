@@ -8,11 +8,7 @@ public class BuildConfigurator : MonoBehaviour
 {
     private static readonly string[] scenes = new string[] {
         "Assets/Scenes/Utilities/NetworkBootstrapScene.unity",
-        "Assets/Scenes/Minigames/RigidbodyTestScene/RigidbodyTestScene.unity",
-        "Assets/Scenes/Minigames/TVShowSetScene/TVShowSetScene.unity",
-        "Assets/Scenes/Minigames/SocketsScene/SocketsScene.unity",
-        "Assets/Scenes/Minigames/NosePickScene/NosePickScene.unity",
-        "Assets/Scenes/Minigames/BowScene/BowScene.unity",
+        "Assets/Scenes/Minigames/RigidbodyTestScene/RigidbodyTestScene.unity"
      };
 
     private static readonly string platformIdentifierAssetPath = "Assets/ScriptableObjects/ProductionPlatformIdentifier.asset";
