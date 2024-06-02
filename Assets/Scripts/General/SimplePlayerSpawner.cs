@@ -5,6 +5,7 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
 public class SimplePlayerSpawner : NetworkBehaviour
@@ -21,11 +22,45 @@ public class SimplePlayerSpawner : NetworkBehaviour
         }
     }
 
+    public void OnSpawnRequested(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            if (NetworkManager.Singleton != null)
+            {
+                var players = FindObjectsByType<NetworkPlayerController>(FindObjectsSortMode.None);
+
+                foreach (var player in players)
+                {
+                    if (player.IsOwner)
+                    {
+                        Debug.Log("player already spawned");
+                        return;
+                    }
+                }
+
+                SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId, true);
+            }
+            else
+            {
+                var player = FindAnyObjectByType<NetworkPlayerController>();
+
+                if (player != null)
+                {
+                    Debug.Log("player already spawned");
+                    return;
+                }
+
+                SpawnPlayer();
+            }
+        }
+    }
+
     public void OnClientConnected(ulong clientId)
     {
         if (!IsServer)
         {
-            SpawnPlayerServerRpc(clientId);
+            SpawnPlayerServerRpc(clientId, false);
         }
     }
 
@@ -33,16 +68,16 @@ public class SimplePlayerSpawner : NetworkBehaviour
     {
         if (!IsServer)
         {
-            SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId);
+            SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId, false);
         }
 
         base.OnNetworkSpawn();
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void SpawnPlayerServerRpc(ulong clientId)
+    private void SpawnPlayerServerRpc(ulong clientId, bool isRespawn)
     {
-        if (_didSpawn) return;
+        if (!isRespawn && _didSpawn) return;
 
         var newPlayer = SpawnPlayer();
 

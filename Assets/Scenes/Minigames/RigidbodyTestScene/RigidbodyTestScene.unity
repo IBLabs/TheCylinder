@@ -2003,7 +2003,7 @@ Transform:
   m_GameObject: {fileID: 461040388}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.000009228612, y: 2.512, z: -2.12}
+  m_LocalPosition: {x: 0.000009228611, y: 2.512, z: -2.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2096,6 +2096,137 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 891088943}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &589813586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 589813588}
+  - component: {fileID: 589813587}
+  m_Layer: 0
+  m_Name: Player Input
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &589813587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589813586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 811906504475b4abca0d10271343978e,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a0233be6-20d9-45ba-8178-c72b5c1f49b0
+    m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 78a6f537-1013-47eb-8a9b-348abcd6e759
+    m_ActionName: 'Player/Look[/Mouse/delta,/Pen/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a55b3a3e-9ad0-4d6b-8f71-4871123e540b
+    m_ActionName: 'Player/Fire[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 02035f47-ee8f-41bd-8524-b3ef336fbfe1
+    m_ActionName: 'UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9fa835a3-e7b9-44ab-aba2-1d0b8f6f3f3d
+    m_ActionName: 'UI/Submit[/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 27834ab7-e546-4226-99b0-6fa5a9220582
+    m_ActionName: 'UI/Cancel[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1645ae21-c7e5-4289-80e8-4f8e309f33ad
+    m_ActionName: 'UI/Point[/Mouse/position,/Pen/position]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dbc97a1a-1bba-402a-be38-c9b1215c1016
+    m_ActionName: 'UI/Click[/Mouse/leftButton,/Pen/tip]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a640c3fa-0931-49fe-8d1d-267b06513b9f
+    m_ActionName: 'UI/ScrollWheel[/Mouse/scroll]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e6ffcbfc-a491-46c9-aba3-3bd28af5c0bd
+    m_ActionName: 'UI/MiddleClick[/Mouse/middleButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7e687f5c-a857-4f2a-b908-36a92e41f190
+    m_ActionName: 'UI/RightClick[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2b485957-ea4a-43cc-b057-8b176a4a2c8c
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2b330782-de13-4732-a133-2e81f45682a3
+    m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1893949630}
+        m_TargetAssemblyTypeName: SimplePlayerSpawner, Assembly-CSharp
+        m_MethodName: OnSpawnRequested
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e43f3171-c6c1-4c9a-aa04-a29b6a68c0de
+    m_ActionName: 'Player/Spawn[/Keyboard/z]'
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!4 &589813588
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589813586}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &632345986
 GameObject:
   m_ObjectHideFlags: 0
@@ -2523,8 +2654,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 943242333}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3701602, y: -0.0000020611074, z: 0.0000008212768, w: 0.92896795}
-  m_LocalPosition: {x: 0.000009228612, y: 2.512, z: -2.12}
+  m_LocalRotation: {x: 0.3701602, y: -0.0000020611071, z: 0.00000082127667, w: 0.92896795}
+  m_LocalPosition: {x: 0.000009228611, y: 2.512, z: -2.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -3588,7 +3719,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1233311427}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38699642, y: -0.0000020069656, z: 0.0000008423211, w: 0.92208123}
+  m_LocalRotation: {x: 0.38699642, y: -0.0000020069654, z: 0.00000084232096, w: 0.92208123}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -4326,6 +4457,7 @@ MonoBehaviour:
   - {fileID: 882221120}
   NonVRObjects:
   - {fileID: 943242333}
+  - {fileID: 589813586}
   OnPlatformDetected:
     m_PersistentCalls:
       m_Calls:
@@ -4640,3 +4772,4 @@ SceneRoots:
   - {fileID: 344360657}
   - {fileID: 1826477933}
   - {fileID: 1893949631}
+  - {fileID: 589813588}

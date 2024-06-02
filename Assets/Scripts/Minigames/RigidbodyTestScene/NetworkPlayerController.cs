@@ -15,6 +15,7 @@ public class NetworkPlayerController : NetworkBehaviour
     [SerializeField] private Camera playerCamera;
 
     private CharacterController characterController;
+    private Vector3 _movementDirection;
 
     void Awake()
     {
@@ -55,6 +56,25 @@ public class NetworkPlayerController : NetworkBehaviour
         }
     }
 
+    void FixedUpdate()
+    {
+        if (characterController != null)
+        {
+            characterController.Move(_movementDirection * moveSpeed * Time.deltaTime);
+
+            if (_movementDirection != Vector3.zero)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(_movementDirection, Vector3.up);
+                transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime * rotationSpeed);
+            }
+
+            if (!characterController.isGrounded && gravityEnabled)
+            {
+                characterController.Move(Vector3.down * gravity * Time.deltaTime);
+            }
+        }
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.KeypadPlus) || Input.GetKeyDown(KeyCode.Plus))
@@ -75,8 +95,7 @@ public class NetworkPlayerController : NetworkBehaviour
         float horizontalInput = moveInput.x;
         float verticalInput = moveInput.y;
 
-        Vector3 movementDirection = new Vector3(horizontalInput, 0f, verticalInput);
-        movementDirection.Normalize();
+        _movementDirection = new Vector3(horizontalInput, 0f, verticalInput);
 
         if (playerCamera != null)
         {
@@ -88,23 +107,9 @@ public class NetworkPlayerController : NetworkBehaviour
             cameraRight.y = 0;
             cameraRight.Normalize();
 
-            movementDirection = cameraForward * movementDirection.z + cameraRight * movementDirection.x;
+            _movementDirection = cameraForward * _movementDirection.z + cameraRight * _movementDirection.x;
         }
 
-        if (characterController != null)
-        {
-            characterController.Move(movementDirection * moveSpeed * Time.deltaTime);
 
-            if (movementDirection != Vector3.zero)
-            {
-                Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-                transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime * rotationSpeed);
-            }
-
-            if (!characterController.isGrounded && gravityEnabled)
-            {
-                characterController.Move(Vector3.down * gravity * Time.deltaTime);
-            }
-        }
     }
 }

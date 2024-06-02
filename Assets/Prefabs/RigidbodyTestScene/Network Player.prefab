@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 1824765837342335325}
   - component: {fileID: 2010919239342262519}
   - component: {fileID: 6581175822513282740}
+  - component: {fileID: 40748908788858135}
   m_Layer: 0
   m_Name: Player Mesh
   m_TagString: Untagged
@@ -171,6 +172,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &40748908788858135
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7436045912390588948}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8333849146806985614
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +208,6 @@ GameObject:
   - component: {fileID: 6728596374741306865}
   - component: {fileID: 2955579043280464975}
   - component: {fileID: 5537760384532479023}
-  - component: {fileID: 6908447901000721036}
   m_Layer: 0
   m_Name: Network Player
   m_TagString: Untagged
@@ -316,34 +339,3 @@ MonoBehaviour:
     m_Reference: {fileID: 9063689130010589215, guid: 811906504475b4abca0d10271343978e,
       type: 3}
   playerCamera: {fileID: 0}
---- !u!114 &6908447901000721036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8333849146806985614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 811906504475b4abca0d10271343978e,
-    type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
