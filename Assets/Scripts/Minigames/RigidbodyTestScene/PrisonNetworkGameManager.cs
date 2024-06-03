@@ -16,6 +16,8 @@ public class PrisonNetworkGameManager : NetworkBehaviour
 
     public void OnLightTurnedOn()
     {
+        if (!IsServer) return;
+
         lightsOnCount++;
 
         if (lightsOnCount >= LIGHTS_ON_TO_WIN)
