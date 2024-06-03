@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using Unity.Netcode;
+using Unity.VisualScripting;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,6 +12,13 @@ public class XRPlayerShooter : MonoBehaviour
 {
     [SerializeField]
     private InputActionProperty triggerAction;
+
+    private XRPlayerShooterVisualizer _visualizer;
+
+    void Start()
+    {
+        _visualizer = GetComponent<XRPlayerShooterVisualizer>();
+    }
 
     void OnEnable()
     {
@@ -25,6 +33,8 @@ public class XRPlayerShooter : MonoBehaviour
     private void OnTriggerActionPerformed(InputAction.CallbackContext context)
     {
         Debug.Log("attempting to shoot...");
+
+        _visualizer.VisualizeShot(transform.position, transform.forward);
 
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, Mathf.Infinity, LayerMask.GetMask("Player")))
         {
