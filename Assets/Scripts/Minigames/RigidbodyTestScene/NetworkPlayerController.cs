@@ -1,6 +1,7 @@
 using DG.Tweening;
 
 using Unity.Netcode;
+using Unity.VisualScripting;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,6 +13,7 @@ public class NetworkPlayerController : NetworkBehaviour
     [SerializeField] private float gravity = 9.8f;
     [SerializeField] private bool gravityEnabled = true;
     [SerializeField] private InputActionProperty moveAction;
+    [SerializeField] private InputActionProperty activateAction;
     [SerializeField] private Camera playerCamera;
 
     private CharacterController characterController;
@@ -35,6 +37,14 @@ public class NetworkPlayerController : NetworkBehaviour
             playerCamera = cameraGameObject.GetComponent<Camera>();
         }
 
+        activateAction.action.performed += OnActivatePerformed;
+    }
+
+    public override void OnDestroy()
+    {
+        activateAction.action.performed -= OnActivatePerformed;
+
+        base.OnDestroy();
     }
 
     public override void OnNetworkSpawn()
@@ -109,7 +119,18 @@ public class NetworkPlayerController : NetworkBehaviour
 
             _movementDirection = cameraForward * _movementDirection.z + cameraRight * _movementDirection.x;
         }
+    }
 
-
+    private void OnActivatePerformed(InputAction.CallbackContext context)
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.12f);
+        foreach (var collider in colliders)
+        {
+            var actionableObject = collider.GetComponent<IActionableObject>();
+            if (actionableObject != null)
+            {
+                actionableObject.PerformAction();
+            }
+        }
     }
 }

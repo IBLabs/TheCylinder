@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
+  rotationSpeed: 5
   gravity: 9.8
   gravityEnabled: 1
   moveAction:
@@ -196,6 +197,18 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 9063689130010589215, guid: 811906504475b4abca0d10271343978e,
       type: 3}
+  activateAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Activate
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 2d49ec33-7ffe-41e8-9a98-9296041d8542
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   playerCamera: {fileID: 0}
 --- !u!114 &3649482488444631618
 MonoBehaviour:
