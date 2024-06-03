@@ -57,6 +57,8 @@ public class PrisonSwitchController : NetworkBehaviour, IActionableObject
     [ClientRpc]
     private void TurnOnClientRpc()
     {
+        if (IsServer) return;
+
         Debug.Log($"{GetType().Name} client turning on light");
 
         PerformTurnOn();

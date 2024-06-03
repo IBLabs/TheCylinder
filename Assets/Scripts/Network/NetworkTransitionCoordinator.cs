@@ -17,6 +17,8 @@ public class NetworkTransitionCoordinator : NetworkBehaviour
     [ClientRpc]
     private void StartOutTransitionClientRpc(float duration)
     {
+        if (IsServer) return;
+
         transitionController.FadeToBlack();
     }
 }

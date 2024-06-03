@@ -13,18 +13,6 @@ public class XRNetworkDisabler : MonoBehaviour
     [SerializeField] private GameObject rightHandGameObject;
     [SerializeField] private GameObject transitionSphere;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void OnPlatformDetected(bool isVR)
     {
         if (!isVR)

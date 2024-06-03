@@ -49,13 +49,31 @@ public class SceneLoader : MonoBehaviour
         StartCoroutine(LoadNextSceneWithTransition());
     }
 
+    public void ReloadScene()
+    {
+        StartCoroutine(LoadSceneWithTransition(GetCurrentlyActiveSceneName()));
+    }
+
     private IEnumerator LoadNextSceneWithTransition()
+    {
+        yield return LoadSceneWithTransition(GetNextSceneName());
+    }
+
+    private IEnumerator LoadSceneWithTransition(string sceneName)
     {
         TransitionWillStart?.Invoke(transitionController.transitionDuration);
 
         yield return transitionController.FadeToBlackAsync();
 
-        PerformLoadNextScene();
+        PerformLoadScene(sceneName);
+    }
+
+    private void PerformReloadScene()
+    {
+        if (!transitionController) return;
+
+        string currentSceneName = GetCurrentlyActiveSceneName();
+        PerformLoadScene(currentSceneName);
     }
 
     private void PerformLoadNextScene()
@@ -63,15 +81,24 @@ public class SceneLoader : MonoBehaviour
         if (!transitionController) return;
 
         string nextSceneName = GetNextSceneName();
+        PerformLoadScene(nextSceneName);
+    }
 
+    private void PerformLoadScene(string sceneName)
+    {
         if (NetworkManager.Singleton != null)
         {
-            NetworkManager.Singleton.SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
+            NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
         }
         else
         {
-            SceneManager.LoadScene(nextSceneName);
+            SceneManager.LoadScene(sceneName);
         }
+    }
+
+    private string GetCurrentlyActiveSceneName()
+    {
+        return SceneManager.GetActiveScene().name;
     }
 
     private string GetNextSceneName()

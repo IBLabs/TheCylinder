@@ -1,8 +1,6 @@
-using System.Diagnostics;
 using UnityEngine;
 using UnityEditor;
-using DG.Tweening.Plugins;
-using Unity.VisualScripting;
+using System.Diagnostics;
 
 public class BuildConfigurator : MonoBehaviour
 {
@@ -32,6 +30,7 @@ public class BuildConfigurator : MonoBehaviour
         string[] vrScenes = scenes;
 
         BuildPipeline.BuildPlayer(vrScenes, buildPath, BuildTarget.Android, BuildOptions.None);
+        RunInstallCommand();
     }
 
     [MenuItem("Build/Build for macOS (Test Client)")]
@@ -61,5 +60,32 @@ public class BuildConfigurator : MonoBehaviour
         PlayerSettings.defaultScreenWidth = 720;
         PlayerSettings.defaultScreenHeight = 1280;
         PlayerSettings.resizableWindow = true;
+    }
+
+    private static void RunInstallCommand()
+    {
+        if (SystemInfo.operatingSystemFamily == OperatingSystemFamily.MacOSX)
+        {
+            string command = "adb install -r ~/Documents/Development/Unity/TheCylinder/Builds/VRBuild.apk";
+            ProcessStartInfo procStartInfo = new ProcessStartInfo("/bin/bash", "-c \"" + command + "\"")
+            {
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            Process proc = new Process
+            {
+                StartInfo = procStartInfo
+            };
+            proc.Start();
+
+            string result = proc.StandardOutput.ReadToEnd();
+            UnityEngine.Debug.Log(result);
+        }
+        else
+        {
+            UnityEngine.Debug.Log("Current OS is not macOS.");
+        }
     }
 }
