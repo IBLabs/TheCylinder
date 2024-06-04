@@ -411,7 +411,7 @@
                 {
                     "name": "",
                     "id": "09809c10-d09e-4c49-b58f-1995e50cf685",
-                    "path": "<Keyboard>/backslash",
+                    "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -444,7 +444,7 @@
                 {
                     "name": "",
                     "id": "85f27bdb-dfe8-48d3-8512-205b3ad6306a",
-                    "path": "<Keyboard>/z",
+                    "path": "<Keyboard>/backslash",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

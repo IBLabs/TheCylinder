@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Unity.XR.CoreUtils.Editor;
+
 using UnityEngine.XR.Interaction.Toolkit;
 
 namespace UnityEditor.XR.Interaction.Toolkit.Samples
@@ -26,7 +28,7 @@ namespace UnityEditor.XR.Interaction.Toolkit.Samples
         {
             // In the Player Settings UI we have to delay the call one frame to let the settings provider get initialized
             // since we need to access the settings asset to set the rule's non-delegate properties (FixItAutomatic).
-            EditorApplication.delayCall += AddRules;
+            // EditorApplication.delayCall += AddRules;
         }
 
         static void AddRules()
