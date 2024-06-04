@@ -16,7 +16,7 @@ class AgentSpawner : NetworkBehaviour
         {
             for (int i = 0; i < autoLoadAmount; i++)
             {
-                SpawnAgent();
+                SpawnAgentAtRandomSpawnPoint();
             }
         }
     }
@@ -25,11 +25,28 @@ class AgentSpawner : NetworkBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
-            SpawnAgent();
+            SpawnAgentAtRandomSpawnPoint();
         }
     }
 
-    private void SpawnAgent()
+    public void SpawnAgentWithPositionAndRotation(Vector3 position, Quaternion rotation)
+    {
+        if (NetworkManager.Singleton != null)
+        {
+            if (!IsServer) return;
+
+            var newAgent = Instantiate(agentPrefab, position, rotation);
+
+            NetworkObject agentNetworkObject = newAgent.GetComponent<NetworkObject>();
+            agentNetworkObject.Spawn(destroyWithScene: true);
+        }
+        else
+        {
+            Instantiate(agentPrefab, position, rotation);
+        }
+    }
+
+    private void SpawnAgentAtRandomSpawnPoint()
     {
         var spawnTransform = transform;
         if (spawnPoints.Length > 0)
@@ -38,18 +55,6 @@ class AgentSpawner : NetworkBehaviour
             spawnTransform = spawnPoints[spawnTransformIndex];
         }
 
-        if (NetworkManager.Singleton != null)
-        {
-            if (!IsServer) return;
-
-            var newAgent = Instantiate(agentPrefab, spawnTransform.position, spawnTransform.rotation);
-
-            NetworkObject agentNetworkObject = newAgent.GetComponent<NetworkObject>();
-            agentNetworkObject.Spawn(destroyWithScene: true);
-        }
-        else
-        {
-            Instantiate(agentPrefab, spawnTransform.position, spawnTransform.rotation);
-        }
+        SpawnAgentWithPositionAndRotation(spawnTransform.position, spawnTransform.rotation);
     }
 }
