@@ -9,8 +9,6 @@ public class BuildConfigurator : MonoBehaviour
         "Assets/Scenes/Minigames/RigidbodyTestScene/RigidbodyTestScene.unity"
      };
 
-    private static readonly string platformIdentifierAssetPath = "Assets/ScriptableObjects/ProductionPlatformIdentifier.asset";
-
     [MenuItem("Build/Build for Mobile")]
     public static void BuildMobile()
     {
@@ -21,8 +19,6 @@ public class BuildConfigurator : MonoBehaviour
     [MenuItem("Build/Build for VR")]
     public static void BuildVR()
     {
-        UpdatePlatformIdentifier("VR_BUILD");
-
         var buildPath = "Builds/VRBuild.apk";
 
         EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Standalone, BuildTarget.Android);
@@ -36,22 +32,12 @@ public class BuildConfigurator : MonoBehaviour
     [MenuItem("Build/Build for macOS (Test Client)")]
     public static void BuildMacOS()
     {
-        UpdatePlatformIdentifier("MAC1_BUILD");
-
         EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Standalone, BuildTarget.StandaloneOSX);
 
         SetPlayerSettingsForMacBuild();
 
         string[] macScenes = scenes;
         BuildPipeline.BuildPlayer(macScenes, "Builds/PAGMAR Desktop Client", BuildTarget.StandaloneOSX, BuildOptions.None);
-    }
-
-    private static void UpdatePlatformIdentifier(string newIdentifier)
-    {
-        PlatformIdentifier buildIdentifier = AssetDatabase.LoadAssetAtPath<PlatformIdentifier>(platformIdentifierAssetPath);
-        buildIdentifier.identifier = newIdentifier;
-        EditorUtility.SetDirty(buildIdentifier);
-        AssetDatabase.SaveAssets();
     }
 
     private static void SetPlayerSettingsForMacBuild()
