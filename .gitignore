@@ -73,3 +73,5 @@ crashlytics-build.properties
 
 # ignore mac aux files
 .DS_Store
+
+.utmp
