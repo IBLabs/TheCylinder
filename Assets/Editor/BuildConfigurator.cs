@@ -7,7 +7,7 @@ public class BuildConfigurator : MonoBehaviour
     private static readonly string[] scenes = new string[] {
         "Assets/Scenes/Utilities/NetworkBootstrapScene.unity",
         "Assets/Scenes/Minigames/PrisonScene/PrisonScene.unity",
-        "Assets/Scenes/Minigames/RigidbodyTestScene/RigidbodyTestScene.unity"
+        "Assets/Scenes/Minigames/RigidbodyTestScene/RigidbodyTestScene.unity",
      };
 
     [MenuItem("Build/Build for Mobile")]

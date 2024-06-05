@@ -51,11 +51,11 @@ public class NetworkPlayerController : NetworkBehaviour
     {
         if (IsOwner)
         {
-            var simplePlayerSpawner = FindAnyObjectByType<NetworkSimplePlayerSpawner>();
-            if (simplePlayerSpawner != null)
-            {
-                transform.position = simplePlayerSpawner.transform.position;
-            }
+            // var simplePlayerSpawner = FindAnyObjectByType<NetworkSimplePlayerSpawner>();
+            // if (simplePlayerSpawner != null)
+            // {
+            //     transform.position = simplePlayerSpawner.transform.position;
+            // }
 
             if (characterController != null)
             {

@@ -7,6 +7,7 @@ using UnityEngine.Rendering;
 public class NetworkSimplePlayerSpawner : NetworkBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private Transform[] spawnPoints;
 
     public void OnSpawnRequested(InputAction.CallbackContext context)
     {
@@ -86,6 +87,14 @@ public class NetworkSimplePlayerSpawner : NetworkBehaviour
 
     private GameObject SpawnPlayerLocal()
     {
-        return Instantiate(playerPrefab, transform.position, transform.rotation);
+        if (spawnPoints != null && spawnPoints.Length > 0)
+        {
+            var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            return Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
+        }
+        else
+        {
+            return Instantiate(playerPrefab, transform.position, transform.rotation);
+        }
     }
 }

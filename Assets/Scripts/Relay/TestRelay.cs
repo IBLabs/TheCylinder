@@ -34,11 +34,6 @@ public class TestRelay : MonoBehaviour
         }
     }
 
-    void OnDisable()
-    {
-        RemoveNetworkManagerListeners();
-    }
-
     public async void CreateRelay()
     {
         try

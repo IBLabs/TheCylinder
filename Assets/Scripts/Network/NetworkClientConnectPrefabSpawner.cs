@@ -15,11 +15,6 @@ public class NetworkClientConnectPrefabSpawner : MonoBehaviour
         NetworkManager.Singleton.OnConnectionEvent += HandleConnectionEvent;
     }
 
-    void OnDestroy()
-    {
-        NetworkManager.Singleton.OnConnectionEvent -= HandleConnectionEvent;
-    }
-
     private void HandleConnectionEvent(NetworkManager manager, ConnectionEventData eventData)
     {
         if (eventData.EventType == ConnectionEvent.ClientConnected && eventData.ClientId != manager.LocalClientId)
