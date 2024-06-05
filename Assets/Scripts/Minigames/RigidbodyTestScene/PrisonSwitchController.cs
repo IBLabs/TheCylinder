@@ -15,6 +15,9 @@ public class PrisonSwitchController : NetworkBehaviour, IActionableObject
 {
     [SerializeField] private GameObject lightObject;
 
+    [ColorUsage(true, true)]
+    [SerializeField] private Color lightUpColor;
+
     public UnityEvent OnLightOn;
 
     public void PerformAction()
@@ -68,6 +71,6 @@ public class PrisonSwitchController : NetworkBehaviour, IActionableObject
     private void PerformTurnOn()
     {
         lightObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-        lightObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.white);
+        lightObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", lightUpColor);
     }
 }

@@ -9,11 +9,13 @@ using UnityEngine.InputSystem;
 public class NetworkPlayerController : NetworkBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float runSpeed = 8f;
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private float gravity = 9.8f;
     [SerializeField] private bool gravityEnabled = true;
     [SerializeField] private InputActionProperty moveAction;
     [SerializeField] private InputActionProperty activateAction;
+    [SerializeField] private InputActionProperty runAction;
     [SerializeField] private Camera playerCamera;
 
     private CharacterController characterController;
@@ -70,7 +72,8 @@ public class NetworkPlayerController : NetworkBehaviour
     {
         if (characterController != null)
         {
-            characterController.Move(_movementDirection * moveSpeed * Time.deltaTime);
+            float targetSpeed = runAction.action.ReadValue<float>() > 0 ? runSpeed : moveSpeed;
+            characterController.Move(_movementDirection * targetSpeed * Time.deltaTime);
 
             if (_movementDirection != Vector3.zero)
             {

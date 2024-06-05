@@ -35,7 +35,7 @@ class AgentSpawner : NetworkBehaviour
         {
             if (!IsServer) return;
 
-            var newAgent = Instantiate(agentPrefab, position, rotation);
+            var newAgent = Instantiate(agentPrefab, position, rotation, transform);
 
             NetworkObject agentNetworkObject = newAgent.GetComponent<NetworkObject>();
             agentNetworkObject.Spawn(destroyWithScene: true);

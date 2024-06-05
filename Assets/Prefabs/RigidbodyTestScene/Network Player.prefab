@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.35
+  runSpeed: 0.85
   rotationSpeed: 10
   gravity: 9.8
   gravityEnabled: 1
@@ -350,5 +351,18 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 1570448165006062204, guid: 811906504475b4abca0d10271343978e,
+      type: 3}
+  runAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Run
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 2629789a-8417-4c90-b53a-cabb8b05050c
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 2959206241069841629, guid: 811906504475b4abca0d10271343978e,
       type: 3}
   playerCamera: {fileID: 0}
