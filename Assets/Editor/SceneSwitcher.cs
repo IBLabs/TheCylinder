@@ -15,6 +15,12 @@ public class SceneSwitcher : EditorWindow
         SwitchToScene("Minigames/RigidbodyTestScene/RigidbodyTestScene");
     }
 
+    [MenuItem("Key Scenes/Prison (New)")]
+    private static void SwitchToScene3()
+    {
+        SwitchToScene("Minigames/PrisonScene/PrisonScene");
+    }
+
     // Add more scene switch methods here
 
     private static void SwitchToScene(string sceneName)

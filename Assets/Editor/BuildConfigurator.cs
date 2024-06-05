@@ -6,6 +6,7 @@ public class BuildConfigurator : MonoBehaviour
 {
     private static readonly string[] scenes = new string[] {
         "Assets/Scenes/Utilities/NetworkBootstrapScene.unity",
+        "Assets/Scenes/Minigames/PrisonScene/PrisonScene.unity",
         "Assets/Scenes/Minigames/RigidbodyTestScene/RigidbodyTestScene.unity"
      };
 
@@ -34,13 +35,24 @@ public class BuildConfigurator : MonoBehaviour
     {
         EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Standalone, BuildTarget.StandaloneOSX);
 
-        SetPlayerSettingsForMacBuild();
+        SetPlayerSettingsForDesktopBuild();
 
         string[] macScenes = scenes;
         BuildPipeline.BuildPlayer(macScenes, "Builds/PAGMAR Desktop Client", BuildTarget.StandaloneOSX, BuildOptions.None);
     }
 
-    private static void SetPlayerSettingsForMacBuild()
+    [MenuItem("Build/Build for Windows")]
+    public static void BuildWindows()
+    {
+        EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Standalone, BuildTarget.StandaloneWindows64);
+
+        SetPlayerSettingsForDesktopBuild();
+
+        string[] windowsScenes = scenes;
+        BuildPipeline.BuildPlayer(windowsScenes, "Builds/WindowsBuild/Oversight.exe", BuildTarget.StandaloneWindows64, BuildOptions.None);
+    }
+
+    private static void SetPlayerSettingsForDesktopBuild()
     {
         PlayerSettings.fullScreenMode = FullScreenMode.Windowed;
         PlayerSettings.defaultScreenWidth = 720;

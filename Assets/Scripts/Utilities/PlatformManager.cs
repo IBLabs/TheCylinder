@@ -1,5 +1,10 @@
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 using UnityEngine.XR.Interaction.Toolkit.Inputs.Simulation;
 
 public class PlatformManager : MonoBehaviour
@@ -53,27 +58,60 @@ public class PlatformManager : MonoBehaviour
     {
         if (IsVR)
         {
-            foreach (var obj in VRObjects)
-            {
-                obj.SetActive(true);
-            }
-
-            foreach (var obj in NonVRObjects)
-            {
-                obj.SetActive(false);
-            }
+            InitializeVR();
         }
         else
         {
-            foreach (var obj in VRObjects)
-            {
-                obj.SetActive(false);
-            }
+            InitializeNonVR();
+        }
+    }
 
-            foreach (var obj in NonVRObjects)
-            {
-                obj.SetActive(true);
-            }
+    public void InitializeVR()
+    {
+        foreach (var obj in VRObjects)
+        {
+            obj.SetActive(true);
+        }
+
+        foreach (var obj in NonVRObjects)
+        {
+            obj.SetActive(false);
+        }
+    }
+
+    public void InitializeNonVR()
+    {
+        foreach (var obj in VRObjects)
+        {
+            obj.SetActive(false);
+        }
+
+        foreach (var obj in NonVRObjects)
+        {
+            obj.SetActive(true);
         }
     }
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(PlatformManager))]
+public class PlatformManagerEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+        PlatformManager platformManager = (PlatformManager)target;
+
+        if (GUILayout.Button("Initialize VR"))
+        {
+            platformManager.InitializeVR();
+        }
+
+        if (GUILayout.Button("Initialize Non-VR"))
+        {
+            platformManager.InitializeNonVR();
+        }
+    }
+}
+#endif

@@ -6,6 +6,7 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Inputs;
 
+[RequireComponent(typeof(XROrigin)), RequireComponent(typeof(InputActionManager))]
 public class XRNetworkDisabler : MonoBehaviour
 {
     [SerializeField] private GameObject mainCameraGameObject;

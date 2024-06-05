@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Utilities/NetworkBootstrapScene.unity
     guid: f65415a76c60a48a98b184b7996105f0
   - enabled: 1
+    path: Assets/Scenes/Minigames/PrisonScene/PrisonScene.unity
+    guid: edcb05c9f4fb04f89b562d8126e865ec
+  - enabled: 1
     path: Assets/Scenes/Minigames/RigidbodyTestScene/RigidbodyTestScene.unity
     guid: c17d187b5443d4ee9a3ee60e554c7479
   - enabled: 1

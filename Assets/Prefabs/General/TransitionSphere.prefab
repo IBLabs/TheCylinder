@@ -119,19 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10c9e7bfacf142a895351ac8c2f2c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toggleTransitionAction:
-    m_UseReference: 0
-    m_Action:
-      m_Name: Toggle Transition
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: a78bb066-d140-49ff-b9dd-6d021689a6ed
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f,
-      type: 3}
+  transitionDuration: 0.5
   OnFadeToBlackCompleted:
     m_PersistentCalls:
       m_Calls: []
@@ -150,9 +138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e98aa1ee28a8c483e82916ef96848e63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionController: {fileID: 0}
+  transitionController: {fileID: 3313262885591241895}
   nextSceneAction:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
       m_Name: Next Scene
       m_Type: 0
@@ -176,3 +164,6 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
+  TransitionWillStart:
+    m_PersistentCalls:
+      m_Calls: []

@@ -1,25 +1,41 @@
+using DG.Tweening;
+
 using Unity.Netcode;
 
 using UnityEngine;
 
 public class NetworkClientConnectPrefabSpawner : MonoBehaviour
 {
-    public GameObject objectToActivate;
+    [SerializeField] private CanvasGroup startButtonCanvasGroup;
+
     private bool hasActivated = false;
 
     void Start()
     {
-        NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+        NetworkManager.Singleton.OnConnectionEvent += HandleConnectionEvent;
     }
 
-    void OnClientConnected(ulong connection)
+    void OnDestroy()
     {
-        if (connection != NetworkManager.Singleton.LocalClientId && !hasActivated)
-        {
-            objectToActivate.SetActive(true);
-            hasActivated = true;
-        }
+        NetworkManager.Singleton.OnConnectionEvent -= HandleConnectionEvent;
+    }
 
-        Debug.Log("Client connected: " + connection);
+    private void HandleConnectionEvent(NetworkManager manager, ConnectionEventData eventData)
+    {
+        if (eventData.EventType == ConnectionEvent.ClientConnected && eventData.ClientId != manager.LocalClientId)
+        {
+            if (manager.IsServer)
+            {
+                if (!hasActivated)
+                {
+                    hasActivated = true;
+
+                    startButtonCanvasGroup.interactable = true;
+                    startButtonCanvasGroup.blocksRaycasts = true;
+
+                    startButtonCanvasGroup.DOFade(1f, 0.5f);
+                }
+            }
+        }
     }
 }

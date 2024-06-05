@@ -22,10 +22,9 @@ public class TestRelay : MonoBehaviour
 {
     [SerializeField] private TMP_InputField joinCodeInputField;
     [SerializeField] private Button joinButton;
-    [SerializeField] private TextMeshProUGUI connectedText;
 
     public UnityEvent<string> OnRelayJoinCodeReceived;
-    public UnityEvent<ulong> OnClientConnected;
+    public UnityEvent<ulong> DidConnectToHost;
 
     void Update()
     {
@@ -35,27 +34,28 @@ public class TestRelay : MonoBehaviour
         }
     }
 
+    void OnDisable()
+    {
+        RemoveNetworkManagerListeners();
+    }
+
     public async void CreateRelay()
     {
         try
         {
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(3);
-
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+            OnRelayJoinCodeReceived?.Invoke(joinCode);
 
-            Debug.Log(joinCode);
+            Debug.Log("received join code: " + joinCode);
 
             RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
-
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-
             NetworkManager.Singleton.StartHost();
-
-            OnRelayJoinCodeReceived?.Invoke(joinCode);
         }
         catch (RelayServiceException e)
         {
-            Debug.Log(e);
+            Debug.Log("failed to start relay and host: " + e);
         }
 
     }
@@ -63,30 +63,33 @@ public class TestRelay : MonoBehaviour
     public void JoinRelay()
     {
         string joinCode = joinCodeInputField.text;
-        if (!string.IsNullOrEmpty(joinCode) && System.Text.RegularExpressions.Regex.IsMatch(joinCode, @"^[a-zA-Z0-9]{6}$"))
+
+        if (IsJoinCodeValid(joinCode))
         {
-            JoinRelay(joinCode);
+            JoinRelayWithCode(joinCode);
         }
         else
         {
-            Debug.Log("Invalid join code");
+            Debug.Log("invalid join code");
         }
     }
 
-    private async void JoinRelay(string joinCode)
+    private bool IsJoinCodeValid(string joinCode)
+    {
+        return !string.IsNullOrEmpty(joinCode) && System.Text.RegularExpressions.Regex.IsMatch(joinCode, @"^[a-zA-Z0-9]{6}$");
+    }
+
+    private async void JoinRelayWithCode(string joinCode)
     {
         try
         {
             Debug.Log("joining relay with " + joinCode);
 
             JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
-
             RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
-
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
 
-            NetworkManager.Singleton.OnClientConnectedCallback += HandleClientConnect;
-            NetworkManager.Singleton.OnClientDisconnectCallback += HandleClientDisconnect;
+            RegisterNetworkManagerListeners();
 
             NetworkManager.Singleton.StartClient();
         }
@@ -112,30 +115,30 @@ public class TestRelay : MonoBehaviour
     {
         await PerformInitialization();
 
-        if (isVR)
-        {
-            CreateRelay();
-        }
+        if (isVR) CreateRelay();
     }
 
-    private void HandleClientConnect(ulong clientId)
+    private void RegisterNetworkManagerListeners()
     {
-        connectedText.gameObject.SetActive(true);
-
-        OnClientConnected?.Invoke(clientId);
-
-        RemoveNetworkManagerListeners();
-    }
-
-    private void HandleClientDisconnect(ulong clientId)
-    {
-        RemoveNetworkManagerListeners();
+        NetworkManager.Singleton.OnConnectionEvent += HandleConnectionEvent;
     }
 
     private void RemoveNetworkManagerListeners()
     {
-        NetworkManager.Singleton.OnClientConnectedCallback -= HandleClientConnect;
-        NetworkManager.Singleton.OnClientDisconnectCallback -= HandleClientDisconnect;
+        NetworkManager.Singleton.OnConnectionEvent -= HandleConnectionEvent;
+    }
+
+    private void HandleConnectionEvent(NetworkManager manager, ConnectionEventData eventData)
+    {
+        Debug.Log("connection event: " + eventData.EventType);
+
+        if (eventData.EventType == ConnectionEvent.ClientConnected)
+        {
+            DidConnectToHost?.Invoke(eventData.ClientId);
+        }
+        else if (eventData.EventType == ConnectionEvent.ClientDisconnected)
+        {
+        }
     }
 }
 
@@ -150,7 +153,7 @@ public class MyComponentEditor : Editor
         TestRelay myComponent = (TestRelay)target;
         if (GUILayout.Button("Trigger OnClientConnected"))
         {
-            myComponent.OnClientConnected.Invoke(0);
+            myComponent.DidConnectToHost.Invoke(0);
         }
     }
 }
