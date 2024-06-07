@@ -6,6 +6,7 @@ public class BuildConfigurator : MonoBehaviour
 {
     private static readonly string[] scenes = new string[] {
         "Assets/Scenes/Utilities/NetworkBootstrapScene.unity",
+        "Assets/Scenes/Minigames/MeadowScene/MeadowScene.unity",
         "Assets/Scenes/Minigames/PrisonScene/PrisonScene.unity",
         "Assets/Scenes/Minigames/RigidbodyTestScene/RigidbodyTestScene.unity",
      };
@@ -50,6 +51,13 @@ public class BuildConfigurator : MonoBehaviour
 
         string[] windowsScenes = scenes;
         BuildPipeline.BuildPlayer(windowsScenes, "Builds/WindowsBuild/Oversight.exe", BuildTarget.StandaloneWindows64, BuildOptions.None);
+    }
+
+    [MenuItem("Build/Build for VR + macOS")]
+    public static void BuildVRMacOS()
+    {
+        BuildMacOS();
+        BuildVR();
     }
 
     private static void SetPlayerSettingsForDesktopBuild()

@@ -2577,6 +2577,7 @@ MonoBehaviour:
   leftHandGameObject: {fileID: 508017542}
   rightHandGameObject: {fileID: 1979640156}
   transitionSphere: {fileID: 1577650414}
+  toDisable: []
 --- !u!1 &943253810
 GameObject:
   m_ObjectHideFlags: 0
@@ -7157,6 +7158,8 @@ SceneRoots:
   - {fileID: 682621807}
   - {fileID: 1993480000}
   - {fileID: 669142471}
+  - {fileID: 1480475257}
+  - {fileID: 301155540}
   - {fileID: 165995608}
   - {fileID: 1115550901}
   - {fileID: 117764357}
@@ -7172,5 +7175,3 @@ SceneRoots:
   - {fileID: 1440754109}
   - {fileID: 1170001846}
   - {fileID: 480108977}
-  - {fileID: 1480475257}
-  - {fileID: 301155540}

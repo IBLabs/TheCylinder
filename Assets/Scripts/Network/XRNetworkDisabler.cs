@@ -14,29 +14,41 @@ public class XRNetworkDisabler : MonoBehaviour
     [SerializeField] private GameObject rightHandGameObject;
     [SerializeField] private GameObject transitionSphere;
 
+    [SerializeField] private Behaviour[] toDisable;
+
     public void OnPlatformDetected(bool isVR)
     {
         if (!isVR)
         {
-            GetComponent<XROrigin>().enabled = false;
-            GetComponent<InputActionManager>().enabled = false;
+            if (toDisable != null && toDisable.Length > 0)
+            {
+                foreach (var component in toDisable)
+                {
+                    component.enabled = false;
+                }
+            }
+            else
+            {
+                GetComponent<XROrigin>().enabled = false;
+                GetComponent<InputActionManager>().enabled = false;
 
-            mainCameraGameObject.GetComponent<Camera>().enabled = false;
-            mainCameraGameObject.GetComponent<AudioListener>().enabled = false;
-            mainCameraGameObject.GetComponent<TrackedPoseDriver>().enabled = false;
-            mainCameraGameObject.GetComponent<UniversalAdditionalCameraData>().enabled = false;
+                mainCameraGameObject.GetComponent<Camera>().enabled = false;
+                mainCameraGameObject.GetComponent<AudioListener>().enabled = false;
+                mainCameraGameObject.GetComponent<TrackedPoseDriver>().enabled = false;
+                mainCameraGameObject.GetComponent<UniversalAdditionalCameraData>().enabled = false;
 
-            leftHandGameObject.GetComponent<ActionBasedController>().enabled = false;
-            leftHandGameObject.GetComponent<XRRayInteractor>().enabled = false;
-            leftHandGameObject.GetComponent<XRInteractorLineVisual>().enabled = false;
-            leftHandGameObject.GetComponent<LineRenderer>().enabled = false;
+                leftHandGameObject.GetComponent<ActionBasedController>().enabled = false;
+                leftHandGameObject.GetComponent<XRRayInteractor>().enabled = false;
+                leftHandGameObject.GetComponent<XRInteractorLineVisual>().enabled = false;
+                leftHandGameObject.GetComponent<LineRenderer>().enabled = false;
 
-            rightHandGameObject.GetComponent<ActionBasedController>().enabled = false;
-            rightHandGameObject.GetComponent<XRRayInteractor>().enabled = false;
-            rightHandGameObject.GetComponent<XRInteractorLineVisual>().enabled = false;
-            rightHandGameObject.GetComponent<LineRenderer>().enabled = false;
+                rightHandGameObject.GetComponent<ActionBasedController>().enabled = false;
+                rightHandGameObject.GetComponent<XRRayInteractor>().enabled = false;
+                rightHandGameObject.GetComponent<XRInteractorLineVisual>().enabled = false;
+                rightHandGameObject.GetComponent<LineRenderer>().enabled = false;
 
-            transitionSphere.SetActive(false);
+                transitionSphere.SetActive(false);
+            }
         }
     }
 }
