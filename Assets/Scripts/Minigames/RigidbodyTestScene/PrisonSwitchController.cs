@@ -72,5 +72,10 @@ public class PrisonSwitchController : NetworkBehaviour, IActionableObject
     {
         lightObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
         lightObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", lightUpColor);
+
+        if (NetworkSoundManager.Instance != null)
+        {
+            NetworkSoundManager.Instance.PlaySoundServerRpc("BuzzerSound1", transform.position);
+        }
     }
 }
