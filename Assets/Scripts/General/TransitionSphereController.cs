@@ -9,7 +9,7 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(MeshRenderer))]
-public class TransitionSphereController : MonoBehaviour
+public class TransitionSphereController : ITransitionController
 {
     private const float BLACK_VALUE = 0f;
     private const float WORDL_VALUE = 1f;
@@ -30,10 +30,10 @@ public class TransitionSphereController : MonoBehaviour
 
         _meshRenderer.material.SetFloat("_Progress", WORDL_VALUE);
 
-        if (transitionOnStart) FadeToWorld();
+        if (transitionOnStart) FadeToScene();
     }
 
-    public void FadeToBlack()
+    public override void FadeToBlack()
     {
         _meshRenderer.material.DOFloat(BLACK_VALUE, "_Offset", transitionDuration).From(-1.0f).SetEase(Ease.InCubic).OnComplete(() => OnFadeToBlackCompleted?.Invoke());
     }
@@ -50,7 +50,7 @@ public class TransitionSphereController : MonoBehaviour
         OnFadeToWorldCompleted?.Invoke();
     }
 
-    public void FadeToWorld()
+    public override void FadeToScene()
     {
         _meshRenderer.material.DOFloat(WORDL_VALUE, "_Offset", transitionDuration).From(0f).SetEase(Ease.InCubic).OnComplete(() => OnFadeToWorldCompleted?.Invoke());
     }
