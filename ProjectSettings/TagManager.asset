@@ -7,6 +7,7 @@ TagManager:
   - SpawnPlane
   - Enemy
   - DesktopCamera
+  - Pickupable
   layers:
   - Default
   - TransparentFX
