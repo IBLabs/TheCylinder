@@ -20,8 +20,16 @@ public class PrisonSwitchController : NetworkBehaviour, IActionableObject
 
     public UnityEvent OnLightOn;
 
+    private bool _isLightOn;
+
     public void PerformAction()
     {
+        if (_isLightOn)
+        {
+            Debug.Log($"{GetType().Name} already on, aborting action");
+            return;
+        }
+
         Debug.Log($"{GetType().Name} performing action...");
 
         if (NetworkManager.Singleton != null)
@@ -70,6 +78,8 @@ public class PrisonSwitchController : NetworkBehaviour, IActionableObject
 
     private void PerformTurnOn()
     {
+        _isLightOn = true;
+
         lightObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
         lightObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", lightUpColor);
 
