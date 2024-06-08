@@ -8849,6 +8849,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4c2770bd357984d51a287b61c9dbd80f, type: 3}
   - {fileID: 8300000, guid: 0394d945a9e254859857f67f4e46bf10, type: 3}
   - {fileID: 8300000, guid: 41a929da6f62845b2aaccb17889fd370, type: 3}
+  muteAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Mute
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: a5032584-2841-41f6-9d39-eb8cc0d55b5a
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 49530437896534186, guid: 811906504475b4abca0d10271343978e,
+      type: 3}
 --- !u!4 &1848506598
 Transform:
   m_ObjectHideFlags: 0

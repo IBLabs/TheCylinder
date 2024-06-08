@@ -1228,6 +1228,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1147478308}
+        m_TargetAssemblyTypeName: NetworkBootstrapManager, Assembly-CSharp
+        m_MethodName: OnPlatformDetected
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &508017542
 GameObject:
   m_ObjectHideFlags: 0
@@ -3242,7 +3254,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ed74b540dff44e9acc6db94aa9dcf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useConsole: 1
+  useConsoleOnDesktop: 1
+  useConsoleOnVR: 0
   uiConsoleLoggerPrefab: {fileID: 3809832072226563602, guid: 205de0671e40742bf89f30fd5046a1e2,
     type: 3}
 --- !u!4 &1147478309
@@ -3916,6 +3929,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4c2770bd357984d51a287b61c9dbd80f, type: 3}
   - {fileID: 8300000, guid: 0394d945a9e254859857f67f4e46bf10, type: 3}
   - {fileID: 8300000, guid: 41a929da6f62845b2aaccb17889fd370, type: 3}
+  muteAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Mute
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: d50492a7-ced6-470a-82a2-77bafe2cb3a3
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 49530437896534186, guid: 811906504475b4abca0d10271343978e,
+      type: 3}
 --- !u!4 &1480475257
 Transform:
   m_ObjectHideFlags: 0

@@ -98,6 +98,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logText: {fileID: 577522594564282440}
+  desktopToggleConsoleAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Desktop Toggle Console
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: b52bdfac-dbaf-446c-a819-3aa16dbda006
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 4355706484624177392, guid: 811906504475b4abca0d10271343978e,
+      type: 3}
+  xrToggleConsoleAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Xr Toggle Console
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 58452904-f0e6-436d-a116-4fd88ddf23cc
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 2919491904940216650, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
 --- !u!1 &7068673066567337922
 GameObject:
   m_ObjectHideFlags: 0

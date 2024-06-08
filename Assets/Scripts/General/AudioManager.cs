@@ -1,9 +1,14 @@
+using Unity.VisualScripting;
+
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
     public AudioClip[] audioClips;
+
+    [SerializeField] private InputActionProperty muteAction;
 
     private void Awake()
     {
@@ -14,6 +19,34 @@ public class AudioManager : MonoBehaviour
         else
         {
             Instance = this;
+        }
+    }
+
+    void OnEnable()
+    {
+        RegisterActions();
+    }
+
+    void OnDisable()
+    {
+        UnregisterActions();
+    }
+
+    private void RegisterActions()
+    {
+        muteAction.action.performed += OnMuteActionPerformed;
+    }
+
+    private void UnregisterActions()
+    {
+        muteAction.action.performed -= OnMuteActionPerformed;
+    }
+
+    private void OnMuteActionPerformed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            AudioListener.pause = !AudioListener.pause;
         }
     }
 
