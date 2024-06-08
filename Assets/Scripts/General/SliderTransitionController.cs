@@ -11,12 +11,13 @@ public class SliderTransitionController : ITransitionController
     public Slider slider;
     public float transitionDuration = 1f;
     public Ease transitionEase = Ease.Linear;
+    public bool transitionOnStart = true;
 
     private bool isTransitioning;
 
     private void Start()
     {
-        FadeToScene();
+        if (transitionOnStart) FadeToScene();
     }
 
     public override void FadeToScene()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 using DG.Tweening;
 
@@ -9,6 +10,7 @@ using TMPro;
 using Unity.Netcode;
 
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PrisonNetworkGameManager : NetworkBehaviour
 {
@@ -23,6 +25,15 @@ public class PrisonNetworkGameManager : NetworkBehaviour
     [SerializeField] private CanvasGroup vrGameEndGroup;
     [SerializeField] private TextMeshProUGUI vrTitleText;
     [SerializeField] private TextMeshProUGUI vrSubtitleText;
+
+    [Header("Tutorial Related")]
+    [SerializeField] private Transform xrOriginTransform;
+    [SerializeField] private CanvasGroup instructionsGroup;
+    [SerializeField] private CanvasGroup countdownGroup;
+    [SerializeField] private TransitionSphereController transitionController;
+    [SerializeField] private CanvasGroup desktopInstructionsGroup;
+    [SerializeField] private CanvasGroup desktopCountdownGroup;
+    [SerializeField] private SliderTransitionController desktopTransitionController;
 
     private int lightsOnCount = 0;
 
@@ -106,6 +117,64 @@ public class PrisonNetworkGameManager : NetworkBehaviour
         gameEndGroup.interactable = true;
         gameEndGroup.blocksRaycasts = true;
     }
+
+    #region Tutorial Related
+
+    public void FinishTutorial()
+    {
+        StartCoroutine(FinishTutorialCoroutine());
+    }
+
+    private IEnumerator FinishTutorialCoroutine()
+    {
+        FadeOutInstructionsClientRpc();
+
+        yield return instructionsGroup.DOFade(0, .3f).WaitForCompletion();
+
+        yield return new WaitForSeconds(.5f);
+
+        for (int i = 3; i > 0; i--)
+        {
+            countdownGroup.GetComponentInChildren<TextMeshProUGUI>().text = i.ToString();
+
+            CountdownStepClientRpc(i.ToString());
+
+            yield return countdownGroup.DOFade(0, 1f).From(1).WaitForCompletion();
+        }
+
+        TransitionToWorldClientRpc();
+
+        xrOriginTransform.position = Vector3.zero;
+
+        transitionController.FadeToWorld();
+    }
+
+    [ClientRpc]
+    private void FadeOutInstructionsClientRpc()
+    {
+        if (IsServer) return;
+
+        desktopInstructionsGroup.DOFade(0, .3f);
+    }
+
+    [ClientRpc]
+    private void CountdownStepClientRpc(string text)
+    {
+        if (IsServer) return;
+
+        desktopCountdownGroup.GetComponentInChildren<TextMeshProUGUI>().text = text;
+        desktopCountdownGroup.DOFade(0, 1f).From(1);
+    }
+
+    [ClientRpc]
+    private void TransitionToWorldClientRpc()
+    {
+        if (IsServer) return;
+
+        desktopTransitionController.FadeToScene();
+    }
+
+    #endregion
 }
 
 enum WinnerType

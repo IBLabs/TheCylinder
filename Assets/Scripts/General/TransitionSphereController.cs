@@ -15,7 +15,7 @@ public class TransitionSphereController : MonoBehaviour
     private const float WORDL_VALUE = 1f;
 
     public float transitionDuration = 1.0f;
-
+    public bool transitionOnStart = true;
 
     [Header("Events")]
     public UnityEvent OnFadeToBlackCompleted;
@@ -30,7 +30,7 @@ public class TransitionSphereController : MonoBehaviour
 
         _meshRenderer.material.SetFloat("_Progress", WORDL_VALUE);
 
-        FadeToWorld();
+        if (transitionOnStart) FadeToWorld();
     }
 
     public void FadeToBlack()
