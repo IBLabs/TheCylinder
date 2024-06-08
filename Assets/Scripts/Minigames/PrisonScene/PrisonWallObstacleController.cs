@@ -21,11 +21,11 @@ public class PrisonWallObstacleController : MonoBehaviour
         {
             yield return new WaitForSeconds(hiddenDuration);
 
-            transform.DOLocalMoveY(6.2f, .4f).From(-7.5f).SetEase(Ease.InOutSine);
+            transform.DOLocalMoveY(6.2f, moveDuration).From(-7.5f).SetEase(Ease.InOutSine);
 
             yield return new WaitForSeconds(visibleDuration);
 
-            transform.DOLocalMoveY(-7.5f, .4f).From(6.2f).SetEase(Ease.InOutSine);
+            transform.DOLocalMoveY(-7.5f, moveDuration).From(6.2f).SetEase(Ease.InOutSine);
         }
     }
 }
