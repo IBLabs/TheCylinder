@@ -3526,6 +3526,7 @@ GameObject:
   - component: {fileID: 1481879351}
   - component: {fileID: 1481879350}
   - component: {fileID: 1481879349}
+  - component: {fileID: 1481879353}
   m_Layer: 0
   m_Name: Network Simple Player Spawner
   m_TagString: Untagged
@@ -3540,7 +3541,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1481879348}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5b649fbfb4e2496ba2a3300d390e067, type: 3}
   m_Name: 
@@ -3557,7 +3558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c56e1700801554906895400a4edb1918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 454524333751757524, guid: 2087ccafe411549bdb190b86898e5683,
+  playerPrefab: {fileID: 8333849146806985614, guid: b4fc972fe209a49ca9ed0269433ce0fa,
     type: 3}
   spawnPoints:
   - {fileID: 502488724}
@@ -3602,6 +3603,31 @@ Transform:
   - {fileID: 529028956}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1481879353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481879348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48944e6f68b8d47dcb69d5186aa8bf7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Spawn
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: d306efca-e9fc-4cca-9809-c4edec9e1c39
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 1570448165006062204, guid: 811906504475b4abca0d10271343978e,
+      type: 3}
 --- !u!1 &1486649366
 GameObject:
   m_ObjectHideFlags: 0
@@ -3631,7 +3657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f80404324653a41c68daeac98c0aa242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceNonVR: 1
+  forceNonVR: 0
   forceVR: 0
   VRObjects:
   - {fileID: 1196213121}

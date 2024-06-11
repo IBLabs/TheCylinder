@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - DesktopCamera
   - Pickupable
+  - Ground
   layers:
   - Default
   - TransparentFX

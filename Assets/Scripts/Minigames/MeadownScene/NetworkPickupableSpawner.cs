@@ -31,7 +31,7 @@ public class NetworkPickupableSpawner : NetworkBehaviour
 
     void Start()
     {
-        if (IsServer && autoSpawnOnStart)
+        if (autoSpawnOnStart)
         {
             StartCoroutine(AutoSpawnCoroutine());
         }
@@ -56,7 +56,7 @@ public class NetworkPickupableSpawner : NetworkBehaviour
 
     public void SpawnPickupable(Vector3 spawnPosition, Quaternion rotation)
     {
-        if (NetworkManager.Singleton != null)
+        if (NetworkManager.Singleton != null && IsServer)
         {
             HandleNetworkPickupableSpawn(spawnPosition, rotation);
         }
@@ -96,6 +96,5 @@ public class NetworkPickupableSpawner : NetworkBehaviour
         Debug.Log("pickupable picked up by " + pickedUpBy);
 
         PlayerDidPickupPickupable?.Invoke(pickupable, pickedUpBy);
-        Destroy(pickupable.gameObject);
     }
 }

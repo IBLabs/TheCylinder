@@ -3,6 +3,8 @@ using System.Collections;
 using TMPro;
 
 using UnityEngine;
+using UnityEngine.Events;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -11,21 +13,37 @@ using UnityEditor;
 public class CodeGenerator : MonoBehaviour
 {
     public TextMeshProUGUI textMeshPro;
+    public AudioSource sfxAudioSource;
+    public AudioClip codeScrambleSound;
     public float scrambleInterval = 0.05f;
     public float revealDelay = 0.1f;
+
+    public UnityEvent DidFinishRevealCode;
+
+
     private string code = "000000";
     private string currentScrambledText;
 
     private int scrambleStartIndex = 0;
 
+    private bool _shouldRevealCodeOnReceived = false;
+
     void Start()
     {
         currentScrambledText = new string('_', code.Length);
+    }
+
+    public void StartScrambling()
+    {
         StartCoroutine(ScrambleText());
     }
 
     IEnumerator ScrambleText()
     {
+        sfxAudioSource.clip = codeScrambleSound;
+        sfxAudioSource.loop = true;
+        sfxAudioSource.Play();
+
         while (scrambleStartIndex < code.Length)
         {
             char[] scrambledArray = currentScrambledText.ToCharArray();
@@ -42,10 +60,25 @@ public class CodeGenerator : MonoBehaviour
         }
     }
 
-    public void RevealCode(string newCode)
+    public void RevealCode()
+    {
+        if (code == "000000")
+        {
+            _shouldRevealCodeOnReceived = true;
+            return;
+        }
+
+        StartCoroutine(RevealText());
+    }
+
+    public void OnRelayJoinCodeReceived(string newCode)
     {
         code = newCode;
-        StartCoroutine(RevealText());
+
+        if (_shouldRevealCodeOnReceived)
+        {
+            RevealCode();
+        }
     }
 
     IEnumerator RevealText()
@@ -57,10 +90,15 @@ public class CodeGenerator : MonoBehaviour
             currentScrambledText = new string(scrambleArray);
             textMeshPro.text = currentScrambledText;
             scrambleStartIndex = i + 1;
-            yield return new WaitForSeconds(revealDelay);
+
+            if (i < code.Length - 1) yield return new WaitForSeconds(revealDelay);
         }
 
         StopAllCoroutines();
+
+        sfxAudioSource.Stop();
+
+        DidFinishRevealCode?.Invoke();
     }
 
     char GetRandomCharacter()
@@ -81,7 +119,7 @@ public class CodeGeneratorEditor : Editor
         CodeGenerator myComponent = (CodeGenerator)target;
         if (GUILayout.Button("Reveal Code"))
         {
-            myComponent.RevealCode("4321DC");
+            myComponent.OnRelayJoinCodeReceived("4321DC");
         }
     }
 }

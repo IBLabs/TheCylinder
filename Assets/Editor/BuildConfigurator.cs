@@ -11,6 +11,8 @@ public class BuildConfigurator : MonoBehaviour
         "Assets/Scenes/Minigames/RigidbodyTestScene/RigidbodyTestScene.unity",
      };
 
+
+
     [MenuItem("Build/Build for Mobile")]
     public static void BuildMobile()
     {

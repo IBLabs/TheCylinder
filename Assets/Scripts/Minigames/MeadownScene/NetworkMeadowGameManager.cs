@@ -10,8 +10,43 @@ public class NetworkMeadowGameManager : NetworkBehaviour
 
     public void OnPlayerPickedupPickupable(NetworkPickupable pickupable, ulong clientId)
     {
-        DestroyPickupableServerRpc(pickupable.NetworkObject);
-        AddPointServerRpc(clientId);
+        if (NetworkManager.Singleton != null)
+        {
+            var players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (var player in players)
+            {
+                var playerNetworkObject = player.GetComponent<NetworkObject>();
+                if (playerNetworkObject != null && playerNetworkObject.OwnerClientId == clientId)
+                {
+                    AttemptParentPickupableToPlayerServerRpc(pickupable.NetworkObject, playerNetworkObject);
+                    break;
+                }
+            }
+        }
+        else
+        {
+            var playerController = FindAnyObjectByType<NetworkPlayerController>();
+            if (playerController != null)
+            {
+                pickupable.transform.SetParent(playerController.transform);
+            }
+            else
+            {
+                Destroy(pickupable.gameObject);
+            }
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void AttemptParentPickupableToPlayerServerRpc(NetworkObjectReference pickupableNetworkObjectRef, NetworkObjectReference playerNetworkObjectRef)
+    {
+        pickupableNetworkObjectRef.TryGet(out NetworkObject pickupableNetworkObject);
+        playerNetworkObjectRef.TryGet(out NetworkObject playerNetworkObject);
+
+        if (pickupableNetworkObject != null && playerNetworkObject != null)
+        {
+            pickupableNetworkObject.transform.SetParent(playerNetworkObject.transform);
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]

@@ -26,6 +26,12 @@ public class NetworkSimplePlayerSpawner : NetworkBehaviour
 
     public void RequestSpawnFromServer(ulong clientId)
     {
+        if (NetworkManager.Singleton == null)
+        {
+            HandleLocalSpawn();
+            return;
+        }
+
         if (IsServer)
         {
             Debug.Log("the server can't request a spawn");

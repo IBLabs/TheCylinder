@@ -1,12 +1,22 @@
+using System.Collections;
+
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class HoldButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+using DG.Tweening;
+
+public class HoldButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Image progressBar;
+    public AudioSource sfxAudioSource;
+    public AudioClip holdSound;
     public float holdTime = 2f;
+    public Color normalColor = Color.white;
+    public Color hoverColor = Color.gray;
+    public float transitionDuration = 0.2f;
+    public Graphic[] graphics;
 
     public UnityEvent OnAction;
 
@@ -17,6 +27,7 @@ public class HoldButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     void Start()
     {
         progressBar.fillAmount = 0f;
+        SetGraphicsColor(normalColor);
     }
 
     void Update()
@@ -29,6 +40,12 @@ public class HoldButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
                 if (_timer >= holdTime)
                 {
+                    sfxAudioSource.DOPitch(.1f, 0.2f).onComplete = () =>
+                    {
+                        sfxAudioSource.Stop();
+                        sfxAudioSource.pitch = 1f;
+                    };
+
                     ButtonAction();
                 }
             }
@@ -44,11 +61,30 @@ public class HoldButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         _isHeld = true;
+
+        sfxAudioSource.clip = holdSound;
+        sfxAudioSource.Play();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         _isHeld = false;
+
+        sfxAudioSource.DOPitch(.1f, 0.2f).onComplete = () =>
+        {
+            sfxAudioSource.Stop();
+            sfxAudioSource.pitch = 1f;
+        };
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        SetGraphicsColor(hoverColor);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        SetGraphicsColor(normalColor);
     }
 
     private void ButtonAction()
@@ -58,5 +94,30 @@ public class HoldButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         Debug.Log("Button held long enough!");
 
         OnAction?.Invoke();
+    }
+
+    private void SetGraphicsColor(Color targetColor)
+    {
+        StopAllCoroutines();
+
+        foreach (var graphic in graphics)
+        {
+            StartCoroutine(FadeToColor(graphic, targetColor, transitionDuration));
+        }
+    }
+
+    private IEnumerator FadeToColor(Graphic graphic, Color targetColor, float duration)
+    {
+        Color startColor = graphic.color;
+        float time = 0;
+
+        while (time < duration)
+        {
+            graphic.color = Color.Lerp(startColor, targetColor, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        graphic.color = targetColor;
     }
 }
