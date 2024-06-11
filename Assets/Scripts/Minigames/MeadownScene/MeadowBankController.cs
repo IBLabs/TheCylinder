@@ -1,26 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using Unity.Netcode;
 using UnityEngine.Events;
 
-public class MeadowBatController : NetworkBehaviour
+public class MeadowBankController : NetworkBehaviour
 {
-    public UnityEvent<ulong> OnPlayerHitByBat;
+    public UnityEvent<ulong> OnPlayerDroppedPickupables;
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.CompareTag("Player"))
         {
-            ulong hitPlayer = 0;
+            ulong pickedUpBy = 0;
 
             if (NetworkManager.Singleton != null)
             {
                 NetworkObject playerNetworkObject = other.GetComponent<NetworkObject>();
-                hitPlayer = playerNetworkObject.OwnerClientId;
+
+                if (!playerNetworkObject.IsOwner) return;
+
+                pickedUpBy = playerNetworkObject.OwnerClientId;
             }
 
-            OnPlayerHitByBat?.Invoke(hitPlayer);
+            OnPlayerDroppedPickupables?.Invoke(pickedUpBy);
         }
     }
 }

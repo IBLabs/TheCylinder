@@ -21,8 +21,11 @@ public class NetworkPickupable : NetworkBehaviour
 
             if (NetworkManager.Singleton != null)
             {
-                NetworkObject networkObject = other.GetComponent<NetworkObject>();
-                pickedUpBy = networkObject.OwnerClientId;
+                NetworkObject playerNetworkObject = other.GetComponent<NetworkObject>();
+
+                if (!playerNetworkObject.IsOwner) return;
+
+                pickedUpBy = playerNetworkObject.OwnerClientId;
             }
 
             NetworkPickupableSpawner.Instance.PlayerDidPickupPickupable.Invoke(this, pickedUpBy);

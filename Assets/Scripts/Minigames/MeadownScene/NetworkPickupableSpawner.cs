@@ -15,6 +15,9 @@ public class NetworkPickupableSpawner : NetworkBehaviour
     [SerializeField] private Transform[] spawnPoints;
 
     [SerializeField] private bool autoSpawnOnStart = false;
+    [SerializeField] private int spawnCount = -1;
+
+    private Transform _lastUsedTransformPoint;
 
     void Awake()
     {
@@ -39,10 +42,12 @@ public class NetworkPickupableSpawner : NetworkBehaviour
 
     private IEnumerator AutoSpawnCoroutine()
     {
-        while (true)
+        int spawnCounter = 0;
+        while ((spawnCount == -1) || (spawnCount > 0 && spawnCounter < spawnCount))
         {
             yield return new WaitForSeconds(Random.Range(1, 4));
             SpawnPickupableAtRandomSpawnPoint();
+            spawnCounter++;
         }
     }
 
@@ -50,20 +55,41 @@ public class NetworkPickupableSpawner : NetworkBehaviour
 
     public void SpawnPickupableAtRandomSpawnPoint()
     {
-        Transform spawnTransform = (spawnPoints != null) && (spawnPoints.Length > 0) ? spawnPoints[Random.Range(0, spawnPoints.Length)] : transform;
-        SpawnPickupable(spawnTransform.position, spawnTransform.rotation);
-    }
+        Transform spawnTransform;
 
-    public void SpawnPickupable(Vector3 spawnPosition, Quaternion rotation)
-    {
-        if (NetworkManager.Singleton != null && IsServer)
+        if (spawnPoints == null || spawnPoints.Length == 0)
         {
-            HandleNetworkPickupableSpawn(spawnPosition, rotation);
+            spawnTransform = transform;
+        }
+        else if (spawnPoints.Length < 2)
+        {
+            spawnTransform = spawnPoints[0];
         }
         else
         {
-            HandleLocalPickupableSpawn(spawnPosition, rotation);
+            do
+            {
+                spawnTransform = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            } while (spawnTransform == _lastUsedTransformPoint);
         }
+
+        SpawnPickupable(spawnTransform);
+    }
+
+    public void SpawnPickupable(Transform spawnTransform)
+    {
+        if (NetworkManager.Singleton != null)
+        {
+            if (!IsServer) return;
+
+            HandleNetworkPickupableSpawn(spawnTransform.position, spawnTransform.rotation);
+        }
+        else
+        {
+            HandleLocalPickupableSpawn(spawnTransform.position, spawnTransform.rotation);
+        }
+
+        _lastUsedTransformPoint = spawnTransform;
     }
 
     private void HandleNetworkPickupableSpawn(Vector3 spawnPosition, Quaternion rotation)

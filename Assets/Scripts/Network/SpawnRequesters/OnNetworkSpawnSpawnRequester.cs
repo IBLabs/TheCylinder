@@ -10,6 +10,8 @@ public class OnNetworkSpawnSpawnRequester : NetworkBehaviour
 {
     public override void OnNetworkSpawn()
     {
+        if (!enabled) return;
+
         var spawner = GetComponent<NetworkSimplePlayerSpawner>();
         spawner.RequestSpawnFromServer(NetworkManager.Singleton.LocalClientId);
 

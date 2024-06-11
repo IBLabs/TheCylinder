@@ -12,15 +12,10 @@ public class NetworkMeadowGameManager : NetworkBehaviour
     {
         if (NetworkManager.Singleton != null)
         {
-            var players = GameObject.FindGameObjectsWithTag("Player");
-            foreach (var player in players)
+            var targetPlayer = FindPlayerNetworkObjectByCliendId(clientId);
+            if (targetPlayer != null)
             {
-                var playerNetworkObject = player.GetComponent<NetworkObject>();
-                if (playerNetworkObject != null && playerNetworkObject.OwnerClientId == clientId)
-                {
-                    AttemptParentPickupableToPlayerServerRpc(pickupable.NetworkObject, playerNetworkObject);
-                    break;
-                }
+                AttemptParentPickupableToPlayerServerRpc(pickupable.NetworkObject, targetPlayer);
             }
         }
         else
@@ -37,6 +32,47 @@ public class NetworkMeadowGameManager : NetworkBehaviour
         }
     }
 
+    public void OnPlayerDroppedPickupables(ulong clientId)
+    {
+        if (NetworkManager.Singleton != null)
+        {
+            var targetPlayer = FindPlayerNetworkObjectByCliendId(clientId);
+            if (targetPlayer != null)
+            {
+                var pickupables = targetPlayer.GetComponentsInChildren<NetworkPickupable>();
+                foreach (var pickupable in pickupables)
+                {
+                    DestroyNetworkObjectServerRpc(pickupable.NetworkObject);
+                }
+            }
+        }
+        else
+        {
+            // TODO: handle offline scenario
+        }
+    }
+
+    public void OnPlayerHitByBat(ulong clientId)
+    {
+        if (NetworkManager.Singleton != null)
+        {
+            var targetPlayer = FindPlayerNetworkObjectByCliendId(clientId);
+            if (targetPlayer == null) return;
+
+            var playerPickupables = targetPlayer.gameObject.GetComponentsInChildren<NetworkPickupable>();
+            foreach (var playerPickupable in playerPickupables)
+            {
+                playerPickupable.transform.SetParent(null);
+            }
+
+            DestroyNetworkObjectServerRpc(targetPlayer);
+        }
+        else
+        {
+            // TODO: handle offline scenario
+        }
+    }
+
     [ServerRpc(RequireOwnership = false)]
     private void AttemptParentPickupableToPlayerServerRpc(NetworkObjectReference pickupableNetworkObjectRef, NetworkObjectReference playerNetworkObjectRef)
     {
@@ -50,12 +86,12 @@ public class NetworkMeadowGameManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void DestroyPickupableServerRpc(NetworkObjectReference pickupableNetworkObjectRef)
+    private void DestroyNetworkObjectServerRpc(NetworkObjectReference networkObjectRef)
     {
-        pickupableNetworkObjectRef.TryGet(out NetworkObject pickupableNetworkObject);
-        if (pickupableNetworkObject != null)
+        networkObjectRef.TryGet(out NetworkObject networkObject);
+        if (networkObject != null)
         {
-            pickupableNetworkObject.Despawn(true);
+            networkObject.Despawn(true);
         }
     }
 
@@ -81,5 +117,23 @@ public class NetworkMeadowGameManager : NetworkBehaviour
     private void FinishGameClientRpc(WinnerType winner)
     {
         Debug.Log($"Game finished, winner: {winner}");
+    }
+
+    private NetworkObject FindPlayerNetworkObjectByCliendId(ulong clientId)
+    {
+        if (NetworkManager.Singleton != null)
+        {
+            var players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (var player in players)
+            {
+                var playerNetworkObject = player.GetComponent<NetworkObject>();
+                if (playerNetworkObject != null && playerNetworkObject.OwnerClientId == clientId)
+                {
+                    return playerNetworkObject;
+                }
+            }
+        }
+
+        return null;
     }
 }
