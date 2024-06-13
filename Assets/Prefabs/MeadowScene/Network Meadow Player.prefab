@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 1824765837342335325}
   - component: {fileID: 2010919239342262519}
   - component: {fileID: 6581175822513282740}
-  - component: {fileID: 40748908788858135}
   m_Layer: 0
   m_Name: Player Mesh
   m_TagString: Untagged
@@ -113,8 +112,8 @@ Transform:
   m_GameObject: {fileID: 7436045912390588948}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.15, z: 0}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2707929193413365788}
@@ -172,29 +171,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &40748908788858135
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7436045912390588948}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8333849146806985614
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,10 +180,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2930180002755885445}
-  - component: {fileID: 8891504734704337669}
   - component: {fileID: 6728596374741306865}
   - component: {fileID: 2955579043280464975}
-  - component: {fileID: 5537760384532479023}
+  - component: {fileID: 1680632862973397768}
+  - component: {fileID: 3674090221646429161}
+  - component: {fileID: 1005870681466905678}
   m_Layer: 0
   m_Name: Network Meadow Player
   m_TagString: Player
@@ -225,38 +202,12 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1824765837342335325}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &8891504734704337669
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8333849146806985614}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.1
-  m_SkinWidth: 0.01
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &6728596374741306865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,7 +260,57 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &5537760384532479023
+--- !u!136 &1680632862973397768
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8333849146806985614}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.075
+  m_Height: 0.3
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.15, z: 0}
+--- !u!54 &3674090221646429161
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8333849146806985614}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
+--- !u!114 &1005870681466905678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -318,51 +319,58 @@ MonoBehaviour:
   m_GameObject: {fileID: 8333849146806985614}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca2a55f7c67794f9cace51858102200b, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d5b8bf258e46430da949f45cf7df7ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.35
-  runSpeed: 0.85
-  rotationSpeed: 10
-  gravity: 9.8
-  gravityEnabled: 1
+  rideHeight: 0.1
+  rideSpringStrength: 220
+  rideDamperStrength: 2
+  maxSpeed: 3.5
+  acceleration: 30
+  maxAccelerationForce: 220
+  accelerationFactorCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.7205424
+    - serializedVersion: 3
+      time: 0.5963113
+      value: 1.0058653
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.38955912
+      outWeight: 0.3285255
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.00941793
+      outSlope: 0.00941793
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.33825752
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   moveAction:
     m_UseReference: 1
     m_Action:
       m_Name: Move
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 5474c1d3-9244-4c67-8faf-3fe498c4b3a0
+      m_Id: 0ad4132b-8b07-4c34-8f46-7a255306b1ba
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 9063689130010589215, guid: 811906504475b4abca0d10271343978e,
       type: 3}
-  activateAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Activate
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 32d44b06-ccd1-4095-8326-3bc70a1760ea
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 1570448165006062204, guid: 811906504475b4abca0d10271343978e,
-      type: 3}
-  runAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Run
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 2629789a-8417-4c90-b53a-cabb8b05050c
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 2959206241069841629, guid: 811906504475b4abca0d10271343978e,
-      type: 3}
-  playerCamera: {fileID: 0}

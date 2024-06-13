@@ -7,28 +7,69 @@ using UnityEngine.Events;
 
 public class NetworkPickupable : NetworkBehaviour
 {
-    public UnityEvent<NetworkPickupable, ulong> OnPickup;
+    [SerializeField] private float timeToLive = 30.0f;
 
-    public override void OnNetworkSpawn()
+    private bool _isTimerActive = true;
+
+    void Update()
     {
+        bool hasNetworkManager = NetworkManager.Singleton != null;
+
+        if ((hasNetworkManager && IsServer) || !hasNetworkManager)
+        {
+            if (_isTimerActive)
+            {
+                timeToLive -= Time.deltaTime;
+
+                if (timeToLive <= 0)
+                {
+                    _isTimerActive = false;
+
+                    NetworkMeadowGameManager.Instance.OnPickupableDidDie(this);
+                }
+            }
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            ulong pickedUpBy = 0;
+            ulong pickedUpBy = GetPlayerClientId(other);
 
-            if (NetworkManager.Singleton != null)
-            {
-                NetworkObject playerNetworkObject = other.GetComponent<NetworkObject>();
+            StopTimerServerRpc();
 
-                if (!playerNetworkObject.IsOwner) return;
-
-                pickedUpBy = playerNetworkObject.OwnerClientId;
-            }
-
-            NetworkPickupableSpawner.Instance.PlayerDidPickupPickupable.Invoke(this, pickedUpBy);
+            NetworkMeadowGameManager.Instance.OnPlayerPickedupPickupable(this, pickedUpBy);
         }
+    }
+
+    public void ResumeTimer()
+    {
+        ResumeTimerServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void ResumeTimerServerRpc()
+    {
+        _isTimerActive = true;
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void StopTimerServerRpc()
+    {
+        _isTimerActive = false;
+
+        Debug.Log($"{GetType().Name} server RPC stopping timer for pickupable");
+    }
+
+    private ulong GetPlayerClientId(Collider other)
+    {
+        if (NetworkManager.Singleton == null) return 0;
+
+        NetworkObject playerNetworkObject = other.GetComponent<NetworkObject>();
+
+        if (!playerNetworkObject.IsOwner) return 0;
+
+        return playerNetworkObject.OwnerClientId;
     }
 }

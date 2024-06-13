@@ -14,13 +14,14 @@ public class SimpleAnimatedCharacterController : NetworkBehaviour
 
     private Rigidbody rb;
     private Animator animator;
-    private bool isGrounded;
+
+    // private bool isGrounded;
 
     private Vector2 m_inputVector;
     private bool m_runPressed;
     private float m_speed;
 
-    private OwnerNetworkAnimator _networkAnimator;
+    // private OwnerNetworkAnimator _networkAnimator;
 
 
     void Start()
@@ -85,7 +86,7 @@ public class SimpleAnimatedCharacterController : NetworkBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isGrounded = true;
+            // isGrounded = true;
         }
     }
 
@@ -93,7 +94,7 @@ public class SimpleAnimatedCharacterController : NetworkBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isGrounded = false;
+            // isGrounded = false;
         }
     }
 }
