@@ -54,6 +54,11 @@ public class SceneLoader : MonoBehaviour
         StartCoroutine(LoadSceneWithTransition(GetCurrentlyActiveSceneName()));
     }
 
+    public void LoadSpecificScene(string sceneName)
+    {
+        StartCoroutine(LoadSceneWithTransition(sceneName));
+    }
+
     private IEnumerator LoadNextSceneWithTransition()
     {
         yield return LoadSceneWithTransition(GetNextSceneName());

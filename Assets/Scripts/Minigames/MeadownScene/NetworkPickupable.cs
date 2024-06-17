@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 using Unity.Netcode;
-using UnityEngine.Events;
+using System;
+using Unity.Netcode.Components;
 
 public class NetworkPickupable : NetworkBehaviour
 {
     [SerializeField] private float timeToLive = 30.0f;
 
     private bool _isTimerActive = true;
+    private bool _isPickedUp = false;
 
     void Update()
     {
@@ -35,12 +35,53 @@ public class NetworkPickupable : NetworkBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            ulong pickedUpBy = GetPlayerClientId(other);
+            bool hasNetworkAccess = NetworkManager.Singleton != null;
 
-            StopTimerServerRpc();
+            if (hasNetworkAccess)
+            {
+                if (!other.TryGetComponent(out NetworkObject playerNetworkObject))
+                {
+                    Debug.LogWarning("Player object does not have NetworkObject component");
+                    return;
+                }
 
-            NetworkMeadowGameManager.Instance.OnPlayerPickedupPickupable(this, pickedUpBy);
+                if (!playerNetworkObject.IsOwner)
+                {
+                    Debug.Log("Current client does not own the collided player object, aborting");
+                    return;
+                }
+
+                AttemptPickupServerRpc(playerNetworkObject);
+
+                StopTimerServerRpc();
+            }
+            else
+            {
+                // TODO: handle offline scenario
+            }
+
+            // TODO: should not be used
+            // NetworkMeadowGameManager.Instance.OnPlayerPickedupPickupable(this, pickedUpBy);
         }
+    }
+
+    public override void OnNetworkObjectParentChanged(NetworkObject parentNetworkObject)
+    {
+        if (!IsServer) return;
+
+        if (parentNetworkObject == null)
+        {
+            _isPickedUp = false;
+
+            if (TryGetComponent(out NetworkTransform networkTransform))
+            {
+                networkTransform.InLocalSpace = false;
+            }
+
+            ResumeTimer();
+        }
+
+        base.OnNetworkObjectParentChanged(parentNetworkObject);
     }
 
     public void ResumeTimer()
@@ -60,6 +101,39 @@ public class NetworkPickupable : NetworkBehaviour
         _isTimerActive = false;
 
         Debug.Log($"{GetType().Name} server RPC stopping timer for pickupable");
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void AttemptPickupServerRpc(NetworkObjectReference playerRef)
+    {
+        if (_isPickedUp)
+        {
+            Debug.Log("Already picked up, aborting");
+            return;
+        }
+
+        if (!playerRef.TryGet(out NetworkObject playerNetworkObject))
+        {
+            Debug.LogWarning("Couldn't get referenced player network object");
+            return;
+        }
+
+        if (NetworkObject.TrySetParent(playerNetworkObject))
+        {
+            NetworkSoundManager.Instance.PlaySoundServerRpc("MeadowPickup1", transform.position);
+
+            _isPickedUp = true;
+
+            if (TryGetComponent(out NetworkTransform networkTransform))
+            {
+                networkTransform.InLocalSpace = true;
+                transform.localPosition = Vector3.up * 0.4f;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Failed to parent pickupable to player");
+        }
     }
 
     private ulong GetPlayerClientId(Collider other)

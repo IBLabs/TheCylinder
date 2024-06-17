@@ -17,9 +17,11 @@ public class SimpleAnimatedCharacterController : NetworkBehaviour
 
     // private bool isGrounded;
 
-    private Vector2 m_inputVector;
+    private Vector3 m_inputVector;
     private bool m_runPressed;
     private float m_speed;
+
+    private Camera _targetCamera;
 
     // private OwnerNetworkAnimator _networkAnimator;
 
@@ -29,23 +31,36 @@ public class SimpleAnimatedCharacterController : NetworkBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
-        // Enable the input actions
         moveAction.action.Enable();
         jumpAction.action.Enable();
-        runAction.action.Enable(); // Enable the run action
+        runAction.action.Enable();
+
+        // get camera tagged as "DesktopCamera"
+        _targetCamera = GameObject.FindWithTag("DesktopCamera").GetComponent<Camera>();
     }
 
     void Update()
     {
         if (!IsOwner) return;
 
-        Vector2 inputVector = moveAction.action.ReadValue<Vector2>();
+        Vector2 rawInputVector = moveAction.action.ReadValue<Vector2>();
+        Vector3 inputVector = new Vector3(rawInputVector.x, 0, rawInputVector.y);
+
         bool runPressed = runAction.action.ReadValue<float>() > 0.5f;
         float speed = runPressed ? runSpeed : moveSpeed;
 
         bool jumpPressed = jumpAction.action.triggered;
 
-        m_inputVector = inputVector;
+        Vector3 cameraForward = _targetCamera.transform.forward;
+        cameraForward.y = 0f;
+        cameraForward.Normalize();
+
+        Vector3 cameraRight = _targetCamera.transform.right;
+        cameraRight.y = 0f;
+        cameraRight.Normalize();
+
+        m_inputVector = cameraForward * inputVector.z + cameraRight * inputVector.x;
+
         m_runPressed = runPressed;
         m_speed = speed;
 
@@ -57,14 +72,14 @@ public class SimpleAnimatedCharacterController : NetworkBehaviour
         Move(m_inputVector, m_speed);
     }
 
-    void Move(Vector2 inputVector, float speed)
+    void Move(Vector3 inputVector, float speed)
     {
-        Vector3 movement = new Vector3(inputVector.x, 0.0f, inputVector.y) * speed * Time.deltaTime;
+        Vector3 movement = new Vector3(inputVector.x, 0.0f, inputVector.z) * speed * Time.deltaTime;
         rb.MovePosition(transform.position + movement);
 
-        if (movement != Vector3.zero) // If the character is moving
+        if (movement != Vector3.zero)
         {
-            transform.rotation = Quaternion.LookRotation(movement); // Rotate the character to face the direction of movement
+            transform.rotation = Quaternion.LookRotation(movement);
         }
     }
 

@@ -27,6 +27,12 @@ public class SceneSwitcher : EditorWindow
         SwitchToScene("Minigames/MeadowScene/MeadowScene");
     }
 
+    [MenuItem("Key Scenes/Mezzanine")]
+    private static void SwitchToScene5()
+    {
+        SwitchToScene("Minigames/MezzanineScene/MezzanineScene");
+    }
+
     // Add more scene switch methods here
 
     private static void SwitchToScene(string sceneName)

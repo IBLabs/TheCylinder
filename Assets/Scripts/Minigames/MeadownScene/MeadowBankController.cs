@@ -3,6 +3,7 @@ using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.InputSystem;
 using DG.Tweening;
+using Unity.VisualScripting;
 
 public class MeadowBankController : NetworkBehaviour
 {
@@ -11,8 +12,16 @@ public class MeadowBankController : NetworkBehaviour
 
     [SerializeField] private InputActionProperty relocateAction;
 
+
+    private MeshRenderer _meshRenderer;
+
     private Vector3 _currentPosition;
     private bool _isRelocating;
+
+    void Start()
+    {
+        _meshRenderer = GetComponent<MeshRenderer>();
+    }
 
     void Update()
     {
@@ -74,12 +83,52 @@ public class MeadowBankController : NetworkBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (other.GetComponentsInChildren<NetworkPickupable>().Length > 0)
+            var hasNetworkAccess = NetworkManager.Singleton != null;
+
+            if (hasNetworkAccess)
             {
+                if (!other.TryGetComponent(out NetworkObject playerNetworkObject))
+                {
+                    Debug.LogWarning("Player object does not have NetworkObject component");
+                    return;
+                }
+
+                if (!playerNetworkObject.IsOwner)
+                {
+                    Debug.Log("Current client does not own the collided player object, aborting");
+                    return;
+                }
+
+                if (other.GetComponentsInChildren<NetworkPickupable>().Length <= 0)
+                {
+                    Debug.Log("Player does not have any pickupables, aborting");
+                    return;
+                }
+
+                NetworkSoundManager.Instance.PlaySoundServerRpc("MeadowDrop1", transform.position);
+
+                FlashBankServerRpc();
+
                 ulong droppedBy = GetPlayerOwnerClientId(other);
                 NetworkMeadowGameManager.Instance.OnPlayerDroppedPickupables(droppedBy);
             }
+            else
+            {
+                // TODO: handle offline scenario
+            }
         }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void FlashBankServerRpc()
+    {
+        FlashBankClientRpc();
+    }
+
+    [ClientRpc]
+    private void FlashBankClientRpc()
+    {
+        _meshRenderer.material.DOColor(Color.black, "_EmissionColor", 0.3f).From(Color.white * 2);
     }
 
     private ulong GetPlayerOwnerClientId(Collider other)

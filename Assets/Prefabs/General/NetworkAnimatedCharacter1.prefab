@@ -98,11 +98,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: de73c2b5a8c784b44a0a1d8de6f35262,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2884053213170889681}
+      addedObject: {fileID: 5743416523213442774}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: de73c2b5a8c784b44a0a1d8de6f35262,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5743416523213442774}
+      addedObject: {fileID: 2884053213170889681}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: de73c2b5a8c784b44a0a1d8de6f35262,
         type: 3}
       insertIndex: -1
@@ -190,6 +190,27 @@ CapsuleCollider:
   m_Height: 0.22
   m_Direction: 1
   m_Center: {x: 0, y: 0.1, z: 0}
+--- !u!114 &5743416523213442774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3229716956188329378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 732875548
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &2884053213170889681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,27 +264,6 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 2959206241069841629, guid: 811906504475b4abca0d10271343978e,
       type: 3}
---- !u!114 &5743416523213442774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3229716956188329378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 732875548
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &5086944369585608330
 MonoBehaviour:
   m_ObjectHideFlags: 0

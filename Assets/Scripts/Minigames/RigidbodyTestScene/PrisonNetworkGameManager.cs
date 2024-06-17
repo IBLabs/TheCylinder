@@ -80,6 +80,8 @@ public class PrisonNetworkGameManager : NetworkBehaviour
             return;
         }
 
+        NetworkScoreKeeper.Instance.AddScore(winnerType);
+
         ShowGameEnd(winnerType);
 
         ShowGameEndClientRpc(winnerType);
@@ -105,10 +107,4 @@ public class PrisonNetworkGameManager : NetworkBehaviour
         gameEndGroup.interactable = true;
         gameEndGroup.blocksRaycasts = true;
     }
-}
-
-enum WinnerType
-{
-    Desktop,
-    VR
 }

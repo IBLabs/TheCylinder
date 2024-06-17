@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 1680632862973397768}
   - component: {fileID: 3674090221646429161}
   - component: {fileID: 1005870681466905678}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Network Meadow Player
   m_TagString: Player
   m_Icon: {fileID: 0}

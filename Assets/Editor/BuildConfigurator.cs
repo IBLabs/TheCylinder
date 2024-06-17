@@ -6,8 +6,9 @@ public class BuildConfigurator : MonoBehaviour
 {
     private static readonly string[] scenes = new string[] {
         "Assets/Scenes/Utilities/NetworkBootstrapScene.unity",
-        "Assets/Scenes/Minigames/MeadowScene/MeadowScene.unity",
+        "Assets/Scenes/Minigames/MezzanineScene/MezzanineScene.unity",
         "Assets/Scenes/Minigames/PrisonScene/PrisonScene.unity",
+        "Assets/Scenes/Minigames/MeadowScene/MeadowScene.unity",
         "Assets/Scenes/Minigames/RigidbodyTestScene/RigidbodyTestScene.unity",
      };
 

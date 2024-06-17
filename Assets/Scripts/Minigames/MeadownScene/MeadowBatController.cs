@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.Events;
 using UnityEngine.SocialPlatforms;
+using Unity.VisualScripting.FullSerializer;
 
 public class MeadowBatController : NetworkBehaviour
 {
@@ -16,15 +17,21 @@ public class MeadowBatController : NetworkBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            ulong hitPlayer = 0;
+            var hasNetworkAccess = NetworkManager.Singleton != null;
 
-            if (NetworkManager.Singleton != null)
+            if (hasNetworkAccess && !IsServer)
             {
-                NetworkObject playerNetworkObject = other.GetComponent<NetworkObject>();
-                hitPlayer = playerNetworkObject.OwnerClientId;
+                Debug.LogWarning("Only the server can process player hits");
+                return;
             }
 
-            NetworkMeadowGameManager.Instance.OnPlayerHitByBat(hitPlayer);
+            if (!other.TryGetComponent(out NetworkObject playerNetworkObject))
+            {
+                Debug.LogWarning($"{GetType().Name} couldn't find target player's network object");
+                return;
+            }
+
+            AttemptKillPlayerServerRpc(playerNetworkObject);
         }
     }
 
@@ -46,6 +53,27 @@ public class MeadowBatController : NetworkBehaviour
                 LocalVisualizeHit(hitPoint, hitNormal);
             }
         }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void AttemptKillPlayerServerRpc(NetworkObjectReference playerToKillRef)
+    {
+        if (!playerToKillRef.TryGet(out NetworkObject playerToKill))
+        {
+            Debug.LogWarning($"{GetType().Name} couldn't find target player's network object");
+            return;
+        }
+
+        var playerPickupables = playerToKill.GetComponentsInChildren<NetworkPickupable>();
+        if (playerPickupables.Length > 0)
+        {
+            foreach (var pickupable in playerPickupables)
+            {
+                pickupable.NetworkObject.TryRemoveParent();
+            }
+        }
+
+        Destroy(playerToKill.gameObject);
     }
 
     [ClientRpc]

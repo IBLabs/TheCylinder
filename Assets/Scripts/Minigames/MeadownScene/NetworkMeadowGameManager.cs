@@ -10,6 +10,8 @@ public class NetworkMeadowGameManager : NetworkBehaviour
     public static NetworkMeadowGameManager Instance { get; private set; }
 
     public NetworkVariable<float> GameTimeLeft = new NetworkVariable<float>(0.0f);
+    public NetworkVariable<int> VRPointCount = new NetworkVariable<int>(0);
+    public NetworkVariable<int> DesktopPointCount = new NetworkVariable<int>(0);
 
     [SerializeField] private NetworkPickupableSpawner pickupableSpawner;
     [SerializeField] private MeadowBankController bankController;
@@ -92,18 +94,6 @@ public class NetworkMeadowGameManager : NetworkBehaviour
         }
     }
 
-    public void OnPlayerPickedupPickupable(NetworkPickupable pickupable, ulong clientId)
-    {
-        if (NetworkManager.Singleton != null)
-        {
-            NetworkHandlePlayerPickedupPickupable(pickupable, clientId);
-        }
-        else
-        {
-            LocalHandlePlayerPickedupPickupable(pickupable);
-        }
-    }
-
     public void OnPlayerDroppedPickupables(ulong clientId)
     {
         if (NetworkManager.Singleton != null)
@@ -113,27 +103,6 @@ public class NetworkMeadowGameManager : NetworkBehaviour
         else
         {
             // TODO: handle offline scenario
-        }
-    }
-
-    public void OnPlayerHitByBat(ulong clientId)
-    {
-        if (NetworkManager.Singleton != null)
-        {
-            NetworkHandlePlayerHitByBat(clientId);
-        }
-        else
-        {
-            // TODO: handle offline scenario
-        }
-    }
-
-    private void NetworkHandlePlayerPickedupPickupable(NetworkPickupable pickupable, ulong clientId)
-    {
-        var targetPlayer = FindPlayerNetworkObjectByCliendId(clientId);
-        if (targetPlayer != null)
-        {
-            AttemptParentPickupableToPlayerServerRpc(pickupable.NetworkObject, targetPlayer);
         }
     }
 
@@ -152,21 +121,6 @@ public class NetworkMeadowGameManager : NetworkBehaviour
 
             RelocateDrophouseServerRpc();
         }
-    }
-
-    private void NetworkHandlePlayerHitByBat(ulong clientId)
-    {
-        var targetPlayer = FindPlayerNetworkObjectByCliendId(clientId);
-        if (targetPlayer == null) return;
-
-        var playerPickupables = targetPlayer.gameObject.GetComponentsInChildren<NetworkPickupable>();
-        foreach (var playerPickupable in playerPickupables)
-        {
-            playerPickupable.transform.SetParent(null);
-            playerPickupable.ResumeTimer();
-        }
-
-        DestroyNetworkObjectServerRpc(targetPlayer);
     }
 
     private void NetworkHandlePickupableDidDie(NetworkPickupable pickupable)
@@ -217,23 +171,6 @@ public class NetworkMeadowGameManager : NetworkBehaviour
         }
 
         return null;
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void AttemptParentPickupableToPlayerServerRpc(NetworkObjectReference pickupableRef, NetworkObjectReference playerRef)
-    {
-        // try get both the pickupable object and the player
-        pickupableRef.TryGet(out NetworkObject pickupable);
-        playerRef.TryGet(out NetworkObject player);
-
-        pickupable.GetComponent<NetworkTransform>().InLocalSpace = true;
-
-        // if both objects are valid, parent the pickupable to the player
-        if (pickupable != null && player != null)
-        {
-            pickupable.transform.SetParent(player.transform);
-            pickupable.transform.localPosition = Vector3.up * 0.27f;
-        }
     }
 
     [ServerRpc(RequireOwnership = false)]

@@ -721,6 +721,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioClips:
   - {fileID: 8300000, guid: 6baa4af2396b141d48115f0d99563344, type: 3}
+  - {fileID: 8300000, guid: 75cdd86c9b3644f76a64ee06eaa3ade9, type: 3}
+  - {fileID: 8300000, guid: c28a711f2a5534b239237aecec12c512, type: 3}
   muteAction:
     m_UseReference: 0
     m_Action:
@@ -1527,7 +1529,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 107b1e9c02cb04a459d7ddbb9297776f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5036,6 +5038,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameTimeLeft:
+    m_InternalValue: 0
+  VRPointCount:
+    m_InternalValue: 0
+  DesktopPointCount:
     m_InternalValue: 0
   pickupableSpawner: {fileID: 1767097798}
   bankController: {fileID: 677628336}
