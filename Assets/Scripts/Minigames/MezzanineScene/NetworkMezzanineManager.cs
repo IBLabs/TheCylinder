@@ -8,25 +8,31 @@ using UnityEngine;
 
 public class NetworkMezzanineManager : NetworkBehaviour
 {
-
-
     [SerializeField] private ScoreCanvasController desktopScoreCanvasController;
     [SerializeField] private ScoreCanvasController xrScoreCanvasController;
 
     [SerializeField] private MezzanineCanvasController desktopMezzanineCanvasController;
     [SerializeField] private MezzanineCanvasController xrMezzanineCanvasController;
 
-    void Start()
+
+    public override void OnNetworkSpawn()
     {
         var lastRoundWinner = NetworkScoreKeeper.Instance.LastRoundWinner;
+
+        Debug.Log("network mezzanine manager received last round winner: " + lastRoundWinner.ToString());
+
         if (lastRoundWinner != WinnerType.Unset)
         {
+            Debug.Log("showing score canvas");
             ShowScore();
         }
         else
         {
+            Debug.Log("showing level selection canvas");
             ShowLevelSelection();
         }
+
+        base.OnNetworkSpawn();
     }
 
     public void OnScoreCanvasFinished()
@@ -44,29 +50,38 @@ public class NetworkMezzanineManager : NetworkBehaviour
 
     void OnEnable()
     {
-        if (desktopScoreCanvasController) desktopScoreCanvasController.OnScoreCanvasFinished.AddListener(OnScoreCanvasFinished);
-        if (xrScoreCanvasController) xrScoreCanvasController.OnScoreCanvasFinished.AddListener(OnScoreCanvasFinished);
+        if (desktopScoreCanvasController)
+            desktopScoreCanvasController.OnScoreCanvasFinished.AddListener(OnScoreCanvasFinished);
+
+        if (xrScoreCanvasController)
+            xrScoreCanvasController.OnScoreCanvasFinished.AddListener(OnScoreCanvasFinished);
     }
 
     void OnDisable()
     {
-        if (desktopScoreCanvasController) desktopScoreCanvasController.OnScoreCanvasFinished.RemoveListener(OnScoreCanvasFinished);
-        if (xrScoreCanvasController) xrScoreCanvasController.OnScoreCanvasFinished.RemoveListener(OnScoreCanvasFinished);
+        if (desktopScoreCanvasController)
+            desktopScoreCanvasController.OnScoreCanvasFinished.RemoveListener(OnScoreCanvasFinished);
+
+        if (xrScoreCanvasController)
+            xrScoreCanvasController.OnScoreCanvasFinished.RemoveListener(OnScoreCanvasFinished);
     }
 
     private void ShowScore()
     {
-        if (desktopScoreCanvasController && desktopScoreCanvasController.gameObject.activeInHierarchy)
-        {
-            desktopMezzanineCanvasController.ShowScoreCanvas();
-            desktopScoreCanvasController.ShowLastRoundWinner(NetworkScoreKeeper.Instance.LastRoundWinner);
-        }
+        StartCoroutine(ShowScoreCoroutine());
+    }
 
-        if (xrScoreCanvasController && xrScoreCanvasController.gameObject.activeInHierarchy)
-        {
-            xrMezzanineCanvasController.ShowScoreCanvas();
-            xrScoreCanvasController.ShowLastRoundWinner(NetworkScoreKeeper.Instance.LastRoundWinner);
-        }
+    private IEnumerator ShowScoreCoroutine()
+    {
+        NetworkScoreKeeper scoreKeeper = NetworkScoreKeeper.Instance;
+
+        desktopMezzanineCanvasController.ShowScoreCanvas();
+        desktopScoreCanvasController.ShowLastRoundWinner(scoreKeeper.LastRoundWinner, scoreKeeper.DesktopScore.Value, scoreKeeper.XrScore.Value);
+
+        xrMezzanineCanvasController.ShowScoreCanvas();
+        xrScoreCanvasController.ShowLastRoundWinner(scoreKeeper.LastRoundWinner, scoreKeeper.DesktopScore.Value, scoreKeeper.XrScore.Value);
+
+        yield return null;
     }
 
     private void ShowLevelSelection()

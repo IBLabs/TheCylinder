@@ -2,12 +2,14 @@ using UnityEngine;
 
 using DG.Tweening;
 using UnityEngine.Events;
+using Unity.Netcode;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-public class TableSwitchController : MonoBehaviour
+public class TableSwitchController : NetworkBehaviour
 {
     public bool IsActivated { get; private set; }
 
@@ -51,12 +53,13 @@ public class TableSwitchController : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            IsActivated = true;
-
-            internalPartTransform.DOLocalMoveY(yMoveOffset, 0.5f);
-            _meshRenderer.material.DOColor(activatedColor, "_EmissionColor", 0.2f);
-
-            OnSwitchActivated?.Invoke(this);
+            var hasNetworkAccess = NetworkManager.Singleton != null;
+            if (!hasNetworkAccess)
+            {
+                SetSwitchPressed();
+                return;
+            }
+            SetSwitchPressedServerRpc();
         }
     }
 
@@ -66,11 +69,56 @@ public class TableSwitchController : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            IsActivated = false;
-
-            internalPartTransform.DOLocalMoveY(0f, 0.5f);
-            _meshRenderer.material.DOColor(Color.black, "_EmissionColor", 0.2f);
+            var hasNetworkAccess = NetworkManager.Singleton != null;
+            if (!hasNetworkAccess)
+            {
+                SetSwitchUnpressed();
+                return;
+            }
+            SetSwitchUnpressedServerRpc();
         }
+    }
+
+    private void SetSwitchPressed()
+    {
+        IsActivated = true;
+
+        internalPartTransform.DOLocalMoveY(yMoveOffset, 0.5f);
+        _meshRenderer.material.DOColor(activatedColor, "_EmissionColor", 0.2f);
+
+        OnSwitchActivated?.Invoke(this);
+    }
+
+    private void SetSwitchUnpressed()
+    {
+        IsActivated = false;
+
+        internalPartTransform.DOLocalMoveY(0f, 0.5f);
+        _meshRenderer.material.DOColor(Color.black, "_EmissionColor", 0.2f);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SetSwitchPressedServerRpc()
+    {
+        SetSwitchPressedClientRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SetSwitchUnpressedServerRpc()
+    {
+        SetSwitchUnpressedClientRpc();
+    }
+
+    [ClientRpc]
+    private void SetSwitchPressedClientRpc()
+    {
+        SetSwitchPressed();
+    }
+
+    [ClientRpc]
+    private void SetSwitchUnpressedClientRpc()
+    {
+        SetSwitchUnpressed();
     }
 }
 

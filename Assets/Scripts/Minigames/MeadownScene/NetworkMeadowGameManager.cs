@@ -4,6 +4,7 @@ using Unity.Netcode;
 using UnityEngine.Events;
 using System.Collections;
 using Unity.Netcode.Components;
+using Unity.VisualScripting;
 
 public class NetworkMeadowGameManager : NetworkBehaviour
 {
@@ -13,18 +14,20 @@ public class NetworkMeadowGameManager : NetworkBehaviour
     public NetworkVariable<int> VRPointCount = new NetworkVariable<int>(0);
     public NetworkVariable<int> DesktopPointCount = new NetworkVariable<int>(0);
 
+    [Header("Dependencies")]
     [SerializeField] private NetworkPickupableSpawner pickupableSpawner;
     [SerializeField] private MeadowBankController bankController;
+    [SerializeField] private SceneLoader sceneLoader;
 
     [Header("Configuration")]
+    [SerializeField] private float gameDuration = 120.0f;
     [SerializeField] private bool autoStartGameOnStart = false;
 
     [Header("Events")]
     public UnityEvent<float> OnGameDidStart;
+    public UnityEvent OnGameDidFinish;
 
-    private const int TARGET_POINTS = 5;
-
-    private int pointCount = 0;
+    private NetworkVariable<bool> _isGameRunning = new NetworkVariable<bool>(false);
 
     void Awake()
     {
@@ -63,7 +66,9 @@ public class NetworkMeadowGameManager : NetworkBehaviour
             if (!IsServer) return;
         }
 
-        GameTimeLeft.Value = 120.0f;
+        _isGameRunning.Value = true;
+
+        GameTimeLeft.Value = gameDuration;
         StartCoroutine(GameTimerCoroutine());
 
         pickupableSpawner.SpawnPickupableAtRandomSpawnPoint();
@@ -79,7 +84,9 @@ public class NetworkMeadowGameManager : NetworkBehaviour
             yield return null;
         }
 
-        // TODO: check win condition and end game
+        _isGameRunning.Value = false;
+
+        FinishGameServerRpc();
     }
 
     public void OnPickupableDidDie(NetworkPickupable pickupable)
@@ -108,9 +115,13 @@ public class NetworkMeadowGameManager : NetworkBehaviour
 
     private void NetworkHandlePlayerDroppedPickupables(ulong clientId)
     {
+        if (!_isGameRunning.Value) return;
+
         var targetPlayer = FindPlayerNetworkObjectByCliendId(clientId);
         if (targetPlayer != null)
         {
+            FinishPickupableRoundServerRpc(WinnerType.Desktop);
+
             var pickupables = targetPlayer.GetComponentsInChildren<NetworkPickupable>();
             foreach (var pickupable in pickupables)
             {
@@ -130,6 +141,10 @@ public class NetworkMeadowGameManager : NetworkBehaviour
             Debug.LogWarning("OnPickupableDidDie was called from a client, this shouldn't happen");
             return;
         }
+
+        if (!_isGameRunning.Value) return;
+
+        FinishPickupableRoundServerRpc(WinnerType.VR);
 
         DestroyNetworkObjectServerRpc(pickupable.NetworkObject);
 
@@ -151,11 +166,6 @@ public class NetworkMeadowGameManager : NetworkBehaviour
         }
     }
 
-    private bool CheckWinCondition()
-    {
-        return pointCount >= TARGET_POINTS;
-    }
-
     private NetworkObject FindPlayerNetworkObjectByCliendId(ulong clientId)
     {
         if (NetworkManager.Singleton == null) return null;
@@ -173,6 +183,13 @@ public class NetworkMeadowGameManager : NetworkBehaviour
         return null;
     }
 
+    private IEnumerator GameEndCoroutine()
+    {
+        yield return new WaitForSeconds(3.0f);
+
+        sceneLoader.LoadSpecificScene("MezzanineScene");
+    }
+
     [ServerRpc(RequireOwnership = false)]
     private void DestroyNetworkObjectServerRpc(NetworkObjectReference networkObjectRef)
     {
@@ -180,19 +197,6 @@ public class NetworkMeadowGameManager : NetworkBehaviour
         if (networkObject != null)
         {
             networkObject.Despawn(true);
-        }
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void AddPointServerRpc(ulong clientId)
-    {
-        pointCount++;
-
-        Debug.Log("points scored by player: " + clientId + ", total points: " + pointCount);
-
-        if (CheckWinCondition())
-        {
-            FinishGameClientRpc(WinnerType.Desktop);
         }
     }
 
@@ -209,6 +213,44 @@ public class NetworkMeadowGameManager : NetworkBehaviour
         RelocateDrophouseClientRpc(newTargetTransform.position);
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    private void FinishPickupableRoundServerRpc(WinnerType roundWinner)
+    {
+        if (!_isGameRunning.Value) return;
+
+        switch (roundWinner)
+        {
+            case WinnerType.Desktop:
+                DesktopPointCount.Value++;
+                break;
+            case WinnerType.VR:
+                VRPointCount.Value++;
+                break;
+            default:
+                break;
+        }
+    }
+
+    [ServerRpc]
+    private void FinishGameServerRpc()
+    {
+        WinnerType winner = WinnerType.Unset;
+        if (VRPointCount.Value > DesktopPointCount.Value)
+        {
+            NetworkScoreKeeper.Instance.AddXrScore();
+            winner = WinnerType.VR;
+        }
+        else if (VRPointCount.Value < DesktopPointCount.Value)
+        {
+            NetworkScoreKeeper.Instance.AddDesktopScore();
+            winner = WinnerType.Desktop;
+        }
+
+        ShowEndGameUIClientRpc(winner);
+
+        StartCoroutine(GameEndCoroutine());
+    }
+
     [ClientRpc]
     private void RelocateDrophouseClientRpc(Vector3 position)
     {
@@ -218,8 +260,10 @@ public class NetworkMeadowGameManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void FinishGameClientRpc(WinnerType winner)
+    private void ShowEndGameUIClientRpc(WinnerType winner)
     {
-        Debug.Log($"Game finished, winner: {winner}");
+        // TODO: show finish game screen
+
+        OnGameDidFinish?.Invoke();
     }
 }

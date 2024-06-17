@@ -9,10 +9,12 @@ public class NetworkScoreKeeper : NetworkBehaviour
 {
     public static NetworkScoreKeeper Instance { get; private set; }
 
-    public int DesktopScore { get; private set; }
-    public int XrScore { get; private set; }
+    public readonly NetworkVariable<int> DesktopScore = new NetworkVariable<int>(0);
+    public readonly NetworkVariable<int> XrScore = new NetworkVariable<int>(0);
 
-    public WinnerType LastRoundWinner { get; private set; }
+    public WinnerType LastRoundWinner => _lastRoundWinner.Value;
+
+    private readonly NetworkVariable<WinnerType> _lastRoundWinner = new NetworkVariable<WinnerType>();
 
     void Awake()
     {
@@ -41,20 +43,45 @@ public class NetworkScoreKeeper : NetworkBehaviour
         }
     }
 
+    public override void OnNetworkSpawn()
+    {
+        Debug.Log("network score keeper spawned");
+
+        base.OnNetworkSpawn();
+    }
+
     public void AddDesktopScore()
     {
-        DesktopScore += 1;
-        LastRoundWinner = WinnerType.Desktop;
+        if (!IsServer)
+        {
+            Debug.Log("only server can increase desktop score, returning");
+            return;
+        }
+
+        Debug.Log("server adding score to desktop player");
+
+        DesktopScore.Value += 1;
+        _lastRoundWinner.Value = WinnerType.Desktop;
     }
 
     public void AddXrScore()
     {
-        XrScore += 1;
-        LastRoundWinner = WinnerType.VR;
+        if (!IsServer)
+        {
+            Debug.Log("only server can increase XR score, returning");
+            return;
+        }
+
+        Debug.Log("server adding score to XR player");
+
+        XrScore.Value += 1;
+        _lastRoundWinner.Value = WinnerType.VR;
     }
 
     private void SetInitialState()
     {
-        LastRoundWinner = WinnerType.Unset;
+        if (!IsServer) return;
+
+        _lastRoundWinner.Value = WinnerType.Unset;
     }
 }

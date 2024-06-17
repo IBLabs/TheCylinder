@@ -1,18 +1,20 @@
 using System.Linq;
 
-using Unity.Mathematics;
+using Unity.Collections;
 using Unity.Netcode;
 
 using UnityEngine;
 
 public class NetworkSceneSelector : NetworkBehaviour
 {
+    private const string DEFAULT_SCENE_ID = "meadow";
+
     [SerializeField] private SceneDescriptor[] sceneDescriptors;
 
     [SerializeField] private DekstopLevelCanvasController desktopLevelCanvasController;
     [SerializeField] private XRLevelCanvasController xrLevelCanvasController;
 
-    private string _selectedSceneId = "prison";
+    private readonly NetworkVariable<FixedString32Bytes> _selectedSceneId = new NetworkVariable<FixedString32Bytes>();
 
     private SceneLoader _sceneLoader;
 
@@ -20,7 +22,14 @@ public class NetworkSceneSelector : NetworkBehaviour
     {
         _sceneLoader = FindAnyObjectByType<SceneLoader>();
 
+        // SetInitialState();
+    }
+
+    public override void OnNetworkSpawn()
+    {
         SetInitialState();
+
+        base.OnNetworkSpawn();
     }
 
     public void SetMeadowScene()
@@ -28,7 +37,7 @@ public class NetworkSceneSelector : NetworkBehaviour
         var hasNetworkAccess = NetworkManager.Singleton != null;
         if (!hasNetworkAccess)
         {
-            SetActiveSceneClientRpc("meadow");
+            SetActiveScene("meadow");
             return;
         }
 
@@ -40,7 +49,7 @@ public class NetworkSceneSelector : NetworkBehaviour
         var hasNetworkAccess = NetworkManager.Singleton != null;
         if (!hasNetworkAccess)
         {
-            SetActiveSceneClientRpc("prison");
+            SetActiveScene("prison");
             return;
         }
 
@@ -49,7 +58,7 @@ public class NetworkSceneSelector : NetworkBehaviour
 
     public void LaunchSelectdScene()
     {
-        var sceneDescriptor = sceneDescriptors.FirstOrDefault(descriptor => descriptor.sceneId == _selectedSceneId);
+        var sceneDescriptor = sceneDescriptors.FirstOrDefault(descriptor => descriptor.sceneId == _selectedSceneId.Value);
         if (!sceneDescriptor) return;
         _sceneLoader.LoadSpecificScene(sceneDescriptor.sceneFileName);
     }
@@ -60,35 +69,42 @@ public class NetworkSceneSelector : NetworkBehaviour
 
         if (hasNetworkAccess)
         {
-            if (!IsServer)
-            {
-                SetSceneWithIdServerRpc(_selectedSceneId);
-            }
+            if (!IsServer) return;
+
+            SetSceneWithIdServerRpc(DEFAULT_SCENE_ID);
         }
         else
         {
-            SetActiveSceneClientRpc(_selectedSceneId);
+            SetActiveScene(DEFAULT_SCENE_ID);
         }
     }
 
     [ServerRpc(RequireOwnership = false)]
     private void SetSceneWithIdServerRpc(string sceneId)
     {
+        if (sceneId == _selectedSceneId.Value) return;
+
+        _selectedSceneId.Value = sceneId;
+
         SetActiveSceneClientRpc(sceneId);
     }
 
     [ClientRpc]
     private void SetActiveSceneClientRpc(string sceneId)
     {
-        if (_selectedSceneId == sceneId) return;
+        SetActiveScene(sceneId);
+    }
 
+    private void SetActiveScene(string sceneId)
+    {
         var targetDescriptor = sceneDescriptors.FirstOrDefault(descriptor => descriptor.sceneId == sceneId);
 
         if (!targetDescriptor) return;
 
-        _selectedSceneId = sceneId;
+        if (desktopLevelCanvasController.gameObject.activeInHierarchy)
+            desktopLevelCanvasController.SetActiveScene(targetDescriptor);
 
-        if (desktopLevelCanvasController.gameObject.activeInHierarchy) desktopLevelCanvasController.SetActiveScene(targetDescriptor);
-        if (xrLevelCanvasController.gameObject.activeInHierarchy) xrLevelCanvasController.SetActiveScene(targetDescriptor);
+        if (xrLevelCanvasController.gameObject.activeInHierarchy)
+            xrLevelCanvasController.SetActiveScene(targetDescriptor);
     }
 }

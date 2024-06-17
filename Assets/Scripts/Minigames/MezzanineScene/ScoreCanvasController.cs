@@ -32,38 +32,19 @@ public abstract class ScoreCanvasController : MonoBehaviour
     [Header("Events")]
     public UnityEvent OnScoreCanvasFinished;
 
-    void Start()
+    public void ShowLastRoundWinner(WinnerType winnerType, int desktopScore, int xrScore)
     {
-        SetInitialState();
+        SetInitialState(winnerType, desktopScore, xrScore);
+        StartCoroutine(ShowLastRoundWinnerCoroutine(winnerType, desktopScore, xrScore));
     }
 
-    public void ShowLastRoundWinner(WinnerType winnerType)
+    private void SetInitialState(WinnerType winnerType, int desktopScore, int xrScore)
     {
-        StartCoroutine(ShowLastRoundWinnerCoroutine(winnerType));
+        desktopScoreText.text = (winnerType == WinnerType.Desktop) ? (desktopScore - 1).ToString() : desktopScore.ToString();
+        xrScoreText.text = (winnerType == WinnerType.VR) ? (xrScore - 1).ToString() : xrScore.ToString();
     }
 
-    private void SetInitialState()
-    {
-        var desktopScore = NetworkScoreKeeper.Instance.DesktopScore;
-        var xrScore = NetworkScoreKeeper.Instance.XrScore;
-
-        switch (NetworkScoreKeeper.Instance.LastRoundWinner)
-        {
-            case WinnerType.Desktop:
-                desktopScore -= 1;
-                break;
-            case WinnerType.VR:
-                xrScore -= 1;
-                break;
-            case WinnerType.Unset:
-                break;
-        }
-
-        desktopScoreText.text = desktopScore.ToString();
-        xrScoreText.text = xrScore.ToString();
-    }
-
-    private IEnumerator ShowLastRoundWinnerCoroutine(WinnerType winnerType)
+    private IEnumerator ShowLastRoundWinnerCoroutine(WinnerType winnerType, int desktopScore, int xrScore)
     {
         var animateInElements = new TextMeshProUGUI[] { desktopScoreText, desktopNameText, xrScoreText, xrNameText };
 
@@ -79,7 +60,7 @@ public abstract class ScoreCanvasController : MonoBehaviour
         }
 
         var winnerScoreText = winnerType == WinnerType.Desktop ? desktopScoreText : xrScoreText;
-        var winnerScore = winnerType == WinnerType.Desktop ? NetworkScoreKeeper.Instance.DesktopScore : NetworkScoreKeeper.Instance.XrScore;
+        var winnerScore = winnerType == WinnerType.Desktop ? desktopScore : xrScore;
 
         if (winnerScoreText.TryGetComponent(out RectTransform winnerTextRectTransform))
         {
@@ -114,7 +95,7 @@ public class ScoreCanvasControllerEditor : Editor
             NetworkScoreKeeper.Instance.AddDesktopScore();
 
             var scoreCanvasController = (ScoreCanvasController)target;
-            scoreCanvasController.ShowLastRoundWinner(WinnerType.Desktop);
+            scoreCanvasController.ShowLastRoundWinner(WinnerType.Desktop, 4, 5);
         }
     }
 }

@@ -35,8 +35,11 @@ public class SimpleAnimatedCharacterController : NetworkBehaviour
         jumpAction.action.Enable();
         runAction.action.Enable();
 
-        // get camera tagged as "DesktopCamera"
-        _targetCamera = GameObject.FindWithTag("DesktopCamera").GetComponent<Camera>();
+        var targetCamera = GameObject.FindWithTag("DesktopCamera");
+        if (targetCamera != null && targetCamera.TryGetComponent(out Camera targetCameraComponent))
+        {
+            _targetCamera = targetCameraComponent;
+        }
     }
 
     void Update()
@@ -88,7 +91,7 @@ public class SimpleAnimatedCharacterController : NetworkBehaviour
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
-    void UpdateAnimator(Vector2 inputVector)
+    void UpdateAnimator(Vector3 inputVector)
     {
         bool isWalking = inputVector.magnitude > 0;
         bool isRunning = runAction.action.ReadValue<float>() > 0.5f;
