@@ -19,6 +19,8 @@ public class NetworkMeadowGameManager : NetworkBehaviour
     [SerializeField] private MeadowBankController bankController;
     [SerializeField] private SceneLoader sceneLoader;
 
+    [SerializeField] private MeadowGameEndController xrGameEndController;
+
     [Header("Configuration")]
     [SerializeField] private float gameDuration = 120.0f;
     [SerializeField] private bool autoStartGameOnStart = false;
@@ -183,13 +185,6 @@ public class NetworkMeadowGameManager : NetworkBehaviour
         return null;
     }
 
-    private IEnumerator GameEndCoroutine()
-    {
-        yield return new WaitForSeconds(3.0f);
-
-        sceneLoader.LoadSpecificScene("MezzanineScene");
-    }
-
     [ServerRpc(RequireOwnership = false)]
     private void DestroyNetworkObjectServerRpc(NetworkObjectReference networkObjectRef)
     {
@@ -247,8 +242,6 @@ public class NetworkMeadowGameManager : NetworkBehaviour
         }
 
         ShowEndGameUIClientRpc(winner);
-
-        StartCoroutine(GameEndCoroutine());
     }
 
     [ClientRpc]
@@ -262,7 +255,7 @@ public class NetworkMeadowGameManager : NetworkBehaviour
     [ClientRpc]
     private void ShowEndGameUIClientRpc(WinnerType winner)
     {
-        // TODO: show finish game screen
+        xrGameEndController.ShowGameEndScreen(winner);
 
         OnGameDidFinish?.Invoke();
     }
