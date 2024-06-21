@@ -18,7 +18,7 @@ using UnityEngine.UI;
 using UnityEditor;
 #endif
 
-public class TestRelay : MonoBehaviour
+public class NetworkRelayManager : MonoBehaviour
 {
     [SerializeField] private TMP_InputField joinCodeInputField;
     [SerializeField] private Button joinButton;
@@ -42,6 +42,8 @@ public class TestRelay : MonoBehaviour
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
             OnRelayJoinCodeReceived?.Invoke(joinCode);
 
+            GUIUtility.systemCopyBuffer = joinCode;
+
             Debug.Log("received join code: " + joinCode);
 
             RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
@@ -59,6 +61,11 @@ public class TestRelay : MonoBehaviour
     {
         string joinCode = joinCodeInputField.text;
 
+        JoinRelay(joinCode);
+    }
+
+    public void JoinRelay(string joinCode)
+    {
         if (IsJoinCodeValid(joinCode))
         {
             JoinRelayWithCode(joinCode);
@@ -94,7 +101,7 @@ public class TestRelay : MonoBehaviour
         }
     }
 
-    private async Task PerformInitialization()
+    public async Task PerformInitialization()
     {
         await UnityServices.InitializeAsync();
 
@@ -138,14 +145,14 @@ public class TestRelay : MonoBehaviour
 }
 
 #if UNITY_EDITOR
-[CustomEditor(typeof(TestRelay))]
+[CustomEditor(typeof(NetworkRelayManager))]
 public class MyComponentEditor : Editor
 {
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
 
-        TestRelay myComponent = (TestRelay)target;
+        NetworkRelayManager myComponent = (NetworkRelayManager)target;
         if (GUILayout.Button("Trigger OnClientConnected"))
         {
             myComponent.DidConnectToHost.Invoke(0);

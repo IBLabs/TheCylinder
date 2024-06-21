@@ -3,6 +3,8 @@ using UnityEngine.AI;
 
 public class SimpleNavmeshAgentController : MonoBehaviour
 {
+    public bool IsPaused => _isPaused;
+
     [SerializeField] private float wanderRadius = 10f;
     [SerializeField] private float minWanderTimer = 1f;
     [SerializeField] private float maxWanderTimer = 3f;
@@ -12,6 +14,8 @@ public class SimpleNavmeshAgentController : MonoBehaviour
     private float _timer;
     private float _currentTime;
 
+    private bool _isPaused = false;
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -20,14 +24,17 @@ public class SimpleNavmeshAgentController : MonoBehaviour
 
     private void Update()
     {
-        _timer += Time.deltaTime;
-
-        if (_timer >= _currentTime)
+        if (!_isPaused)
         {
-            Vector3 newPos = RandomNavmeshLocation(wanderRadius);
-            agent.SetDestination(newPos);
-            _timer = 0f;
-            _currentTime = Random.Range(minWanderTimer, maxWanderTimer);
+            _timer += Time.deltaTime;
+
+            if (_timer >= _currentTime)
+            {
+                Vector3 newPos = RandomNavmeshLocation(wanderRadius);
+                agent.SetDestination(newPos);
+                _timer = 0f;
+                _currentTime = Random.Range(minWanderTimer, maxWanderTimer);
+            }
         }
 
         if (agent.velocity.sqrMagnitude > 0)
@@ -35,6 +42,16 @@ public class SimpleNavmeshAgentController : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(agent.velocity.normalized);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
         }
+    }
+
+    public void Pause()
+    {
+        _isPaused = true;
+    }
+
+    public void Resume()
+    {
+        _isPaused = false;
     }
 
     private Vector3 RandomNavmeshLocation(float radius)

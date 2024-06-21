@@ -29,10 +29,6 @@ public class MeadowGameEndController : MonoBehaviour
     [SerializeField] private XRDirectInteractor leftDirectInteractor;
     [SerializeField] private XRDirectInteractor rightDirectInteractor;
 
-    [Header("XR Controllers")]
-    [SerializeField] private Transform leftControllerTransform;
-    [SerializeField] private Transform rightControllerTransform;
-
     [Header("Configuration")]
     [SerializeField] private float canvasRotationSpeed = 1.0f;
     [SerializeField] private float canvasRotationAmount = .1f;
@@ -48,11 +44,6 @@ public class MeadowGameEndController : MonoBehaviour
     void Start()
     {
         SetInitialState();
-    }
-
-    void Update()
-    {
-        HandleUIPanelRotation();
     }
 
     public void ShowGameEndScreen(WinnerType winner)
@@ -129,32 +120,6 @@ public class MeadowGameEndController : MonoBehaviour
         yield return new WaitForSeconds(.2f);
 
         continueButtonCanvasGroup.DOFade(1.0f, .4f);
-    }
-
-    private void HandleUIPanelRotation()
-    {
-        var targetRotation = CalculateCanvasRotation();
-        var partialRotation = Quaternion.Lerp(Quaternion.identity, targetRotation, canvasRotationAmount);
-        transform.rotation = Quaternion.Slerp(uiPanelMeshRenderer.transform.rotation, partialRotation, canvasRotationSpeed * Time.deltaTime);
-    }
-
-    private Quaternion CalculateCanvasRotation()
-    {
-        Ray leftRay = new Ray(leftControllerTransform.position, leftControllerTransform.forward);
-
-        Debug.DrawRay(leftRay.origin, leftRay.direction * 100f, Color.red);
-
-        int layerMask = LayerMask.GetMask("Pinned UI");
-
-        if (Physics.Raycast(leftRay, out RaycastHit hit, 100f, layerMask))
-        {
-            if (hit.collider.gameObject == this.gameObject)
-            {
-                return Quaternion.FromToRotation(uiPanelMeshRenderer.transform.forward, hit.point - uiPanelMeshRenderer.transform.position);
-            }
-        }
-
-        return Quaternion.identity;
     }
 }
 

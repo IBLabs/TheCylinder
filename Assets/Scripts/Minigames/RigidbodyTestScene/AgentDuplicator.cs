@@ -3,18 +3,18 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-[RequireComponent(typeof(AgentSpawner))]
+[RequireComponent(typeof(NetworkAgentSpawner))]
 public class AgentDuplicator : MonoBehaviour
 {
     public bool duplicatorEnabled = true;
 
     [SerializeField] private int copiesToSpawn = 1;
 
-    private AgentSpawner _spawner;
+    private NetworkAgentSpawner _spawner;
 
     void Start()
     {
-        _spawner = GetComponent<AgentSpawner>();
+        _spawner = GetComponent<NetworkAgentSpawner>();
     }
 
     public void OnEnemyHit(GameObject hitObject)

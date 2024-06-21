@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d678bcbe28b7544debe91f74828429e8, type: 3}
+  m_Name: DefaultNetworkManagerDebugConfig
+  m_EditorClassIdentifier: 
+  loadDebugManagers: 0
+  addUIConsoleLogger: 0
+  initializeInBuild: 0
+  networkManagerPrefab: {fileID: 43438339083829615, guid: 09601f56a93c94e5dbfcd8851410c4eb,
+    type: 3}
+  networkRelayManagerPrefab: {fileID: 3967711048619543465, guid: 403cd78090bc44702b8f501ef73f589e,
+    type: 3}
+  uiConsoleLogger: {fileID: 3809832072226563602, guid: 205de0671e40742bf89f30fd5046a1e2,
+    type: 3}

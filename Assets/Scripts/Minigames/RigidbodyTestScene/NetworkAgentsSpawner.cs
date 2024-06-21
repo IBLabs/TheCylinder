@@ -1,22 +1,29 @@
 using Unity.Netcode;
 
 using UnityEngine;
+using UnityEngine.Rendering;
 
-class AgentSpawner : NetworkBehaviour
+class NetworkAgentSpawner : NetworkBehaviour
 {
+    public GameObject[] SpawnedAgents => _spawnedAgents;
+
     [SerializeField] private GameObject agentPrefab;
     [SerializeField] private bool autoLoad = false;
     [SerializeField] private int autoLoadAmount = 10;
     [SerializeField] private Transform[] spawnPoints;
+
+    private GameObject[] _spawnedAgents;
 
     void Start()
     {
         var shouldSpawn = IsServer || NetworkManager.Singleton == null;
         if (shouldSpawn && autoLoad)
         {
+            _spawnedAgents = new GameObject[autoLoadAmount];
             for (int i = 0; i < autoLoadAmount; i++)
             {
-                SpawnAgentAtRandomSpawnPoint();
+                var newAgent = SpawnAgentAtRandomSpawnPoint();
+                if (newAgent != null) { _spawnedAgents[i] = newAgent; };
             }
         }
     }
@@ -29,24 +36,26 @@ class AgentSpawner : NetworkBehaviour
         }
     }
 
-    public void SpawnAgentWithPositionAndRotation(Vector3 position, Quaternion rotation)
+    public GameObject SpawnAgentWithPositionAndRotation(Vector3 position, Quaternion rotation)
     {
         if (NetworkManager.Singleton != null)
         {
-            if (!IsServer) return;
+            if (!IsServer) return null;
 
             var newAgent = Instantiate(agentPrefab, position, rotation, transform);
 
             NetworkObject agentNetworkObject = newAgent.GetComponent<NetworkObject>();
             agentNetworkObject.Spawn(destroyWithScene: true);
+
+            return newAgent;
         }
         else
         {
-            Instantiate(agentPrefab, position, rotation);
+            return Instantiate(agentPrefab, position, rotation);
         }
     }
 
-    private void SpawnAgentAtRandomSpawnPoint()
+    private GameObject SpawnAgentAtRandomSpawnPoint()
     {
         var spawnTransform = transform;
         if (spawnPoints.Length > 0)
@@ -55,6 +64,6 @@ class AgentSpawner : NetworkBehaviour
             spawnTransform = spawnPoints[spawnTransformIndex];
         }
 
-        SpawnAgentWithPositionAndRotation(spawnTransform.position, spawnTransform.rotation);
+        return SpawnAgentWithPositionAndRotation(spawnTransform.position, spawnTransform.rotation);
     }
 }
