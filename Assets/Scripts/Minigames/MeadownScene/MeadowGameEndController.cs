@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 using DG.Tweening;
 using UnityEngine.XR.Interaction.Toolkit;
+using System.Xml;
+
 
 
 #if UNITY_EDITOR
@@ -60,16 +62,29 @@ public class MeadowGameEndController : MonoBehaviour
         }
 
 
-        leftDirectInteractor.enabled = false;
-        rightDirectInteractor.enabled = false;
+        if (leftDirectInteractor != null) leftDirectInteractor.enabled = false;
+        if (rightDirectInteractor != null) rightDirectInteractor.enabled = false;
 
-        rayLeftController.SetActive(true);
-        rayRightController.SetActive(true);
+        if (rayLeftController != null) rayLeftController.SetActive(true);
+        if (rayRightController != null) rayRightController.SetActive(true);
 
         GetComponent<BoxCollider>().enabled = true;
         canvasGameObject.SetActive(true);
 
         StartCoroutine(ShowGameEndScreenCoroutine(winner));
+    }
+
+    public void DidClickGoButton()
+    {
+        var sceneLoader = FindAnyObjectByType<SceneLoader>();
+
+        if (sceneLoader == null)
+        {
+            Debug.LogWarning("SceneLoader not found in the scene, can't load next scene");
+            return;
+        }
+
+        sceneLoader.LoadSpecificScene("MezzanineScene");
     }
 
     private void SetInitialState()

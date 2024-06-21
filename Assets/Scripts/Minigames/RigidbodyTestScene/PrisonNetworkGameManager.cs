@@ -89,6 +89,11 @@ public class PrisonNetworkGameManager : NetworkBehaviour
 
     private void ShowGameEnd(WinnerType winnerType)
     {
+        var gameEndController = FindAnyObjectByType<MeadowGameEndController>();
+        gameEndController.ShowGameEndScreen(winnerType);
+
+        return;
+
         vrTitleText.text = winnerType == WinnerType.Desktop ? "OUTLAWS WIN" : "ENFORCER WINS";
         vrSubtitleText.text = WinnerType.VR == winnerType ? "GOOD JOB!" : "BETTER LUCK NEXT TIME!";
 
