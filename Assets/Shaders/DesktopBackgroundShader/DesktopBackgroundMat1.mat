@@ -56,6 +56,6 @@ Material:
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
     - _Tiling: {r: 1, g: 0.58, b: 0, a: 0}
-    - _Tint: {r: 1.2343178, g: 4.743511, b: 5.3403134, a: 0.4627451}
+    - _Tint: {r: 5.3403144, g: 3.2047133, b: 1.2581891, a: 0.4627451}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

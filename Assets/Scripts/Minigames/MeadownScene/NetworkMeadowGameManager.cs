@@ -5,6 +5,8 @@ using UnityEngine.Events;
 using System.Collections;
 using Unity.Netcode.Components;
 using Unity.VisualScripting;
+using Unity.Services.Relay.Models;
+using NUnit.Framework;
 
 public class NetworkMeadowGameManager : NetworkBehaviour
 {
@@ -46,15 +48,19 @@ public class NetworkMeadowGameManager : NetworkBehaviour
 
     void Start()
     {
-        if (NetworkManager.Singleton == null && autoStartGameOnStart)
+        var hasNetworkAccess = NetworkManager.Singleton != null;
+        if (!hasNetworkAccess)
         {
-            StartGame();
+            if (autoStartGameOnStart)
+            {
+                StartGame();
+            }
         }
     }
 
     public override void OnNetworkSpawn()
     {
-        if (NetworkManager.Singleton != null && autoStartGameOnStart)
+        if (autoStartGameOnStart)
         {
             StartGame();
         }
@@ -64,19 +70,99 @@ public class NetworkMeadowGameManager : NetworkBehaviour
 
     public void StartGame()
     {
-        if (NetworkManager != null)
+        var hasNetworkAccess = NetworkManager.Singleton != null;
+        if (hasNetworkAccess)
         {
-            if (!IsServer) return;
+            if (!IsServer)
+            {
+                return;
+            }
         }
 
+        StartGameTimer();
+
+        // pickupableSpawner.SpawnPickupableAtRandomSpawnPoint();
+
+        // TODO: spawn a hidden gem somewhere in the level
+
+        Debug.Log($"{GetType().Name} starting game...");
+    }
+
+    #region Networking
+
+    [ServerRpc(RequireOwnership = false)]
+    private void OnPlayerDidFindHiddenGemServerRpc(NetworkObjectReference hiddenGemObjectRef)
+    {
+        hiddenGemObjectRef.TryGet(out NetworkObject hiddenGemNetworkObject);
+        if (hiddenGemNetworkObject != null)
+        {
+
+        }
+
+        EndGameServerRpc(WinnerType.Desktop);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void EndGameServerRpc(WinnerType winner)
+    {
+        if (winner == WinnerType.VR)
+        {
+            NetworkScoreKeeper.Instance.AddXrScore();
+        }
+        else if (winner == WinnerType.Desktop)
+        {
+            NetworkScoreKeeper.Instance.AddDesktopScore();
+        }
+
+        EndGameClientRpc(winner);
+    }
+
+    [ClientRpc]
+    private void EndGameClientRpc(WinnerType winner)
+    {
+        LocalShowEndGameUI(winner);
+    }
+
+    #endregion
+
+    #region Events
+
+    public void OnPlayerDidFindHiddenGem(NetworkObject hiddenGemNetworkObject)
+    {
+        var hasNetworkAccess = NetworkManager.Singleton != null;
+        if (hasNetworkAccess)
+        {
+            OnPlayerDidFindHiddenGemServerRpc(hiddenGemNetworkObject);
+        }
+    }
+
+    public void OnPlayerKilled()
+    {
+        StartCoroutine(OnPlayerKilledCoroutine());
+    }
+
+    private IEnumerator OnPlayerKilledCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+
+        if (GameObjectUtilities.CheckAllPlayersDead())
+        {
+            Debug.Log("VR player wins!");
+
+            EndGame(WinnerType.VR);
+        }
+    }
+
+    #endregion
+
+    #region Private Implementation Details
+
+    private void StartGameTimer()
+    {
         _isGameRunning.Value = true;
 
         GameTimeLeft.Value = gameDuration;
         StartCoroutine(GameTimerCoroutine());
-
-        pickupableSpawner.SpawnPickupableAtRandomSpawnPoint();
-
-        Debug.Log($"{GetType().Name} starting game...");
     }
 
     private IEnumerator GameTimerCoroutine()
@@ -91,6 +177,35 @@ public class NetworkMeadowGameManager : NetworkBehaviour
 
         FinishGameServerRpc();
     }
+
+    private void EndGame(WinnerType winner)
+    {
+        var hasNetworkAccess = NetworkManager.Singleton != null;
+        if (hasNetworkAccess)
+        {
+            EndGameServerRpc(winner);
+        }
+        else
+        {
+            LocalShowEndGameUI(winner);
+        }
+    }
+
+    private void LocalShowEndGameUI(WinnerType winner)
+    {
+        if (desktopGameEndController && desktopGameEndController.isActiveAndEnabled)
+        {
+            desktopGameEndController.SetWinner(winner);
+            desktopGameEndController.Show();
+        }
+
+        if (xrGameEndController && xrGameEndController.isActiveAndEnabled)
+        {
+            xrGameEndController.ShowGameEndScreen(winner);
+        }
+    }
+
+    #endregion
 
     public void OnPickupableDidDie(NetworkPickupable pickupable)
     {

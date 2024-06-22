@@ -52,7 +52,25 @@ public class MeadowXRFollower : MonoBehaviour
 
         var lookRotation = Quaternion.LookRotation(lookDirection);
 
-        Ray leftRay = new Ray(leftControllerTransform.position, leftControllerTransform.forward);
+        if (!HandleAdvancedRotation(lookRotation, leftControllerTransform))
+        {
+            ApplySimpleRotation(lookRotation);
+        }
+    }
+
+    private void ApplySimpleRotation(Quaternion simpleRotation)
+    {
+        uiPanelTransform.rotation = Quaternion.Slerp(uiPanelTransform.rotation, simpleRotation, followSpeed * Time.deltaTime);
+    }
+
+    private bool HandleAdvancedRotation(Quaternion lookRotation, Transform targetControllerTransform)
+    {
+        if (targetControllerTransform == null)
+        {
+            return false;
+        }
+
+        Ray leftRay = new Ray(targetControllerTransform.position, targetControllerTransform.forward);
         RaycastHit hit;
         if (Physics.Raycast(leftRay, out hit, 100f, LayerMask.GetMask("Pinned UI")))
         {
@@ -64,10 +82,10 @@ public class MeadowXRFollower : MonoBehaviour
             Quaternion targetRotation = Quaternion.Slerp(uiPanelTransform.rotation, partialToLookRotation, followSpeed * Time.deltaTime);
 
             uiPanelTransform.rotation = targetRotation;
+
+            return true;
         }
-        else
-        {
-            uiPanelTransform.rotation = Quaternion.Slerp(uiPanelTransform.rotation, lookRotation, followSpeed * Time.deltaTime);
-        }
+
+        return false;
     }
 }

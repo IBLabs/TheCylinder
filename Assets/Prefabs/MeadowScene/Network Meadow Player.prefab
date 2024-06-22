@@ -185,6 +185,7 @@ GameObject:
   - component: {fileID: 1680632862973397768}
   - component: {fileID: 3674090221646429161}
   - component: {fileID: 1005870681466905678}
+  - component: {fileID: 2183988180321150552}
   m_Layer: 11
   m_Name: Network Meadow Player
   m_TagString: Player
@@ -373,4 +374,29 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 9063689130010589215, guid: 811906504475b4abca0d10271343978e,
+      type: 3}
+--- !u!114 &2183988180321150552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8333849146806985614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 531a241dd14f249559ddef700cd512b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Activate
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 18102436-561c-4e41-bbc9-c87d8286deed
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 1570448165006062204, guid: 811906504475b4abca0d10271343978e,
       type: 3}
