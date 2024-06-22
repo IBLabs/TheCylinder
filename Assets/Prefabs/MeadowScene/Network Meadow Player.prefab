@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7d86428fde0eb4381bf0a64a4483977d, type: 2}
+  - {fileID: 2100000, guid: fdf995ce50bba4da5872b9bae889d230, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -149,7 +149,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7d86428fde0eb4381bf0a64a4483977d, type: 2}
+  - {fileID: 2100000, guid: fdf995ce50bba4da5872b9bae889d230, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -182,10 +182,10 @@ GameObject:
   - component: {fileID: 2930180002755885445}
   - component: {fileID: 6728596374741306865}
   - component: {fileID: 2955579043280464975}
-  - component: {fileID: 1680632862973397768}
-  - component: {fileID: 3674090221646429161}
-  - component: {fileID: 1005870681466905678}
+  - component: {fileID: 3767400911147170592}
   - component: {fileID: 2183988180321150552}
+  - component: {fileID: 1941884693494297970}
+  - component: {fileID: 5982905600995258636}
   m_Layer: 11
   m_Name: Network Meadow Player
   m_TagString: Player
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GlobalObjectIdHash: 1664346905
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 3636350141
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -261,7 +261,103 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!136 &1680632862973397768
+--- !u!114 &3767400911147170592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8333849146806985614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2a55f7c67794f9cace51858102200b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0.35
+  runSpeed: 0.85
+  rotationSpeed: 10
+  gravity: 9.8
+  gravityEnabled: 1
+  moveAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Move
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 5474c1d3-9244-4c67-8faf-3fe498c4b3a0
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 9063689130010589215, guid: 811906504475b4abca0d10271343978e,
+      type: 3}
+  runAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Run
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 2629789a-8417-4c90-b53a-cabb8b05050c
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 2959206241069841629, guid: 811906504475b4abca0d10271343978e,
+      type: 3}
+  playerCamera: {fileID: 0}
+--- !u!114 &2183988180321150552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8333849146806985614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 531a241dd14f249559ddef700cd512b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overlapSphereRadius: 0.5
+  activateAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Activate
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 18102436-561c-4e41-bbc9-c87d8286deed
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 1570448165006062204, guid: 811906504475b4abca0d10271343978e,
+      type: 3}
+--- !u!143 &1941884693494297970
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8333849146806985614}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 0.33
+  m_Radius: 0.12
+  m_SlopeLimit: 45
+  m_StepOffset: 0.1
+  m_SkinWidth: 0.01
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.18, z: 0}
+--- !u!136 &5982905600995258636
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -280,123 +376,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.075
-  m_Height: 0.3
+  m_Radius: 0.1
+  m_Height: 0.34
   m_Direction: 1
   m_Center: {x: 0, y: 0.15, z: 0}
---- !u!54 &3674090221646429161
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8333849146806985614}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
---- !u!114 &1005870681466905678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8333849146806985614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d5b8bf258e46430da949f45cf7df7ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rideHeight: 0.1
-  rideSpringStrength: 220
-  rideDamperStrength: 2
-  maxSpeed: 3.5
-  acceleration: 30
-  maxAccelerationForce: 220
-  accelerationFactorCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 2
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0
-      outWeight: 0.7205424
-    - serializedVersion: 3
-      time: 0.5963113
-      value: 1.0058653
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0.38955912
-      outWeight: 0.3285255
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0.00941793
-      outSlope: 0.00941793
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0.33825752
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  moveAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Move
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 0ad4132b-8b07-4c34-8f46-7a255306b1ba
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 9063689130010589215, guid: 811906504475b4abca0d10271343978e,
-      type: 3}
---- !u!114 &2183988180321150552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8333849146806985614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 531a241dd14f249559ddef700cd512b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activateAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Activate
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 18102436-561c-4e41-bbc9-c87d8286deed
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 1570448165006062204, guid: 811906504475b4abca0d10271343978e,
-      type: 3}

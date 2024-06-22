@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class NetworkSceneSelector : NetworkBehaviour
 {
-    private const string DEFAULT_SCENE_ID = "meadow";
+    private const string DEFAULT_SCENE_ID = "prison";
 
     [SerializeField] private SceneDescriptor[] sceneDescriptors;
 

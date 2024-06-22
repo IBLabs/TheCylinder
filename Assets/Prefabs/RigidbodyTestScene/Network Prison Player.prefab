@@ -208,8 +208,9 @@ GameObject:
   - component: {fileID: 6728596374741306865}
   - component: {fileID: 2955579043280464975}
   - component: {fileID: 5537760384532479023}
+  - component: {fileID: 3528124245555758773}
   m_Layer: 0
-  m_Name: Network Player
+  m_Name: Network Prison Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -339,19 +340,6 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 9063689130010589215, guid: 811906504475b4abca0d10271343978e,
       type: 3}
-  activateAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Activate
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 32d44b06-ccd1-4095-8326-3bc70a1760ea
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 1570448165006062204, guid: 811906504475b4abca0d10271343978e,
-      type: 3}
   runAction:
     m_UseReference: 1
     m_Action:
@@ -366,3 +354,28 @@ MonoBehaviour:
     m_Reference: {fileID: 2959206241069841629, guid: 811906504475b4abca0d10271343978e,
       type: 3}
   playerCamera: {fileID: 0}
+--- !u!114 &3528124245555758773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8333849146806985614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a19926cda852046acad1b9d8708ef9e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Activate
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: fd2f2c26-8662-44fd-a5e1-8f7fd0a15127
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 1570448165006062204, guid: 811906504475b4abca0d10271343978e,
+      type: 3}

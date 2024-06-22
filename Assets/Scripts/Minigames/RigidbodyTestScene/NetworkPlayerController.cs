@@ -14,7 +14,6 @@ public class NetworkPlayerController : NetworkBehaviour
     [SerializeField] private float gravity = 9.8f;
     [SerializeField] private bool gravityEnabled = true;
     [SerializeField] private InputActionProperty moveAction;
-    [SerializeField] private InputActionProperty activateAction;
     [SerializeField] private InputActionProperty runAction;
     [SerializeField] private Camera playerCamera;
 
@@ -38,27 +37,12 @@ public class NetworkPlayerController : NetworkBehaviour
         {
             playerCamera = cameraGameObject.GetComponent<Camera>();
         }
-
-        activateAction.action.performed += OnActivatePerformed;
-    }
-
-    public override void OnDestroy()
-    {
-        activateAction.action.performed -= OnActivatePerformed;
-
-        base.OnDestroy();
     }
 
     public override void OnNetworkSpawn()
     {
         if (IsOwner)
         {
-            // var simplePlayerSpawner = FindAnyObjectByType<NetworkSimplePlayerSpawner>();
-            // if (simplePlayerSpawner != null)
-            // {
-            //     transform.position = simplePlayerSpawner.transform.position;
-            // }
-
             if (characterController != null)
             {
                 characterController.enabled = true;
@@ -121,19 +105,6 @@ public class NetworkPlayerController : NetworkBehaviour
             cameraRight.Normalize();
 
             _movementDirection = cameraForward * _movementDirection.z + cameraRight * _movementDirection.x;
-        }
-    }
-
-    private void OnActivatePerformed(InputAction.CallbackContext context)
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.12f);
-        foreach (var collider in colliders)
-        {
-            var actionableObject = collider.GetComponent<IActionableObject>();
-            if (actionableObject != null)
-            {
-                actionableObject.PerformAction();
-            }
         }
     }
 }

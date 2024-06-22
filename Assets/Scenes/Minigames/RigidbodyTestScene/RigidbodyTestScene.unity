@@ -2463,6 +2463,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  DidShoot:
+    m_PersistentCalls:
+      m_Calls: []
+  DidHit:
+    m_PersistentCalls:
+      m_Calls: []
+  DidHitPositive:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &458617746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3379,6 +3388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneLoader: {fileID: 2099270754}
+  desktopGameEndController: {fileID: 0}
 --- !u!4 &712646112
 Transform:
   m_ObjectHideFlags: 0
@@ -5260,6 +5270,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  DidShoot:
+    m_PersistentCalls:
+      m_Calls: []
+  DidHit:
+    m_PersistentCalls:
+      m_Calls: []
+  DidHitPositive:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &988903685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5806,7 +5825,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1233311427}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38699636, y: -0.0000020069647, z: 0.0000008423205, w: 0.9220813}
+  m_LocalRotation: {x: 0.38699642, y: -0.0000020069656, z: 0.0000008423211, w: 0.92208123}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -6366,6 +6385,7 @@ MonoBehaviour:
   leftHandGameObject: {fileID: 988903674}
   rightHandGameObject: {fileID: 458617736}
   transitionSphere: {fileID: 2099270752}
+  toDisable: []
 --- !u!1 &1433805196
 GameObject:
   m_ObjectHideFlags: 0
