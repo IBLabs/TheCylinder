@@ -14,7 +14,7 @@ public class XRNetworkDisabler : MonoBehaviour
     [SerializeField] private GameObject rightHandGameObject;
     [SerializeField] private GameObject transitionSphere;
 
-    [SerializeField] private Behaviour[] toDisable;
+    [SerializeField] private Component[] toDisable;
 
     public void OnPlatformDetected(bool isVR)
     {
@@ -24,7 +24,14 @@ public class XRNetworkDisabler : MonoBehaviour
             {
                 foreach (var component in toDisable)
                 {
-                    component.enabled = false;
+                    if (component is Behaviour behaviour)
+                    {
+                        behaviour.enabled = false;
+                    }
+                    else if (component is Renderer renderer)
+                    {
+                        renderer.enabled = false;
+                    }
                 }
             }
             else

@@ -20,6 +20,7 @@ public class NetworkMeadowGameManager : NetworkBehaviour
     [SerializeField] private SceneLoader sceneLoader;
 
     [SerializeField] private MeadowGameEndController xrGameEndController;
+    [SerializeField] private MeadowDesktopGameEndController desktopGameEndController;
 
     [Header("Configuration")]
     [SerializeField] private float gameDuration = 120.0f;
@@ -255,7 +256,16 @@ public class NetworkMeadowGameManager : NetworkBehaviour
     [ClientRpc]
     private void ShowEndGameUIClientRpc(WinnerType winner)
     {
-        xrGameEndController.ShowGameEndScreen(winner);
+        if (xrGameEndController.isActiveAndEnabled)
+        {
+            xrGameEndController.ShowGameEndScreen(winner);
+        }
+
+        if (desktopGameEndController.isActiveAndEnabled)
+        {
+            desktopGameEndController.SetWinner(winner);
+            desktopGameEndController.Show();
+        }
 
         OnGameDidFinish?.Invoke();
     }
