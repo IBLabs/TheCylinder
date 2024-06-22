@@ -5,6 +5,10 @@ using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.Events;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class XRPlayerShooter : MonoBehaviour
 {
     [SerializeField] private float cooldownTime = 1f;
@@ -133,3 +137,26 @@ public class XRPlayerShooter : MonoBehaviour
         return true;
     }
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(XRPlayerShooter))]
+public class XRPlayerShooterEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+        var shooter = (XRPlayerShooter)target;
+
+        if (GUILayout.Button("Kill Random Player"))
+        {
+            var playerGameObject = GameObject.FindWithTag("Player");
+            if (playerGameObject != null)
+            {
+                Destroy(playerGameObject);
+                shooter.OnPlayerKilled?.Invoke();
+            }
+        }
+    }
+}
+#endif

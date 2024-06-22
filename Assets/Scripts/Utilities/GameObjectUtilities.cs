@@ -1,3 +1,5 @@
+using System.Linq;
+
 using UnityEngine;
 
 public static class GameObjectUtilities
@@ -14,5 +16,22 @@ public static class GameObjectUtilities
             }
             FindComponentWithTagInChildren(child.gameObject, tag, out component);
         }
+    }
+
+    public static bool CheckAllPlayersDead()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        var allPlayersDead = players.Length == 0 || players.All(player => player == null);
+
+        Debug.Log("players death state: " + allPlayersDead + " " + players.Length);
+
+        if (allPlayersDead)
+        {
+            Debug.Log("[TEST]: all players are dead");
+            return true;
+        }
+
+        return false;
     }
 }

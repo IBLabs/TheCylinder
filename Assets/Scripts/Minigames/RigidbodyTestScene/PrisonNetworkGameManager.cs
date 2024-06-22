@@ -47,13 +47,7 @@ public class PrisonNetworkGameManager : NetworkBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-
-        var allPlayersDead = players.Length == 0 || players.All(player => player == null);
-
-        Debug.Log("players death state: " + allPlayersDead + " " + players.Length);
-
-        if (allPlayersDead)
+        if (GameObjectUtilities.CheckAllPlayersDead())
         {
             Debug.Log("VR player wins!");
 
