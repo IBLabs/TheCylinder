@@ -14,14 +14,7 @@ public class PrisonNetworkGameManager : NetworkBehaviour
     private const int LIGHTS_ON_TO_WIN = 3;
 
     [SerializeField] private SceneLoader sceneLoader;
-
-    [SerializeField] private CanvasGroup gameEndGroup;
-    [SerializeField] private TextMeshProUGUI titleText;
-    [SerializeField] private TextMeshProUGUI subtitleText;
-
-    [SerializeField] private CanvasGroup vrGameEndGroup;
-    [SerializeField] private TextMeshProUGUI vrTitleText;
-    [SerializeField] private TextMeshProUGUI vrSubtitleText;
+    [SerializeField] private MeadowDesktopGameEndController desktopGameEndController;
 
     private int lightsOnCount = 0;
 
@@ -34,8 +27,6 @@ public class PrisonNetworkGameManager : NetworkBehaviour
         if (lightsOnCount >= LIGHTS_ON_TO_WIN)
         {
             Debug.Log("Lights on count reached, desktop players wins!");
-
-            // StartCoroutine(ReloadSceneAfterDelay());
 
             EndGame(WinnerType.Desktop);
         }
@@ -66,8 +57,6 @@ public class PrisonNetworkGameManager : NetworkBehaviour
         {
             Debug.Log("VR player wins!");
 
-            // StartCoroutine(ReloadSceneAfterDelay());
-
             EndGame(WinnerType.VR);
         }
     }
@@ -91,25 +80,12 @@ public class PrisonNetworkGameManager : NetworkBehaviour
     {
         var gameEndController = FindAnyObjectByType<MeadowGameEndController>();
         gameEndController.ShowGameEndScreen(winnerType);
-
-        return;
-
-        vrTitleText.text = winnerType == WinnerType.Desktop ? "OUTLAWS WIN" : "ENFORCER WINS";
-        vrSubtitleText.text = WinnerType.VR == winnerType ? "GOOD JOB!" : "BETTER LUCK NEXT TIME!";
-
-        vrGameEndGroup.DOFade(1, .3f);
-        vrGameEndGroup.interactable = true;
-        vrGameEndGroup.blocksRaycasts = true;
     }
 
     [ClientRpc]
     private void ShowGameEndClientRpc(WinnerType winnerType)
     {
-        titleText.text = winnerType == WinnerType.Desktop ? "OUTLAWS WIN" : "ENFORCER WINS";
-        subtitleText.text = WinnerType.Desktop == winnerType ? "GOOD JOB!" : "BETTER LUCK NEXT TIME!";
-
-        gameEndGroup.DOFade(1, .3f);
-        gameEndGroup.interactable = true;
-        gameEndGroup.blocksRaycasts = true;
+        desktopGameEndController.SetWinner(winnerType);
+        desktopGameEndController.Show();
     }
 }

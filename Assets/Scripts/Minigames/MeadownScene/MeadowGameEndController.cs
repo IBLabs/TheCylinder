@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.XR.Interaction.Toolkit;
 using System.Xml;
+using System;
+
 
 
 
@@ -65,8 +67,7 @@ public class MeadowGameEndController : MonoBehaviour
         if (leftDirectInteractor != null) leftDirectInteractor.enabled = false;
         if (rightDirectInteractor != null) rightDirectInteractor.enabled = false;
 
-        if (rayLeftController != null) rayLeftController.SetActive(true);
-        if (rayRightController != null) rayRightController.SetActive(true);
+        HandleControllers();
 
         GetComponent<BoxCollider>().enabled = true;
         canvasGameObject.SetActive(true);
@@ -136,6 +137,33 @@ public class MeadowGameEndController : MonoBehaviour
 
         continueButtonCanvasGroup.DOFade(1.0f, .4f);
     }
+
+    #region Private Implementation Methods
+
+    private void HandleControllers()
+    {
+        if (rayLeftController != null)
+        {
+            SetVRPlayerBodyGameObjectAsPinnedUI(rayLeftController);
+        }
+
+        if (rayRightController != null)
+        {
+            SetVRPlayerBodyGameObjectAsPinnedUI(rayRightController);
+        }
+    }
+
+    private void SetVRPlayerBodyGameObjectAsPinnedUI(GameObject targetGameObject)
+    {
+        targetGameObject.SetActive(true);
+
+        targetGameObject.gameObject.layer = LayerMask.NameToLayer("Pinned UI");
+        targetGameObject.GetComponent<XRRayInteractor>().raycastMask = LayerMask.GetMask("Pinned UI");
+        targetGameObject.FindComponentWithTagInChildren("VRPlayerBody", out MeshRenderer renderer);
+        if (renderer != null) { renderer.gameObject.layer = LayerMask.NameToLayer("Pinned UI"); }
+    }
+
+    #endregion
 }
 
 #if UNITY_EDITOR

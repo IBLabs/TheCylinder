@@ -55,6 +55,17 @@ public class NetworkSceneSelector : NetworkBehaviour
 
         SetSceneWithIdServerRpc("prison");
     }
+    public void SetFollowScene()
+    {
+        var hasNetworkAccess = NetworkManager.Singleton != null;
+        if (!hasNetworkAccess)
+        {
+            SetActiveScene("follow");
+            return;
+        }
+
+        SetSceneWithIdServerRpc("follow");
+    }
 
     public void LaunchSelectdScene()
     {
