@@ -37,11 +37,11 @@ public class NetworkFollowMoveCommandsBroadcaster : NetworkBehaviour
         OnWillBroadcastMoveCommandsClientRpc(moveCommands);
     }
 
-    private void OnDidBroadcastMoveCommand(FollowMoveCommand moveCommand)
+    private void OnDidBroadcastMoveCommand(FollowMoveCommand moveCommand, FollowMoveCommand nextCommand)
     {
         if (!IsServer) return;
 
-        OnDidBroadcastMoveCommandClientRpc(moveCommand);
+        OnDidBroadcastMoveCommandClientRpc(moveCommand, nextCommand);
     }
 
     [ClientRpc]
@@ -52,9 +52,9 @@ public class NetworkFollowMoveCommandsBroadcaster : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void OnDidBroadcastMoveCommandClientRpc(FollowMoveCommand moveCommand)
+    private void OnDidBroadcastMoveCommandClientRpc(FollowMoveCommand moveCommand, FollowMoveCommand nextCommand)
     {
         if (IsServer) return;
-        _canvasController.OnDidBroadcastMoveCommand(moveCommand);
+        _canvasController.OnDidBroadcastMoveCommand(moveCommand, nextCommand);
     }
 }

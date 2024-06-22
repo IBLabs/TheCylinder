@@ -1,14 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-
 using Unity.Netcode;
-using Unity.VisualScripting;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
-using UnityEngine.XR;
-using UnityEngine.UIElements;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.Events;
 
@@ -22,9 +15,12 @@ public class XRPlayerShooter : MonoBehaviour
     public UnityEvent OnPlayerKilled;
     public UnityEvent<GameObject> OnEnemyHit;
 
+    public UnityEvent<Vector3, Vector3> DidShoot;
+    public UnityEvent<Vector3, Vector3> DidHit;
+    public UnityEvent<Vector3, Vector3> DidHitPositive;
+
     public float normalizedCooldownTimer => Mathf.Clamp01(cooldownTimer / cooldownTime);
 
-    private XRPlayerShooterVisualizer _visualizer;
     private XRBaseControllerInteractor _attachedInteractor;
 
     private float cooldownTimer = 0f;
@@ -33,7 +29,6 @@ public class XRPlayerShooter : MonoBehaviour
 
     void Start()
     {
-        _visualizer = GetComponent<XRPlayerShooterVisualizer>();
         _attachedInteractor = GetComponent<XRBaseControllerInteractor>();
     }
 
@@ -60,30 +55,12 @@ public class XRPlayerShooter : MonoBehaviour
         Debug.Log("hit player object: " + hitObject.name);
 
         Vector3 hitVisualizationPosition = new Vector3(hitObject.transform.position.x, hitPoint.y, hitObject.transform.position.z);
-        _visualizer.VisualizePossitiveHit(hitVisualizationPosition, Vector3.up);
 
-        if (NetworkManager.Singleton != null)
-        {
-            NetworkObject hitNetworkObject = hitObject.GetComponent<NetworkObject>();
-            if (hitNetworkObject != null)
-            {
-                var localId = NetworkManager.Singleton.LocalClientId;
-                var networkObjectOwnerId = hitNetworkObject.OwnerClientId;
+        DidHitPositive?.Invoke(hitVisualizationPosition, Vector3.up);
 
-                if (localId != networkObjectOwnerId)
-                {
-                    Debug.Log("the object is owned by someone else, destroying it...");
-
-                    Destroy(hitObject);
-
-                    OnPlayerKilled?.Invoke();
-                }
-            }
-        }
-        else
+        if (!HandleNetworkHit(hitObject))
         {
             Destroy(hitObject);
-
             OnPlayerKilled?.Invoke();
         }
     }
@@ -106,11 +83,11 @@ public class XRPlayerShooter : MonoBehaviour
             _attachedInteractor.SendHapticImpulse(0.5f, 0.1f);
         }
 
-        _visualizer.VisualizeShot(transform.position, transform.forward);
+        DidShoot?.Invoke(transform.position, transform.forward);
 
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, Mathf.Infinity))
         {
-            _visualizer.VisualizeHit(hit.point, hit.normal);
+            DidHit?.Invoke(hit.point, hit.normal);
 
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
@@ -121,5 +98,38 @@ public class XRPlayerShooter : MonoBehaviour
                 HandleHitEnemy(hit.collider.gameObject, hit.point);
             }
         }
+    }
+
+    private bool HandleNetworkHit(GameObject hitObject)
+    {
+        Debug.Log("[TEST]: handling network hit...");
+
+        if (NetworkManager.Singleton == null)
+        {
+            Debug.Log("[TEST]: network manager is null, returning false...");
+            return false;
+        }
+
+        NetworkObject hitNetworkObject = hitObject.GetComponent<NetworkObject>();
+        if (hitNetworkObject == null)
+        {
+            Debug.Log("[TEST]: network object is null, returning false...");
+            return false;
+        }
+
+        var localId = NetworkManager.Singleton.LocalClientId;
+        var networkObjectOwnerId = hitNetworkObject.OwnerClientId;
+
+        if (localId != networkObjectOwnerId)
+        {
+            Debug.Log("the object is owned by someone else, destroying it...");
+
+            Destroy(hitObject);
+
+            OnPlayerKilled?.Invoke();
+        }
+
+
+        return true;
     }
 }

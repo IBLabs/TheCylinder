@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Netcode;
+using NUnit.Framework.Constraints;
 
 public struct FollowMoveCommand : INetworkSerializable
 {
@@ -32,6 +33,8 @@ public struct FollowMoveCommand : INetworkSerializable
         }
     }
 
+    public static FollowMoveCommand None => new FollowMoveCommand(DirectionType.None, 0);
+
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
         serializer.SerializeValue(ref Direction);
@@ -41,6 +44,7 @@ public struct FollowMoveCommand : INetworkSerializable
 
     public enum DirectionType
     {
+        None,
         Forward,
         Backward,
         Left,

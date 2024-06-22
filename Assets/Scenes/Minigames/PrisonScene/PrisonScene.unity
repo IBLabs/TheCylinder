@@ -1932,6 +1932,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  DidShoot:
+    m_PersistentCalls:
+      m_Calls: []
+  DidHit:
+    m_PersistentCalls:
+      m_Calls: []
+  DidHitPositive:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &133429415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11411,6 +11420,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  DidShoot:
+    m_PersistentCalls:
+      m_Calls: []
+  DidHit:
+    m_PersistentCalls:
+      m_Calls: []
+  DidHitPositive:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1890004930
 MonoBehaviour:
   m_ObjectHideFlags: 0

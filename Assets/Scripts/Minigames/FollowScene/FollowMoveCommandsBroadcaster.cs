@@ -18,7 +18,7 @@ public class FollowMoveCommandsBroadcaster : MonoBehaviour
 
     [Header("Events")]
     public UnityEvent<FollowMoveCommand[]> WillBroadcastMoveCommands;
-    public UnityEvent<FollowMoveCommand> DidBroadcastMoveCommand;
+    public UnityEvent<FollowMoveCommand, FollowMoveCommand> DidBroadcastMoveCommand;
 
     private NetworkAgentSpawner _agentSpawner;
 
@@ -39,12 +39,17 @@ public class FollowMoveCommandsBroadcaster : MonoBehaviour
         FollowMoveCommand[] moveCommands = new FollowMoveCommand[amount];
         for (int i = 0; i < amount; i++)
         {
-            var targetDirectionType = (FollowMoveCommand.DirectionType)Random.Range(0, 4);
+            var targetDirectionType = (FollowMoveCommand.DirectionType)Random.Range(0, 5);
+            while (targetDirectionType == FollowMoveCommand.DirectionType.None)
+            {
+                targetDirectionType = (FollowMoveCommand.DirectionType)Random.Range(0, 5);
+            }
+
             if (i > 0)
             {
-                while (targetDirectionType == moveCommands[i - 1].directionType)
+                while (targetDirectionType == moveCommands[i - 1].directionType || targetDirectionType == FollowMoveCommand.DirectionType.None)
                 {
-                    targetDirectionType = (FollowMoveCommand.DirectionType)Random.Range(0, 4);
+                    targetDirectionType = (FollowMoveCommand.DirectionType)Random.Range(0, 5);
                 }
             }
 
@@ -64,7 +69,10 @@ public class FollowMoveCommandsBroadcaster : MonoBehaviour
                 agentController.PerformMoveCommand(moveCommands[i]);
             }
 
-            DidBroadcastMoveCommand?.Invoke(moveCommands[i]);
+            FollowMoveCommand currentCommand = moveCommands[i];
+            FollowMoveCommand nextCommand = i + 1 < moveCommands.Length ? moveCommands[i + 1] : FollowMoveCommand.None;
+
+            DidBroadcastMoveCommand?.Invoke(currentCommand, nextCommand);
 
             yield return new WaitForSeconds(moveCommands[i].Time);
         }
