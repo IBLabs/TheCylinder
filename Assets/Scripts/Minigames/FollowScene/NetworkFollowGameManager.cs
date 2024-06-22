@@ -17,6 +17,7 @@ public class NetworkFollowGameManager : NetworkBehaviour
 
     [Header("Dependencies")]
     [SerializeField] private MeadowDesktopGameEndController desktopGameEndController;
+    [SerializeField] private MeadowGameEndController xrGameEndController;
 
     [Header("Configuration")]
     [SerializeField] private float gameDuration = 120f;
@@ -102,6 +103,7 @@ public class NetworkFollowGameManager : NetworkBehaviour
 
     private void NetworkEndGame(WinnerType winner)
     {
+        NetworkScoreKeeper.Instance.AddScore(winner);
         ShowGameEndClientRpc(winner);
     }
 
@@ -111,6 +113,11 @@ public class NetworkFollowGameManager : NetworkBehaviour
         {
             desktopGameEndController.SetWinner(winner);
             desktopGameEndController.Show();
+        }
+
+        if (xrGameEndController && xrGameEndController.isActiveAndEnabled)
+        {
+            xrGameEndController.ShowGameEndScreen(winner);
         }
     }
 

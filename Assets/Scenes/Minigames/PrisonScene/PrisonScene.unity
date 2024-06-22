@@ -5652,26 +5652,6 @@ PrefabInstance:
       propertyPath: rayRightController
       value: 
       objectReference: {fileID: 133429406}
-    - target: {fileID: 6697510573816381888, guid: 39d21601a4e3d4105870981c3d1fb5b9,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6697510573816381888, guid: 39d21601a4e3d4105870981c3d1fb5b9,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1037410644}
-    - target: {fileID: 6697510573816381888, guid: 39d21601a4e3d4105870981c3d1fb5b9,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DidClickGoButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 6697510573816381888, guid: 39d21601a4e3d4105870981c3d1fb5b9,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MeadowGameEndController, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 7150916274482242534, guid: 39d21601a4e3d4105870981c3d1fb5b9,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -5693,18 +5673,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1037410642}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1037410644 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6654070733366308123, guid: 39d21601a4e3d4105870981c3d1fb5b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1037410642}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 787318b86493d416bae3790b869e0f0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1051478504
 GameObject:
   m_ObjectHideFlags: 0

@@ -8416,11 +8416,6 @@ PrefabInstance:
       propertyPath: rightDirectInteractor
       value: 
       objectReference: {fileID: 752350301}
-    - target: {fileID: 6697510573816381888, guid: 39d21601a4e3d4105870981c3d1fb5b9,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1240677231}
     - target: {fileID: 7150916274482242534, guid: 39d21601a4e3d4105870981c3d1fb5b9,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'

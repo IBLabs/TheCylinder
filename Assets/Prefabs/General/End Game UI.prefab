@@ -167,10 +167,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadSpecificScene
-        m_Mode: 5
+      - m_Target: {fileID: 6654070733366308123}
+        m_TargetAssemblyTypeName: MeadowGameEndController, Assembly-CSharp
+        m_MethodName: DidClickGoButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
