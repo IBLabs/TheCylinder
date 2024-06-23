@@ -317,6 +317,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 531a241dd14f249559ddef700cd512b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scanEffectPrefab: {fileID: 6766456917675017375, guid: 2d0ac49693fbd4e839c344bff2a8af64,
+    type: 3}
   overlapSphereRadius: 0.5
   activateAction:
     m_UseReference: 1

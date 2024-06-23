@@ -8,10 +8,12 @@ using Unity.VisualScripting;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit.Utilities.Tweenables.Primitives;
 
 public class NetworkMeadowPlayerController : NetworkBehaviour
 {
     [Header("Configuration")]
+    [SerializeField] private GameObject scanEffectPrefab;
     [SerializeField] private float overlapSphereRadius = .2f;
     [SerializeField] private InputActionProperty activateAction;
 
@@ -30,6 +32,8 @@ public class NetworkMeadowPlayerController : NetworkBehaviour
     private void VisualizeActivateServerRpc()
     {
         VisualizeActivateClientRpc();
+
+        NetworkSoundManager.Instance.PlaySoundServerRpc("MeadowScan1", transform.position);
     }
 
     [ClientRpc]
@@ -80,6 +84,15 @@ public class NetworkMeadowPlayerController : NetworkBehaviour
         {
             renderer.material.DOColor(Color.black, "_EmissionColor", 0.5f).From(Color.white);
         }
+
+        LocalVisualizeScan();
+    }
+
+    private void LocalVisualizeScan()
+    {
+        var effectPosition = new Vector3(transform.position.x, transform.position.y + .01f, transform.position.z);
+        var scanEffect = Instantiate(scanEffectPrefab, effectPosition, Quaternion.LookRotation(Vector3.up));
+        Destroy(scanEffect, 2f);
     }
 
     private void ScanForHiddenGems()

@@ -13,6 +13,11 @@ public class NetworkPrisonPlayerController : MonoBehaviour
         activateAction.action.performed += OnActivatePerformed;
     }
 
+    void OnDestroy()
+    {
+        activateAction.action.performed -= OnActivatePerformed;
+    }
+
     private void OnActivatePerformed(InputAction.CallbackContext context)
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, 0.12f);

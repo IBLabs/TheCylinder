@@ -24,8 +24,10 @@ public class MeadowXRFollower : MonoBehaviour
     void Start()
     {
         var xrOrigin = FindAnyObjectByType<XROrigin>();
-        _playerOriginCamera = xrOrigin.GetComponentInChildren<Camera>();
-
+        if (xrOrigin != null)
+        {
+            _playerOriginCamera = xrOrigin.GetComponentInChildren<Camera>();
+        }
     }
 
     void Update()
@@ -36,6 +38,11 @@ public class MeadowXRFollower : MonoBehaviour
 
     private void HandleFollowPosition()
     {
+        if (_playerOriginCamera == null)
+        {
+            return;
+        }
+
         var normalizedPlayerForward = _playerOriginCamera.transform.forward.normalized;
         var playerPosition = _playerOriginCamera.transform.position;
 
@@ -47,6 +54,11 @@ public class MeadowXRFollower : MonoBehaviour
 
     private void HandleFollowRotation()
     {
+        if (_playerOriginCamera == null)
+        {
+            return;
+        }
+
         var playerPosition = _playerOriginCamera.transform.position;
         var lookDirection = uiPanelTransform.position - playerPosition;
 
