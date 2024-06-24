@@ -31,8 +31,13 @@ public class BuildConfigurator : MonoBehaviour
 
         string[] vrScenes = scenes;
 
-        BuildPipeline.BuildPlayer(vrScenes, buildPath, BuildTarget.Android, BuildOptions.None);
-        RunInstallCommand();
+        var buildOptions = BuildOptions.None;
+        buildOptions |= BuildOptions.AutoRunPlayer;
+
+        BuildPipeline.BuildPlayer(vrScenes, buildPath, BuildTarget.Android, buildOptions);
+
+        // TODO: remove this
+        // RunInstallCommand();
     }
 
     [MenuItem("Build/Build for macOS (Test Client)")]
