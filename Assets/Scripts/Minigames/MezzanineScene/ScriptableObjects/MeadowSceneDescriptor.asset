@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MeadowSceneDescriptor
   m_EditorClassIdentifier: 
   sceneId: meadow
-  sceneName: MEADOW
+  sceneName: BINARY FIELD
   sceneFileName: MeadowScene

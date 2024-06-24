@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: FollowSceneDescriptor
   m_EditorClassIdentifier: 
   sceneId: follow
-  sceneName: FOLLOW
+  sceneName: DATA FLOW
   sceneFileName: FollowScene
