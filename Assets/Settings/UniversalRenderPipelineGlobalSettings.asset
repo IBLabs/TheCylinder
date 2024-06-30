@@ -20,8 +20,8 @@ MonoBehaviour:
     type: 2}
   m_RenderingLayerNames:
   - Light Layer default
-  - Light Layer 1
-  - Light Layer 2
+  - Red
+  - Green
   - Light Layer 3
   - Light Layer 4
   - Light Layer 5

@@ -25,6 +25,8 @@ public class NetworkTutorialController : NetworkBehaviour
     [Header("Configuration")]
     [SerializeField] private bool showOnStart = true;
 
+    private Vector3 _originalPosition;
+
     void Start()
     {
         if (showOnStart)
@@ -35,6 +37,8 @@ public class NetworkTutorialController : NetworkBehaviour
 
     public void ShowTutorial()
     {
+        _originalPosition = xrOriginTransform.position;
+
         xrOriginTransform.position = xrTutorialStartTransform.position;
         xrOriginTransform.rotation = xrTutorialStartTransform.rotation;
 
@@ -68,7 +72,7 @@ public class NetworkTutorialController : NetworkBehaviour
 
         TransitionToWorldClientRpc();
 
-        xrOriginTransform.position = Vector3.zero;
+        xrOriginTransform.position = _originalPosition;
 
         xrTransitionController.FadeToScene();
     }

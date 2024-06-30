@@ -42,6 +42,8 @@ public class MeadowDesktopGameEndController : MonoBehaviour
 
     public void SetWinner(WinnerType winner)
     {
+        if (!isActiveAndEnabled) return;
+
         winText.SetActive(winner == WinnerType.Desktop);
         loseText.SetActive(winner == WinnerType.VR);
 
@@ -51,6 +53,8 @@ public class MeadowDesktopGameEndController : MonoBehaviour
 
     public void Show()
     {
+        if (!isActiveAndEnabled) return;
+
         animator.SetTrigger("Show");
     }
 }

@@ -26,12 +26,12 @@ PrefabInstance:
     - target: {fileID: 6728596374741306865, guid: d2e47888e9e964cb7b9109a2d2e0ec5c,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2239247738
+      value: 4230083951
       objectReference: {fileID: 0}
     - target: {fileID: 8333849146806985614, guid: d2e47888e9e964cb7b9109a2d2e0ec5c,
         type: 3}
       propertyPath: m_Name
-      value: Network Player (Override)
+      value: Network Prison Player (Override)
       objectReference: {fileID: 0}
     - target: {fileID: 8333849146806985614, guid: d2e47888e9e964cb7b9109a2d2e0ec5c,
         type: 3}
@@ -42,6 +42,8 @@ PrefabInstance:
     - {fileID: 8891504734704337669, guid: d2e47888e9e964cb7b9109a2d2e0ec5c, type: 3}
     - {fileID: 5537760384532479023, guid: d2e47888e9e964cb7b9109a2d2e0ec5c, type: 3}
     - {fileID: 40748908788858135, guid: d2e47888e9e964cb7b9109a2d2e0ec5c, type: 3}
+    - {fileID: 2239693460525997170, guid: d2e47888e9e964cb7b9109a2d2e0ec5c, type: 3}
+    - {fileID: 3528124245555758773, guid: d2e47888e9e964cb7b9109a2d2e0ec5c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

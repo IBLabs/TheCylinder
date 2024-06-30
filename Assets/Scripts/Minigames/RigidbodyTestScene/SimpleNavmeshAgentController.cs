@@ -1,9 +1,14 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class SimpleNavmeshAgentController : MonoBehaviour
 {
+    private const string IS_WALKING = "isWalking";
+
     public bool IsPaused => _isPaused;
+
+    [SerializeField] private Animator animator;
 
     [SerializeField] private float wanderRadius = 10f;
     [SerializeField] private float minWanderTimer = 1f;
@@ -20,6 +25,11 @@ public class SimpleNavmeshAgentController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
+
+        if (animator == null)
+        {
+            Debug.LogError("Animator is not set on " + gameObject.name);
+        }
     }
 
     private void Update()
@@ -41,6 +51,15 @@ public class SimpleNavmeshAgentController : MonoBehaviour
         {
             Quaternion lookRotation = Quaternion.LookRotation(agent.velocity.normalized);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+        }
+
+        if (agent.velocity.magnitude > 0.01f)
+        {
+            animator.SetBool(IS_WALKING, true);
+        }
+        else
+        {
+            animator.SetBool(IS_WALKING, false);
         }
     }
 

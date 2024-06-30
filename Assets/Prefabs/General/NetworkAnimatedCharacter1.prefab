@@ -10,6 +10,21 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: de73c2b5a8c784b44a0a1d8de6f35262,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: de73c2b5a8c784b44a0a1d8de6f35262,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: de73c2b5a8c784b44a0a1d8de6f35262,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: de73c2b5a8c784b44a0a1d8de6f35262,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.033325076
       objectReference: {fileID: 0}
@@ -102,15 +117,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: de73c2b5a8c784b44a0a1d8de6f35262,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2884053213170889681}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: de73c2b5a8c784b44a0a1d8de6f35262,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 5086944369585608330}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: de73c2b5a8c784b44a0a1d8de6f35262,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6613200015478686602}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: de73c2b5a8c784b44a0a1d8de6f35262,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2884053213170889681}
   m_SourcePrefab: {fileID: 100100000, guid: de73c2b5a8c784b44a0a1d8de6f35262, type: 3}
 --- !u!1 &3229716956188329378 stripped
 GameObject:
@@ -202,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 732875548
+  GlobalObjectIdHash: 776141200
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -211,59 +226,6 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &2884053213170889681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3229716956188329378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79919d68c8a4d408f807adca68b141f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 0.26
-  runSpeed: 0.7
-  jumpForce: 5
-  moveAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Move
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: e4b72999-7f75-4f46-937a-aecfa97ae500
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 9063689130010589215, guid: 811906504475b4abca0d10271343978e,
-      type: 3}
-  jumpAction:
-    m_UseReference: 0
-    m_Action:
-      m_Name: Jump
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 497b6d6b-2791-456a-98f2-417676e23894
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
-  runAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Run
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 85896b3f-693f-460e-9238-96f0455f9b0d
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 2959206241069841629, guid: 811906504475b4abca0d10271343978e,
-      type: 3}
 --- !u!114 &5086944369585608330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,3 +271,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TransitionStateInfoList: []
   m_Animator: {fileID: 4004302135439263356}
+--- !u!114 &2884053213170889681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3229716956188329378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79919d68c8a4d408f807adca68b141f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0.35
+  runSpeed: 1.2
+  jumpForce: 5
+  moveAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Move
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: e4b72999-7f75-4f46-937a-aecfa97ae500
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 9063689130010589215, guid: 811906504475b4abca0d10271343978e,
+      type: 3}
+  jumpAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Jump
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 497b6d6b-2791-456a-98f2-417676e23894
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  runAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Run
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 85896b3f-693f-460e-9238-96f0455f9b0d
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 2959206241069841629, guid: 811906504475b4abca0d10271343978e,
+      type: 3}

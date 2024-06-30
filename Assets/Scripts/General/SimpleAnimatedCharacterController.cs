@@ -40,11 +40,19 @@ public class SimpleAnimatedCharacterController : NetworkBehaviour
         {
             _targetCamera = targetCameraComponent;
         }
+        else
+        {
+            Debug.LogError("No camera found");
+        }
     }
 
     void Update()
     {
-        if (!IsOwner) return;
+        var hasNetworkAccess = NetworkManager.Singleton != null;
+        if (hasNetworkAccess && !IsOwner)
+        {
+            return;
+        }
 
         Vector2 rawInputVector = moveAction.action.ReadValue<Vector2>();
         Vector3 inputVector = new Vector3(rawInputVector.x, 0, rawInputVector.y);
