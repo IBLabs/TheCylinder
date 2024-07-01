@@ -71,7 +71,13 @@ public class XRPlayerShooter : MonoBehaviour
 
     private void HandleHitEnemy(GameObject hitObject, Vector3 hitPoint)
     {
-        OnEnemyHit?.Invoke(hitObject);
+        if (hitObject.TryGetComponent(out NetworkEnemyHitVisualizer visualizer))
+        {
+            visualizer.RequestVisualizeHit(() =>
+            {
+                OnEnemyHit?.Invoke(hitObject);
+            });
+        }
     }
 
     private void OnTriggerActionPerformed(InputAction.CallbackContext context)
