@@ -47,12 +47,14 @@ public class XRNetworkDisabler : MonoBehaviour
                 leftHandGameObject.GetComponent<ActionBasedController>().enabled = false;
                 leftHandGameObject.GetComponent<XRRayInteractor>().enabled = false;
                 leftHandGameObject.GetComponent<XRInteractorLineVisual>().enabled = false;
-                leftHandGameObject.GetComponent<LineRenderer>().enabled = false;
+
+                // leftHandGameObject.GetComponent<LineRenderer>().enabled = false;
 
                 rightHandGameObject.GetComponent<ActionBasedController>().enabled = false;
                 rightHandGameObject.GetComponent<XRRayInteractor>().enabled = false;
                 rightHandGameObject.GetComponent<XRInteractorLineVisual>().enabled = false;
-                rightHandGameObject.GetComponent<LineRenderer>().enabled = false;
+
+                // rightHandGameObject.GetComponent<LineRenderer>().enabled = false;
 
                 transitionSphere.SetActive(false);
             }

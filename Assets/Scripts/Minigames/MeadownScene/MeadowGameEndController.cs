@@ -30,6 +30,8 @@ public class MeadowGameEndController : MonoBehaviour
     [SerializeField] private GameObject rayLeftController;
     [SerializeField] private GameObject rayRightController;
 
+    [SerializeField] private Renderer[] splineMeshRenderers;
+
     [SerializeField] private XRDirectInteractor leftDirectInteractor;
     [SerializeField] private XRDirectInteractor rightDirectInteractor;
 
@@ -151,6 +153,11 @@ public class MeadowGameEndController : MonoBehaviour
         {
             SetVRPlayerBodyGameObjectAsPinnedUI(rayRightController);
         }
+
+        foreach (var renderer in splineMeshRenderers)
+        {
+            renderer.gameObject.layer = LayerMask.NameToLayer("Pinned UI");
+        }
     }
 
     private void SetVRPlayerBodyGameObjectAsPinnedUI(GameObject targetGameObject)
@@ -158,7 +165,15 @@ public class MeadowGameEndController : MonoBehaviour
         targetGameObject.SetActive(true);
 
         targetGameObject.gameObject.layer = LayerMask.NameToLayer("Pinned UI");
+
+        // also set children
+        foreach (Transform child in targetGameObject.transform)
+        {
+            child.gameObject.layer = LayerMask.NameToLayer("Pinned UI");
+        }
+
         targetGameObject.GetComponent<XRRayInteractor>().raycastMask = LayerMask.GetMask("Pinned UI");
+
         targetGameObject.FindComponentWithTagInChildren("VRPlayerBody", out MeshRenderer renderer);
         if (renderer != null) { renderer.gameObject.layer = LayerMask.NameToLayer("Pinned UI"); }
     }
