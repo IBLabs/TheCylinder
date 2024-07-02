@@ -7,7 +7,7 @@ public class OnClientConnectSpawnRequester : MonoBehaviour
 
     public void OnDidConnectToHost(ulong clientId)
     {
-        if (!enabled) return;
+        if (!isActiveAndEnabled) return;
 
         Debug.Log("requesting spawn for client: " + clientId);
 

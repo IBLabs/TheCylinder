@@ -27,6 +27,8 @@ public class LobbyDesktopCanvasController : MonoBehaviour
 
     public void OnClientConnected(ulong clientId)
     {
+        if (!isActiveAndEnabled) return;
+
         StartCoroutine(ClientConnectedCoroutine());
     }
 

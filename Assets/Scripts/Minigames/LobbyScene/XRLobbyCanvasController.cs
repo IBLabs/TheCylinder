@@ -14,8 +14,7 @@ public class XRLobbyCanvasController : MonoBehaviour
     [SerializeField] private CanvasGroup startGroup;
     [SerializeField] private CanvasGroup codeGroup;
     [SerializeField] private CodeGenerator codeGenerator;
-
-    [SerializeField] private TextMeshProUGUI titleText;
+    [SerializeField] private CanvasGroup launchButtonGroup;
 
     void Start()
     {
@@ -64,14 +63,13 @@ public class XRLobbyCanvasController : MonoBehaviour
         // TODO: do something
     }
 
-    private IEnumerator CodeGenerationTextCoroutine()
+    public void ClientDidConnect(ulong clientId)
     {
-        int dotCount = 1;
-        while (true)
+        if (launchButtonGroup.alpha == 0)
         {
-            titleText.text = "GENERATING CODE" + new string('.', dotCount);
-            dotCount = (dotCount + 1) % 4;
-            yield return new WaitForSeconds(0.33f);
+            launchButtonGroup.DOFade(1, 0.3f);
+            launchButtonGroup.interactable = true;
+            launchButtonGroup.blocksRaycasts = true;
         }
     }
 }
