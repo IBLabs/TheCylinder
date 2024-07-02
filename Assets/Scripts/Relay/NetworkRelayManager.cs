@@ -21,18 +21,9 @@ using UnityEditor;
 public class NetworkRelayManager : MonoBehaviour
 {
     [SerializeField] private TMP_InputField joinCodeInputField;
-    [SerializeField] private Button joinButton;
 
     public UnityEvent<string> OnRelayJoinCodeReceived;
     public UnityEvent<ulong> DidConnectToHost;
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
-        {
-            JoinRelay();
-        }
-    }
 
     public async void CreateRelay()
     {
@@ -57,22 +48,24 @@ public class NetworkRelayManager : MonoBehaviour
 
     }
 
-    public void JoinRelay()
+    public bool JoinRelay()
     {
         string joinCode = joinCodeInputField.text;
 
-        JoinRelay(joinCode);
+        return JoinRelay(joinCode);
     }
 
-    public void JoinRelay(string joinCode)
+    public bool JoinRelay(string joinCode)
     {
         if (IsJoinCodeValid(joinCode))
         {
             JoinRelayWithCode(joinCode);
+            return true;
         }
         else
         {
             Debug.Log("invalid join code");
+            return false;
         }
     }
 
