@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
+using TMPro;
+
 using Unity.Netcode;
 
 using UnityEngine;
@@ -17,6 +19,7 @@ public class NetworkTutorialManager : NetworkBehaviour
     [SerializeField] private NetworkAgentSpawner networkAgentSpawner;
     [SerializeField] private AgentDuplicator agentDuplicator;
     [SerializeField] private NetworkPrisonLockController lockController;
+    [SerializeField] private TextMeshPro xrTaskText;
 
     [SerializeField] private bool autoStart = true;
     [SerializeField] private TutorialStep[] steps;
@@ -179,9 +182,16 @@ public class NetworkTutorialManager : NetworkBehaviour
 
     private void OnPlayerKilled(ulong clientId)
     {
+        Debug.Log("player killed");
+
         if (steps[_currentStepIndex].stepId == STEP_ID_KILL_PLAYER)
         {
+            Debug.Log("player killed on correct step, moving to next step");
             NextStep();
+        }
+        else
+        {
+            Debug.Log("player killed on wrong step");
         }
 
         StartCoroutine(RespawnCoroutine(clientId));
@@ -242,6 +252,13 @@ public class NetworkTutorialManager : NetworkBehaviour
         {
             lockController.TurnOn();
         }
+    }
+
+    public void OnReachedUpdateTaskText()
+    {
+        Debug.Log("reached update task text");
+
+        xrTaskText.text = steps[_currentStepIndex].taskText;
     }
 
     #endregion
