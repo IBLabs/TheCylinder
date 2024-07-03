@@ -14,6 +14,8 @@ public class NetworkTutorialManager : NetworkBehaviour
     [SerializeField] private PlayableDirector director;
 
     [SerializeField] private NetworkSimplePlayerSpawner networkPlayerSpawner;
+    [SerializeField] private NetworkAgentSpawner networkAgentSpawner;
+    [SerializeField] private AgentDuplicator agentDuplicator;
 
     [SerializeField] private bool autoStart = true;
     [SerializeField] private TutorialStep[] steps;
@@ -32,6 +34,25 @@ public class NetworkTutorialManager : NetworkBehaviour
         {
             StartCoroutine(TutorialCoroutine());
         }
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        // TODO: remove, testing only
+        if (IsServer)
+        {
+            StartCoroutine(SpawnEnemyCoroutine());
+        }
+
+        base.OnNetworkSpawn();
+    }
+
+    // TODO: remove, testing only
+    private IEnumerator SpawnEnemyCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+
+        networkAgentSpawner.SpawnAgentAtRandomSpawnPoint();
     }
 
     public void NextStep()
@@ -119,6 +140,8 @@ public class NetworkTutorialManager : NetworkBehaviour
         {
             NextStep();
         }
+
+        agentDuplicator.OnEnemyHit(hitObject);
     }
 
     private void OnPlayableDirectorPlayed(PlayableDirector obj)

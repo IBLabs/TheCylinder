@@ -55,7 +55,7 @@ class NetworkAgentSpawner : NetworkBehaviour
         }
     }
 
-    private GameObject SpawnAgentAtRandomSpawnPoint()
+    public GameObject SpawnAgentAtRandomSpawnPoint()
     {
         var spawnTransform = transform;
         if (spawnPoints.Length > 0)
