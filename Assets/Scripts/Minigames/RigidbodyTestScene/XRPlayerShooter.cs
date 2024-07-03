@@ -16,7 +16,7 @@ public class XRPlayerShooter : MonoBehaviour
 
     [SerializeField] private InputActionProperty triggerAction;
 
-    public UnityEvent OnPlayerKilled;
+    public UnityEvent<ulong> OnPlayerKilled;
     public UnityEvent<GameObject> OnEnemyHit;
 
     public UnityEvent<Vector3, Vector3> DidShoot;
@@ -65,7 +65,7 @@ public class XRPlayerShooter : MonoBehaviour
         if (!HandleNetworkHit(hitObject))
         {
             Destroy(hitObject);
-            OnPlayerKilled?.Invoke();
+            OnPlayerKilled?.Invoke(9999);
         }
     }
 
@@ -136,7 +136,7 @@ public class XRPlayerShooter : MonoBehaviour
 
             Destroy(hitObject);
 
-            OnPlayerKilled?.Invoke();
+            OnPlayerKilled?.Invoke(networkObjectOwnerId);
         }
 
 
@@ -160,7 +160,7 @@ public class XRPlayerShooterEditor : Editor
             if (playerGameObject != null)
             {
                 Destroy(playerGameObject);
-                shooter.OnPlayerKilled?.Invoke();
+                shooter.OnPlayerKilled?.Invoke(9999);
             }
         }
     }

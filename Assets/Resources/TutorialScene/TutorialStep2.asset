@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7404d37d53114f13ae05d5173c14eb1, type: 3}
+  m_Name: TutorialStep2
+  m_EditorClassIdentifier: 
+  timelineAsset: {fileID: 11400000, guid: 463647b7470504f99a68f22ff442a74d, type: 2}
+  autoContinue: 1

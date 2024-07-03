@@ -12,7 +12,7 @@ public class SceneSwitcher : EditorWindow
     [MenuItem("Key Scenes/Prison")]
     private static void SwitchToScene2()
     {
-        SwitchToScene("Minigames/RigidbodyTestScene/RigidbodyTestScene");
+        SwitchToScene("Minigames/TutorialScene/TutorialScene");
     }
 
     [MenuItem("Key Scenes/Prison (New)")]
