@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7404d37d53114f13ae05d5173c14eb1, type: 3}
   m_Name: TutorialStep1
   m_EditorClassIdentifier: 
+  stepId: kill_player
   timelineAsset: {fileID: 11400000, guid: e1626f2d8f5a64972b93f1e7f8dbc993, type: 2}
-  autoContinue: 1
+  autoContinue: 0

@@ -16,6 +16,7 @@ public class NetworkTutorialManager : NetworkBehaviour
     [SerializeField] private NetworkSimplePlayerSpawner networkPlayerSpawner;
     [SerializeField] private NetworkAgentSpawner networkAgentSpawner;
     [SerializeField] private AgentDuplicator agentDuplicator;
+    [SerializeField] private NetworkPrisonLockController lockController;
 
     [SerializeField] private bool autoStart = true;
     [SerializeField] private TutorialStep[] steps;
@@ -27,21 +28,23 @@ public class NetworkTutorialManager : NetworkBehaviour
     void Start()
     {
         ListenForPlayerShooterEvents();
-
         ListenForPlayableDirectorEvents();
 
-        if (autoStart)
+        var hasNetworkAccess = NetworkManager.Singleton != null;
+        if (!hasNetworkAccess)
         {
-            StartCoroutine(TutorialCoroutine());
+            if (autoStart)
+            {
+                StartCoroutine(TutorialCoroutine());
+            }
         }
     }
 
     public override void OnNetworkSpawn()
     {
-        // TODO: remove, testing only
         if (IsServer)
         {
-            StartCoroutine(SpawnEnemyCoroutine());
+            StartCoroutine(TutorialCoroutine());
         }
 
         base.OnNetworkSpawn();
@@ -53,6 +56,14 @@ public class NetworkTutorialManager : NetworkBehaviour
         yield return new WaitForSeconds(1f);
 
         networkAgentSpawner.SpawnAgentAtRandomSpawnPoint();
+    }
+
+    // TODO: remove, testing only
+    private IEnumerator LockCourtine()
+    {
+        yield return new WaitForSeconds(2f);
+
+        lockController.TurnOn();
     }
 
     public void NextStep()
@@ -79,25 +90,67 @@ public class NetworkTutorialManager : NetworkBehaviour
 
     private IEnumerator TutorialCoroutine()
     {
+        var hasNetworkAccess = NetworkManager.Singleton != null;
+        if (hasNetworkAccess)
+        {
+            if (!IsServer)
+            {
+                Debug.Log("only the server can start the tutorial, ignoring...");
+                yield break;
+            }
+        }
+
         for (int i = 0; i < steps.Length; i++)
         {
             _currentStepIndex = i;
 
-            var tutorialStep = steps[i];
-
-            director.playableAsset = tutorialStep.timelineAsset;
-            director.Play();
-
-            yield return new WaitUntil(() => _finishedPlayingStep);
-
-            _finishedPlayingStep = false;
-
-            yield return new WaitUntil(() => _shouldContinue);
-
-            _shouldContinue = false;
+            yield return StartCoroutine(PlayStepCoroutine(i));
         }
 
         Debug.Log("tutorial finished");
+    }
+
+    private IEnumerator PlayStepCoroutine(int stepIndex)
+    {
+        var hasNetworkAccess = NetworkManager.Singleton != null;
+        if (hasNetworkAccess)
+        {
+            if (!IsServer)
+            {
+                Debug.Log("only the server can play a step, ignoring...");
+                yield break;
+            }
+
+            PlayStepClientRpc(stepIndex);
+        }
+        else
+        {
+            LocalPlayStep(stepIndex);
+        }
+
+        yield return new WaitUntil(() => _finishedPlayingStep);
+
+        _finishedPlayingStep = false;
+
+        yield return new WaitUntil(() => _shouldContinue);
+
+        _shouldContinue = false;
+    }
+
+    [ClientRpc]
+    private void PlayStepClientRpc(int stepIndex)
+    {
+        LocalPlayStep(stepIndex);
+    }
+
+    private void LocalPlayStep(int stepIndex)
+    {
+        _currentStepIndex = stepIndex;
+
+        var tutorialStep = steps[stepIndex];
+
+        director.playableAsset = tutorialStep.timelineAsset;
+        director.Play();
     }
 
     private IEnumerator RespawnCoroutine(ulong clientId)
@@ -144,6 +197,14 @@ public class NetworkTutorialManager : NetworkBehaviour
         agentDuplicator.OnEnemyHit(hitObject);
     }
 
+    public void OnUnlock()
+    {
+        if (steps[_currentStepIndex].stepId == "unlock")
+        {
+            NextStep();
+        }
+    }
+
     private void OnPlayableDirectorPlayed(PlayableDirector obj)
     {
     }
@@ -158,6 +219,28 @@ public class NetworkTutorialManager : NetworkBehaviour
             {
                 _shouldContinue = true;
             }
+        }
+    }
+
+    public void OnReachedKillPlayerSignal()
+    {
+        Debug.Log("reached kill player signal");
+    }
+
+    public void OnReachedKillEnemySignal()
+    {
+        Debug.Log("reached kill enemy signal");
+
+        networkAgentSpawner.SpawnAgentAtRandomSpawnPoint();
+    }
+
+    public void OnReachedUnlockSignal()
+    {
+        Debug.Log("reached unlock signal");
+
+        if (IsServer)
+        {
+            lockController.TurnOn();
         }
     }
 

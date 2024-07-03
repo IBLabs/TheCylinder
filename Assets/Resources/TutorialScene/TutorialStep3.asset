@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7404d37d53114f13ae05d5173c14eb1, type: 3}
-  m_Name: TutorialStep2
+  m_Name: TutorialStep3
   m_EditorClassIdentifier: 
-  stepId: hit_enemy
-  timelineAsset: {fileID: 11400000, guid: 463647b7470504f99a68f22ff442a74d, type: 2}
+  stepId: unlock
+  timelineAsset: {fileID: 11400000, guid: 0eeed9aa6d4844b29a57ce6b1e8206bc, type: 2}
   autoContinue: 0
