@@ -10,5 +10,6 @@ public class TutorialStep : ScriptableObject
     public string stepId;
     public TimelineAsset timelineAsset;
     public bool autoContinue = true;
-    public string taskText;
+    public string xrText;
+    public string desktopText;
 }

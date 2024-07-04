@@ -20,6 +20,7 @@ public class NetworkTutorialManager : NetworkBehaviour
     [SerializeField] private AgentDuplicator agentDuplicator;
     [SerializeField] private NetworkPrisonLockController lockController;
     [SerializeField] private TextMeshPro xrTaskText;
+    [SerializeField] private TextMeshProUGUI desktopTaskText;
 
     [SerializeField] private bool autoStart = true;
     [SerializeField] private TutorialStep[] steps;
@@ -91,6 +92,12 @@ public class NetworkTutorialManager : NetworkBehaviour
         director.stopped += OnPlayableDirectorStopped;
     }
 
+    private void RemovePlayableDirectorEvents()
+    {
+        director.played -= OnPlayableDirectorPlayed;
+        director.stopped -= OnPlayableDirectorStopped;
+    }
+
     private IEnumerator TutorialCoroutine()
     {
         var hasNetworkAccess = NetworkManager.Singleton != null;
@@ -133,11 +140,11 @@ public class NetworkTutorialManager : NetworkBehaviour
 
         yield return new WaitUntil(() => _finishedPlayingStep);
 
-        _finishedPlayingStep = false;
-
         yield return new WaitUntil(() => _shouldContinue);
 
         _shouldContinue = false;
+
+        _finishedPlayingStep = false;
     }
 
     [ClientRpc]
@@ -153,6 +160,9 @@ public class NetworkTutorialManager : NetworkBehaviour
         var tutorialStep = steps[stepIndex];
 
         director.playableAsset = tutorialStep.timelineAsset;
+
+        ListenForPlayableDirectorEvents();
+
         director.Play();
     }
 
@@ -184,27 +194,34 @@ public class NetworkTutorialManager : NetworkBehaviour
     {
         Debug.Log("player killed");
 
+        StartCoroutine(RespawnCoroutine(clientId));
+
         if (steps[_currentStepIndex].stepId == STEP_ID_KILL_PLAYER)
         {
+            if (!_finishedPlayingStep) return;
+
             Debug.Log("player killed on correct step, moving to next step");
+
             NextStep();
         }
         else
         {
             Debug.Log("player killed on wrong step");
         }
-
-        StartCoroutine(RespawnCoroutine(clientId));
     }
 
     private void OnEnemyHit(GameObject hitObject)
     {
+        agentDuplicator.OnEnemyHit(hitObject);
+
         if (steps[_currentStepIndex].stepId == STEP_ID_HIT_ENEMY)
         {
+            if (!_finishedPlayingStep) return;
+
+            agentDuplicator.duplicatorEnabled = false;
+
             NextStep();
         }
-
-        agentDuplicator.OnEnemyHit(hitObject);
     }
 
     public void OnUnlock()
@@ -217,12 +234,17 @@ public class NetworkTutorialManager : NetworkBehaviour
 
     private void OnPlayableDirectorPlayed(PlayableDirector obj)
     {
+        Debug.Log("started playing timline step!");
     }
 
     private void OnPlayableDirectorStopped(PlayableDirector obj)
     {
+        Debug.Log("reached finished playing step");
+
         if (obj == director)
         {
+            Debug.Log("finished playing step on correct director");
+
             _finishedPlayingStep = true;
 
             if (steps[_currentStepIndex].autoContinue)
@@ -258,7 +280,8 @@ public class NetworkTutorialManager : NetworkBehaviour
     {
         Debug.Log("reached update task text");
 
-        xrTaskText.text = steps[_currentStepIndex].taskText;
+        xrTaskText.text = steps[_currentStepIndex].xrText;
+        desktopTaskText.text = steps[_currentStepIndex].desktopText;
     }
 
     #endregion

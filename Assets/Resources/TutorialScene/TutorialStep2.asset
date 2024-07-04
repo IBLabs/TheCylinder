@@ -15,3 +15,5 @@ MonoBehaviour:
   stepId: hit_enemy
   timelineAsset: {fileID: 11400000, guid: 463647b7470504f99a68f22ff442a74d, type: 2}
   autoContinue: 0
+  xrText: SPOT THE UN-INFECTED BLOB AND SHOOT IT
+  desktopText: WAIT FOR VR PLAYER

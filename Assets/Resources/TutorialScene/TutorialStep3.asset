@@ -15,3 +15,5 @@ MonoBehaviour:
   stepId: unlock
   timelineAsset: {fileID: 11400000, guid: 0eeed9aa6d4844b29a57ce6b1e8206bc, type: 2}
   autoContinue: 0
+  xrText: WAIT FOR THE BLOB TO UNLOCK THE DATA
+  desktopText: UNLOCK THE DATA BY WALKING TO IT

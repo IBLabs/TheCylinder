@@ -10,8 +10,6 @@ public class NetworkXRPlayerShooterVisualizer : NetworkBehaviour
     [SerializeField] private ParticleSystem positiveHitParticleSystem;
     [SerializeField] private float lineDuration = 0.2f;
 
-    [SerializeField] private Transform gunTransform;
-
     private XRPlayerShooter _shooter;
     private Tweener _gunPunchTweener;
 
@@ -170,12 +168,6 @@ public class NetworkXRPlayerShooterVisualizer : NetworkBehaviour
 
     private void PerformVisualizeShot(Vector3 origin, Vector3 direction)
     {
-        if (_gunPunchTweener != null) _gunPunchTweener.Kill();
-        _gunPunchTweener = gunTransform.DOPunchPosition(-direction * 0.1f, 0.2f, 1, 0.5f).OnComplete(() =>
-        {
-            gunTransform.localPosition = Vector3.zero;
-        });
-
         lineRenderer.SetPosition(0, origin);
         lineRenderer.SetPosition(1, origin + direction * 100f);
 

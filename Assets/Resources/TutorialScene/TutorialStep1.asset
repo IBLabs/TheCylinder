@@ -15,4 +15,5 @@ MonoBehaviour:
   stepId: kill_player
   timelineAsset: {fileID: 11400000, guid: e1626f2d8f5a64972b93f1e7f8dbc993, type: 2}
   autoContinue: 0
-  taskText: SHOOT THE INFECTED BLOB
+  xrText: SHOOT THE INFECTED DATA BLOB
+  desktopText: ESCAPE FROM BEING SHOT

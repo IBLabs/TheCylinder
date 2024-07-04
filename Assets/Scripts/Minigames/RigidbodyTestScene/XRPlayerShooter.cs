@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.Events;
+using System.Collections;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -11,8 +13,12 @@ using UnityEditor;
 
 public class XRPlayerShooter : MonoBehaviour
 {
+    public int Ammo => ammo;
+
     [SerializeField] private float cooldownTime = 1f;
     public bool cooldownEnabled = true;
+
+    [SerializeField] private int ammo = 3;
 
     [SerializeField] private InputActionProperty triggerAction;
 
@@ -23,25 +29,13 @@ public class XRPlayerShooter : MonoBehaviour
     public UnityEvent<Vector3, Vector3> DidHit;
     public UnityEvent<Vector3, Vector3> DidHitPositive;
 
-    public float normalizedCooldownTimer => Mathf.Clamp01(cooldownTimer / cooldownTime);
-
     private XRBaseControllerInteractor _attachedInteractor;
-
-    private float cooldownTimer = 0f;
-
-    private bool isGunReady => cooldownTimer <= 0f;
 
     void Start()
     {
         _attachedInteractor = GetComponent<XRBaseControllerInteractor>();
-    }
 
-    void Update()
-    {
-        if (cooldownTimer > 0f)
-        {
-            cooldownTimer -= Time.deltaTime;
-        }
+        StartCoroutine(AmmoReloadCoroutine());
     }
 
     void OnEnable()
@@ -82,9 +76,9 @@ public class XRPlayerShooter : MonoBehaviour
 
     private void OnTriggerActionPerformed(InputAction.CallbackContext context)
     {
-        if (cooldownEnabled && !isGunReady) return;
+        if (ammo <= 0) return;
 
-        cooldownTimer = cooldownTime;
+        ammo--;
 
         Debug.Log("attempting to shoot...");
 
@@ -141,6 +135,20 @@ public class XRPlayerShooter : MonoBehaviour
 
 
         return true;
+    }
+
+    private IEnumerator AmmoReloadCoroutine()
+    {
+        while (true)
+        {
+            if (ammo < 3)
+            {
+                yield return new WaitForSeconds(cooldownTime);
+                ammo++;
+            }
+
+            yield return null;
+        }
     }
 }
 
