@@ -174,8 +174,11 @@ public class MeadowGameEndController : MonoBehaviour
 
         targetGameObject.GetComponent<XRRayInteractor>().raycastMask = LayerMask.GetMask("Pinned UI");
 
-        targetGameObject.FindComponentWithTagInChildren("VRPlayerBody", out MeshRenderer renderer);
-        if (renderer != null) { renderer.gameObject.layer = LayerMask.NameToLayer("Pinned UI"); }
+        var vrBodyGameObjects = GameObject.FindGameObjectsWithTag("VRPlayerBody");
+        foreach (var vrBodyGameObject in vrBodyGameObjects)
+        {
+            vrBodyGameObject.layer = LayerMask.NameToLayer("Pinned UI");
+        }
     }
 
     #endregion

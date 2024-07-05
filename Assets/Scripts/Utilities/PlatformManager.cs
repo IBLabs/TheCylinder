@@ -11,6 +11,8 @@ public class PlatformManager : MonoBehaviour
 {
     public static bool IsVR { get; private set; }
 
+    public bool DidDetect => _didDetect;
+
     public bool forceNonVR = false;
     public bool forceVR = false;
 
@@ -18,6 +20,8 @@ public class PlatformManager : MonoBehaviour
     public GameObject[] NonVRObjects;
 
     public UnityEvent<bool> OnPlatformDetected;
+
+    private bool _didDetect = false;
 
     void Start()
     {
@@ -46,6 +50,8 @@ public class PlatformManager : MonoBehaviour
         }
 
         OnPlatformDetected?.Invoke(IsVR);
+
+        _didDetect = true;
     }
 
     private bool IsVRDeviceSimulatorActive()
