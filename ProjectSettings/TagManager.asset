@@ -12,6 +12,7 @@ TagManager:
   - VRPlayerBody
   - NavMeshTarget
   - DesktopVirtualCamera
+  - DummyEnemy
   layers:
   - Default
   - TransparentFX

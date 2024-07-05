@@ -13,26 +13,49 @@ public class TargetNavMeshAgentController : MonoBehaviour
 
     void Start()
     {
-        agent.SetDestination(target.position);
+
+    }
+
+    void OnEnable()
+    {
+        if (target == null)
+        {
+            SetNewDestination();
+        }
+        else
+        {
+            agent.SetDestination(target.position);
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "NavMeshTarget")
         {
-            Debug.Log("Target reached");
-
-            var targets = GameObject.FindGameObjectsWithTag("NavMeshTarget");
-            var newTarget = targets[Random.Range(0, targets.Length)];
-            while (newTarget.transform.position == target.position)
+            if (target != null && other.transform.position != target.position)
             {
-                newTarget = targets[Random.Range(0, targets.Length)];
+                return;
             }
 
-            Debug.Log("setting new target to " + newTarget.name);
+            Debug.Log("Target reached");
 
-            target = newTarget.transform;
-            agent.SetDestination(target.position);
+            SetNewDestination();
         }
+    }
+
+    private void SetNewDestination()
+    {
+        var targets = GameObject.FindGameObjectsWithTag("NavMeshTarget");
+        var newTarget = targets[Random.Range(0, targets.Length)];
+
+        while (target != null && newTarget.transform.position == target.position)
+        {
+            newTarget = targets[Random.Range(0, targets.Length)];
+        }
+
+        Debug.Log("setting new target to " + newTarget.name);
+
+        target = newTarget.transform;
+        agent.SetDestination(target.position);
     }
 }

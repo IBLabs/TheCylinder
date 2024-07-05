@@ -31,6 +31,7 @@ public class NetworkXRPlayerShooterVisualizer : NetworkBehaviour
         _shooter.DidShoot.AddListener(OnDidShoot);
         _shooter.DidHit.AddListener(OnDidHit);
         _shooter.DidHitPositive.AddListener(OnDidHitPositive);
+        _shooter.DidHitDummyEnemy.AddListener(OnDidHitDummyEnemy);
 
         _desktopVirtualCamera = GameObject.FindGameObjectWithTag(TAG_DESKTOP_VIRTUAL_CAMERA).GetComponent<CinemachineVirtualCamera>();
     }
@@ -40,6 +41,7 @@ public class NetworkXRPlayerShooterVisualizer : NetworkBehaviour
         _shooter.DidShoot.RemoveListener(OnDidShoot);
         _shooter.DidHit.RemoveListener(OnDidHit);
         _shooter.DidHitPositive.RemoveListener(OnDidHitPositive);
+        _shooter.DidHitDummyEnemy.RemoveListener(OnDidHitDummyEnemy);
 
         base.OnDestroy();
     }
@@ -55,6 +57,11 @@ public class NetworkXRPlayerShooterVisualizer : NetworkBehaviour
     }
 
     private void OnDidHitPositive(Vector3 position, Vector3 faceDirection)
+    {
+        VisualizePossitiveHit(position, faceDirection);
+    }
+
+    private void OnDidHitDummyEnemy(Vector3 position, Vector3 faceDirection)
     {
         VisualizePossitiveHit(position, faceDirection);
     }

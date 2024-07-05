@@ -29,6 +29,7 @@ public class XRPlayerShooter : MonoBehaviour
     public UnityEvent<Vector3, Vector3> DidShoot;
     public UnityEvent<Vector3, Vector3> DidHit;
     public UnityEvent<Vector3, Vector3> DidHitPositive;
+    public UnityEvent<Vector3, Vector3> DidHitDummyEnemy;
     public UnityEvent<int> OnAmmoChanged;
 
     private XRBaseControllerInteractor _attachedInteractor;
@@ -79,6 +80,13 @@ public class XRPlayerShooter : MonoBehaviour
         }
     }
 
+    private void HandleHitDummyEnemy(GameObject hitObject, Vector3 hitPoint)
+    {
+        Vector3 hitVisualizationPosition = new Vector3(hitObject.transform.position.x, hitPoint.y, hitObject.transform.position.z);
+        DidHitDummyEnemy?.Invoke(hitVisualizationPosition, Vector3.up);
+        Destroy(hitObject);
+    }
+
     private void OnTriggerActionPerformed(InputAction.CallbackContext context)
     {
         if (ammo <= 0) return;
@@ -105,6 +113,10 @@ public class XRPlayerShooter : MonoBehaviour
             else if (hit.collider.CompareTag("Enemy"))
             {
                 HandleHitEnemy(hit.collider.gameObject, hit.point);
+            }
+            else if (hit.collider.CompareTag("DummyEnemy"))
+            {
+                HandleHitDummyEnemy(hit.collider.gameObject, hit.point);
             }
         }
     }
