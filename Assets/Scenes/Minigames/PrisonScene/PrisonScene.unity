@@ -1311,7 +1311,7 @@ GameObject:
   - component: {fileID: 72554099}
   m_Layer: 0
   m_Name: Desktop Virtual Camera
-  m_TagString: Untagged
+  m_TagString: DesktopVirtualCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2456,6 +2456,9 @@ MonoBehaviour:
   positiveHitParticleSystem: {fileID: 5041513823320499126, guid: d08ecc55b87f64cdea1abc226513108e,
     type: 3}
   lineDuration: 0.8
+  shakeDuration: 0.5
+  shakeAmplitude: 0.5
+  shakeFrequency: 5
 --- !u!114 &133429414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2521,6 +2524,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   DidHitPositive:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAmmoChanged:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &133429415
@@ -9565,6 +9571,7 @@ GameObject:
   - component: {fileID: 1102977404}
   - component: {fileID: 1102977403}
   - component: {fileID: 1102977402}
+  - component: {fileID: 1102977405}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -9648,6 +9655,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1102977405
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102977400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!4 &1102995919 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f44110fed62b54922b5eb5ee5dcadf85,
@@ -16588,6 +16612,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 943564304811390542, guid: 4e244e30c9e8b4841ae40945252a71cb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4258914434
+      objectReference: {fileID: 0}
     - target: {fileID: 1559232638004255348, guid: 4e244e30c9e8b4841ae40945252a71cb,
         type: 3}
       propertyPath: GlobalObjectIdHash
@@ -16672,6 +16701,11 @@ PrefabInstance:
         type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1745612296
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314755373670646825, guid: 4e244e30c9e8b4841ae40945252a71cb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3841353416
       objectReference: {fileID: 0}
     - target: {fileID: 6996337097449263326, guid: 4e244e30c9e8b4841ae40945252a71cb,
         type: 3}
@@ -17487,6 +17521,9 @@ MonoBehaviour:
   positiveHitParticleSystem: {fileID: 5041513823320499126, guid: d08ecc55b87f64cdea1abc226513108e,
     type: 3}
   lineDuration: 0.8
+  shakeDuration: 0.5
+  shakeAmplitude: 0.5
+  shakeFrequency: 5
 --- !u!114 &1890004929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17552,6 +17589,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   DidHitPositive:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAmmoChanged:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &1890004930

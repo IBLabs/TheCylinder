@@ -1,17 +1,28 @@
 using UnityEngine;
 using DG.Tweening;
 using Unity.Netcode;
+using Cinemachine;
 
 [RequireComponent(typeof(XRPlayerShooter))]
 public class NetworkXRPlayerShooterVisualizer : NetworkBehaviour
 {
+    private const string TAG_DESKTOP_VIRTUAL_CAMERA = "DesktopVirtualCamera";
+    private const string TAG_DESKTOP_CAMERA = "DesktopCamera";
+
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private ParticleSystem hitParticleSystem;
     [SerializeField] private ParticleSystem positiveHitParticleSystem;
     [SerializeField] private float lineDuration = 0.2f;
+    [SerializeField] private float shakeDuration = 0.5f;
+    [SerializeField] private float shakeAmplitude = 0.5f;
+    [SerializeField] private float shakeFrequency = 5f;
 
     private XRPlayerShooter _shooter;
-    private Tweener _gunPunchTweener;
+
+    private CinemachineVirtualCamera _desktopVirtualCamera;
+
+    private Tweener _amplitudeTweener;
+    private Tweener _frequencyTweener;
 
     void Start()
     {
@@ -20,6 +31,8 @@ public class NetworkXRPlayerShooterVisualizer : NetworkBehaviour
         _shooter.DidShoot.AddListener(OnDidShoot);
         _shooter.DidHit.AddListener(OnDidHit);
         _shooter.DidHitPositive.AddListener(OnDidHitPositive);
+
+        _desktopVirtualCamera = GameObject.FindGameObjectWithTag(TAG_DESKTOP_VIRTUAL_CAMERA).GetComponent<CinemachineVirtualCamera>();
     }
 
     public override void OnDestroy()
@@ -173,6 +186,29 @@ public class NetworkXRPlayerShooterVisualizer : NetworkBehaviour
 
         lineRenderer.enabled = true;
         lineRenderer.startWidth = 0.08f;
+
+        if (_desktopVirtualCamera != null && _desktopVirtualCamera.isActiveAndEnabled)
+        {
+            LocalShakeCamera(_desktopVirtualCamera);
+        }
+    }
+
+    public void LocalShakeCamera(CinemachineVirtualCamera cameraToShake)
+    {
+        if (cameraToShake == null) return;
+
+        _amplitudeTweener?.Kill();
+        _frequencyTweener?.Kill();
+
+        cameraToShake.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = shakeAmplitude;
+        cameraToShake.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = shakeFrequency;
+
+        _amplitudeTweener = DOTween.To(() => cameraToShake.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain, x => cameraToShake.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = x, 0f, shakeDuration);
+        _frequencyTweener = DOTween.To(() => cameraToShake.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain, x => cameraToShake.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = x, 0f, shakeDuration).OnComplete(() =>
+        {
+            cameraToShake.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0f;
+            cameraToShake.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0f;
+        });
     }
 
     private void PerformVisualizeHit(Vector3 position, Vector3 faceDirection)

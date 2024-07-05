@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1273661221
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 0
@@ -987,7 +987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 4199107189
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1045,6 +1045,9 @@ MonoBehaviour:
   positiveHitParticleSystem: {fileID: 5041513823320499126, guid: d08ecc55b87f64cdea1abc226513108e,
     type: 3}
   lineDuration: 0.8
+  shakeDuration: 0.5
+  shakeAmplitude: 0.5
+  shakeFrequency: 5
 --- !u!114 &3841845077971668055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2228,7 +2231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1915723236
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 0
@@ -2405,7 +2408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 937683571
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -2463,6 +2466,9 @@ MonoBehaviour:
   positiveHitParticleSystem: {fileID: 5041513823320499126, guid: d08ecc55b87f64cdea1abc226513108e,
     type: 3}
   lineDuration: 0.8
+  shakeDuration: 0.5
+  shakeAmplitude: 0.5
+  shakeFrequency: 5
 --- !u!114 &7899672808542697693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3505,6 +3511,7 @@ MonoBehaviour:
   - {fileID: 4954647429039983460}
   - {fileID: 2405536744433220260}
   - {fileID: 2576470037014658579}
+  loadedColor: {r: 0, g: 0.9321003, b: 2, a: 1}
 --- !u!114 &2290978949257392095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3517,7 +3524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 460188346
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 0
@@ -3829,7 +3836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 3109147592
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -3967,12 +3974,12 @@ PrefabInstance:
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+      objectReference: {fileID: 2100000, guid: ed52e25afd369437d868e876e0611602, type: 2}
     - target: {fileID: -3223362301043716625, guid: 558ff97a5497b4aa1b656e9be995dce5,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+      objectReference: {fileID: 2100000, guid: ed52e25afd369437d868e876e0611602, type: 2}
     - target: {fileID: 919132149155446097, guid: 558ff97a5497b4aa1b656e9be995dce5,
         type: 3}
       propertyPath: m_Name
@@ -3992,7 +3999,7 @@ PrefabInstance:
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+      objectReference: {fileID: 2100000, guid: ed52e25afd369437d868e876e0611602, type: 2}
     - target: {fileID: 4659390447950767262, guid: 558ff97a5497b4aa1b656e9be995dce5,
         type: 3}
       propertyPath: m_TagString
@@ -4092,6 +4099,7 @@ MonoBehaviour:
   - {fileID: 4124795458997955848}
   - {fileID: 6673887029922356424}
   - {fileID: 6790640786980378751}
+  loadedColor: {r: 0, g: 0.9321003, b: 2, a: 1}
 --- !u!114 &8292632245703831930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4104,7 +4112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 2476129173
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 0
