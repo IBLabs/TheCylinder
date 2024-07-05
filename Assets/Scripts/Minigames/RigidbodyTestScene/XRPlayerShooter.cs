@@ -14,6 +14,7 @@ using UnityEditor;
 public class XRPlayerShooter : MonoBehaviour
 {
     public int Ammo => ammo;
+    public float ReloadProgress => _reloadProgress;
 
     [SerializeField] private float cooldownTime = 1f;
     public bool cooldownEnabled = true;
@@ -28,8 +29,12 @@ public class XRPlayerShooter : MonoBehaviour
     public UnityEvent<Vector3, Vector3> DidShoot;
     public UnityEvent<Vector3, Vector3> DidHit;
     public UnityEvent<Vector3, Vector3> DidHitPositive;
+    public UnityEvent<int> OnAmmoChanged;
 
     private XRBaseControllerInteractor _attachedInteractor;
+
+    private float _reloadProgress = 0f;
+    private float _reloadTimer = 0f;
 
     void Start()
     {
@@ -78,7 +83,7 @@ public class XRPlayerShooter : MonoBehaviour
     {
         if (ammo <= 0) return;
 
-        ammo--;
+        DecreaseAmmo();
 
         Debug.Log("attempting to shoot...");
 
@@ -102,6 +107,19 @@ public class XRPlayerShooter : MonoBehaviour
                 HandleHitEnemy(hit.collider.gameObject, hit.point);
             }
         }
+    }
+
+    private void IncreaseAmmo()
+    {
+        ammo++;
+        OnAmmoChanged?.Invoke(ammo);
+    }
+
+    private void DecreaseAmmo()
+    {
+        _reloadTimer = 0f;
+        ammo--;
+        OnAmmoChanged?.Invoke(ammo);
     }
 
     private bool HandleNetworkHit(GameObject hitObject)
@@ -143,8 +161,17 @@ public class XRPlayerShooter : MonoBehaviour
         {
             if (ammo < 3)
             {
-                yield return new WaitForSeconds(cooldownTime);
-                ammo++;
+                while (_reloadTimer < cooldownTime)
+                {
+                    _reloadTimer += Time.deltaTime;
+                    _reloadProgress = _reloadTimer / cooldownTime;
+                    yield return null;
+                }
+
+                _reloadProgress = 0f;
+                _reloadTimer = 0f;
+
+                IncreaseAmmo();
             }
 
             yield return null;
