@@ -37,11 +37,11 @@ public class NetworkSceneSelector : NetworkBehaviour
         var hasNetworkAccess = NetworkManager.Singleton != null;
         if (!hasNetworkAccess)
         {
-            SetActiveScene("meadow");
+            SetActiveScene("oval");
             return;
         }
 
-        SetSceneWithIdServerRpc("meadow");
+        SetSceneWithIdServerRpc("oval");
     }
 
     public void SetPrisonScene()

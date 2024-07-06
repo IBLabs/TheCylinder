@@ -24,7 +24,7 @@ public class SceneSwitcher : EditorWindow
     [MenuItem("Key Scenes/Meadow")]
     private static void SwitchToScene4()
     {
-        SwitchToScene("Minigames/MeadowScene/MeadowScene");
+        SwitchToScene("Minigames/OvalScene/OvalScene");
     }
 
     [MenuItem("Key Scenes/Mezzanine")]

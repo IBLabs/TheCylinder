@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6377ef060fcd4fb4b5986c3be687381, type: 3}
-  m_Name: MeadowSceneDescriptor
+  m_Name: OvalSceneDescriptor
   m_EditorClassIdentifier: 
-  sceneId: meadow
-  sceneName: BINARY FIELD
-  sceneFileName: MeadowScene
+  sceneId: oval
+  sceneName: OVAL-LAND
+  sceneFileName: OvalScene
