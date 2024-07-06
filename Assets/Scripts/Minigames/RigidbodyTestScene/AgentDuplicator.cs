@@ -21,6 +21,12 @@ public class AgentDuplicator : MonoBehaviour
     {
         if (!duplicatorEnabled) return;
 
+        if (NetworkSoundManager.Instance != null)
+        {
+            NetworkSoundManager.Instance.PlaySoundServerRpc("Duplication2", hitObject.transform.position);
+
+        }
+
         for (int i = 0; i < copiesToSpawn; i++)
         {
             _spawner.SpawnAgentWithPositionAndRotation(hitObject.transform.position, hitObject.transform.rotation);

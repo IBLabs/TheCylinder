@@ -58,11 +58,14 @@ public class NetworkEnemyHitVisualizer : NetworkBehaviour
     {
         if (_renderer == null) yield break;
 
-        _renderer.material.DOColor(Color.black, "_EmissionColor", 0.4f).From(Color.white);
+        yield return _renderer.material.DOColor(Color.black, "_EmissionColor", 0.33f).From(Color.white).WaitForCompletion();
+
+        if (NetworkSoundManager.Instance != null)
+        {
+            NetworkSoundManager.Instance.PlaySoundServerRpc("EnemyError1", transform.position);
+        }
 
         // TODO: show thinking animation
-
-        yield return new WaitForSeconds(.5f);
 
         yield return _renderer.material.DOColor(Color.black, "_EmissionColor", 0.1f).From(Color.red).SetLoops(2).WaitForCompletion();
 

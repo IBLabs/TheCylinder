@@ -1742,6 +1742,9 @@ MonoBehaviour:
   DidHitPositive:
     m_PersistentCalls:
       m_Calls: []
+  DidHitDummyEnemy:
+    m_PersistentCalls:
+      m_Calls: []
   OnAmmoChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3163,6 +3166,9 @@ MonoBehaviour:
   DidHitPositive:
     m_PersistentCalls:
       m_Calls: []
+  DidHitDummyEnemy:
+    m_PersistentCalls:
+      m_Calls: []
   OnAmmoChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3511,7 +3517,7 @@ MonoBehaviour:
   - {fileID: 4954647429039983460}
   - {fileID: 2405536744433220260}
   - {fileID: 2576470037014658579}
-  loadedColor: {r: 0, g: 0.9321003, b: 2, a: 1}
+  loadedColor: {r: 2.670157, g: 0.4446281, b: 0, a: 1}
 --- !u!114 &2290978949257392095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4099,7 +4105,7 @@ MonoBehaviour:
   - {fileID: 4124795458997955848}
   - {fileID: 6673887029922356424}
   - {fileID: 6790640786980378751}
-  loadedColor: {r: 0, g: 0.9321003, b: 2, a: 1}
+  loadedColor: {r: 2.670157, g: 0.4446281, b: 0, a: 1}
 --- !u!114 &8292632245703831930
 MonoBehaviour:
   m_ObjectHideFlags: 0
