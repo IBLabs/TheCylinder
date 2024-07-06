@@ -21,6 +21,7 @@ public class NetworkTutorialManager : NetworkBehaviour
     [SerializeField] private NetworkPrisonLockController lockController;
     [SerializeField] private TextMeshPro xrTaskText;
     [SerializeField] private TextMeshProUGUI desktopTaskText;
+    [SerializeField] private AudioSource bgmAudioSource;
 
     [SerializeField] private bool autoStart = true;
     [SerializeField] private TutorialStep[] steps;
@@ -28,6 +29,7 @@ public class NetworkTutorialManager : NetworkBehaviour
     private int _currentStepIndex = 0;
     private bool _shouldContinue = false;
     private bool _finishedPlayingStep = false;
+    private bool _listenForInput = false;
 
     void Start()
     {
@@ -138,19 +140,44 @@ public class NetworkTutorialManager : NetworkBehaviour
             LocalPlayStep(stepIndex);
         }
 
-        yield return new WaitUntil(() => _finishedPlayingStep);
+        yield return new WaitUntil(() => _finishedPlayingStep || _shouldContinue);
+
+        if (_shouldContinue && !_finishedPlayingStep)
+        {
+            StopStepClientRpc();
+
+            yield return new WaitForSeconds(.5f);
+
+            NetworkSoundManager.Instance.PlaySoundServerRpc("NoPatience2", transform.position);
+
+            yield return new WaitForSeconds(1.5f);
+        }
 
         yield return new WaitUntil(() => _shouldContinue);
 
         _shouldContinue = false;
 
         _finishedPlayingStep = false;
+
+        _listenForInput = false;
     }
 
     [ClientRpc]
     private void PlayStepClientRpc(int stepIndex)
     {
         LocalPlayStep(stepIndex);
+    }
+
+    [ClientRpc]
+    private void StopStepClientRpc()
+    {
+        LocalStopStep();
+    }
+
+    private void LocalStopStep()
+    {
+        bgmAudioSource.volume = .05f;
+        director.Stop();
     }
 
     private void LocalPlayStep(int stepIndex)
@@ -198,7 +225,7 @@ public class NetworkTutorialManager : NetworkBehaviour
 
         if (steps[_currentStepIndex].stepId == STEP_ID_KILL_PLAYER)
         {
-            if (!_finishedPlayingStep) return;
+            if (!_listenForInput) return;
 
             Debug.Log("player killed on correct step, moving to next step");
 
@@ -216,7 +243,7 @@ public class NetworkTutorialManager : NetworkBehaviour
 
         if (steps[_currentStepIndex].stepId == STEP_ID_HIT_ENEMY)
         {
-            if (!_finishedPlayingStep) return;
+            if (!_listenForInput) return;
 
             agentDuplicator.duplicatorEnabled = false;
 
@@ -282,6 +309,11 @@ public class NetworkTutorialManager : NetworkBehaviour
 
         xrTaskText.text = steps[_currentStepIndex].xrText;
         desktopTaskText.text = steps[_currentStepIndex].desktopText;
+    }
+
+    public void OnReachedStartListeningForInput()
+    {
+        _listenForInput = true;
     }
 
     #endregion

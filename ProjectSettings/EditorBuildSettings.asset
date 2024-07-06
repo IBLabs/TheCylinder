@@ -9,17 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Utilities/NetworkBootstrapScene.unity
     guid: f65415a76c60a48a98b184b7996105f0
   - enabled: 1
-    path: Assets/Scenes/Minigames/OvalScene/OvalScene.unity
-    guid: af69471bd0c8f433aa63ae4b8ee8e442
+    path: Assets/Scenes/Minigames/TutorialScene/TutorialScene.unity
+    guid: 80054e64598fe424d8eb5948ba0e8b65
   - enabled: 1
     path: Assets/Scenes/Minigames/PrisonScene/PrisonScene.unity
     guid: edcb05c9f4fb04f89b562d8126e865ec
   - enabled: 1
-    path: Assets/Scenes/Minigames/TutorialScene/TutorialScene.unity
-    guid: 80054e64598fe424d8eb5948ba0e8b65
-  - enabled: 1
     path: Assets/Scenes/Minigames/MezzanineScene/MezzanineScene.unity
     guid: ef1158fcbd51f44bba6d58fb0b6c438f
+  - enabled: 1
+    path: Assets/Scenes/Minigames/OvalScene/OvalScene.unity
+    guid: af69471bd0c8f433aa63ae4b8ee8e442
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 8d0d7f08dda5d49148465d556a65d1bc,
       type: 2}

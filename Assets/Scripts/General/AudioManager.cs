@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
     public AudioClip[] audioClips;
 
+    [SerializeField] private AudioSource attachedAudioSource;
+
     [SerializeField] private InputActionProperty muteAction;
 
     private void Awake()
@@ -55,7 +57,14 @@ public class AudioManager : MonoBehaviour
         AudioClip clip = GetAudioClip(soundName);
         if (clip != null)
         {
-            AudioSource.PlayClipAtPoint(clip, position);
+            if (attachedAudioSource != null)
+            {
+                attachedAudioSource.PlayOneShot(clip);
+            }
+            else
+            {
+                AudioSource.PlayClipAtPoint(clip, position, 1.0f);
+            }
         }
     }
 

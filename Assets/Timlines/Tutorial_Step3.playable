@@ -34,7 +34,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
   m_Name: Signal Emitter
   m_EditorClassIdentifier: 
-  m_Time: 9.266666666666666
+  m_Time: 2.6
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 14832903026ed4966a54789390173cd3, type: 2}
@@ -63,6 +63,7 @@ MonoBehaviour:
     m_Objects:
     - {fileID: 4362779633096468919}
     - {fileID: -8564246988690748209}
+    - {fileID: -6239964944041190792}
 --- !u!114 &-7860340228912219645
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -85,6 +86,39 @@ MonoBehaviour:
   m_Loop: 0
   m_Version: 1
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
+--- !u!114 &-7775081975733084610
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
+  m_Name: AudioPlayableAsset
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 8300000, guid: 7f5ddced076674cc18b607fe6bba0189, type: 3}
+  m_Loop: 0
+  m_bufferingTime: 0.1
+  m_ClipProperties:
+    volume: 1
+--- !u!114 &-6239964944041190792
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 1.6999999999999993
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: 31be6f8a449cf42e0b89dbd3b790c9be, type: 2}
 --- !u!114 &-5288003362296564318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -308,7 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
   m_Name: Signal Emitter
   m_EditorClassIdentifier: 
-  m_Time: 7.6166666666666645
+  m_Time: 3.230952380952378
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 0f035991529064d4ca7bf8a369ff8075, type: 2}
@@ -652,6 +686,57 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Tutorial_Speech4_1
+  - m_Version: 1
+    m_Start: 0.4166666666666667
+    m_ClipIn: 0
+    m_Asset: {fileID: -7775081975733084610}
+    m_Duration: 0.87175
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 6659423187555177215}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: TaskCompleted1
   m_Markers:
     m_Objects: []
   m_TrackProperties:
@@ -814,11 +899,11 @@ MonoBehaviour:
     m_Recordable: 0
     m_PostExtrapolationMode: 1
     m_PreExtrapolationMode: 1
-    m_PostExtrapolationTime: 7.683333333333335
+    m_PostExtrapolationTime: 2.347619047619049
     m_PreExtrapolationTime: 0
     m_DisplayName: TutorialXRCanvas_HideTask
   - m_Version: 1
-    m_Start: 9.383333333333335
+    m_Start: 4.047619047619048
     m_ClipIn: 0
     m_Asset: {fileID: 6472020796622209869}
     m_Duration: 0.3333333333333333
@@ -1204,11 +1289,11 @@ MonoBehaviour:
     m_Recordable: 0
     m_PostExtrapolationMode: 1
     m_PreExtrapolationMode: 1
-    m_PostExtrapolationTime: 7.683333333333334
+    m_PostExtrapolationTime: 2.347619047619049
     m_PreExtrapolationTime: 0
     m_DisplayName: DesktopTask_HideTask
   - m_Version: 1
-    m_Start: 9.383333333333333
+    m_Start: 4.047619047619048
     m_ClipIn: 0
     m_Asset: {fileID: 1892514799761250647}
     m_Duration: 0.4166666666666667
