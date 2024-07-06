@@ -2929,6 +2929,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 768b63bb81540445fa29d909faeeae6e, type: 3}
   - {fileID: 8300000, guid: 62f50112953e146ceb1b7312c46e2394, type: 3}
   - {fileID: 8300000, guid: 65f49500806d94785bc1e5418996f269, type: 3}
+  - {fileID: 8300000, guid: eff5c1afdaf9f497991a09dcbc588b87, type: 3}
+  - {fileID: 8300000, guid: e6a138b3e9b4a428f90e297bd0accfaf, type: 3}
+  - {fileID: 8300000, guid: dfa99c4bceb224086b99729ca50ec563, type: 3}
   attachedAudioSource: {fileID: 503101347}
   muteAction:
     m_UseReference: 1

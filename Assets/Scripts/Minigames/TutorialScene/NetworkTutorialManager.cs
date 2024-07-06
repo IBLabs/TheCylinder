@@ -148,7 +148,7 @@ public class NetworkTutorialManager : NetworkBehaviour
 
             yield return new WaitForSeconds(.5f);
 
-            NetworkSoundManager.Instance.PlaySoundServerRpc("NoPatience2", transform.position);
+            NetworkSoundManager.Instance.PlaySoundServerRpc("NoPatience" + Random.Range(2, 6), transform.position);
 
             yield return new WaitForSeconds(1.5f);
         }
