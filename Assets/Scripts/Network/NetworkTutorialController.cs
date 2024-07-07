@@ -7,6 +7,7 @@ using Unity.Netcode;
 using DG.Tweening;
 
 using TMPro;
+using UnityEngine.Playables;
 
 public class NetworkTutorialController : NetworkBehaviour
 {
@@ -17,10 +18,14 @@ public class NetworkTutorialController : NetworkBehaviour
     [SerializeField] private ITransitionController xrTransitionController;
     [SerializeField] private Transform xrTutorialStartTransform;
 
+    [SerializeField] private PlayableDirector xrDirector;
+
     [Header("Desktop Components")]
     [SerializeField] private CanvasGroup desktopInstructionsGroup;
     [SerializeField] private CanvasGroup desktopCountdownGroup;
     [SerializeField] private ITransitionController desktopTransitionController;
+
+    [SerializeField] private PlayableDirector desktopDirector;
 
     [Header("Configuration")]
     [SerializeField] private bool showOnStart = true;
@@ -44,6 +49,8 @@ public class NetworkTutorialController : NetworkBehaviour
 
         xrCountdownGroup.alpha = 0;
         xrInstructionsGroup.alpha = 1;
+
+        xrDirector.Play();
 
         ShowTutorialClientRpc();
     }
@@ -81,6 +88,8 @@ public class NetworkTutorialController : NetworkBehaviour
     private void ShowTutorialClientRpc()
     {
         if (IsServer) return;
+
+        desktopDirector.Play();
 
         desktopCountdownGroup.alpha = 0;
         desktopInstructionsGroup.alpha = 1;

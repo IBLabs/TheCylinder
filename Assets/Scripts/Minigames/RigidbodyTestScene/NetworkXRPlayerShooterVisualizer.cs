@@ -33,7 +33,12 @@ public class NetworkXRPlayerShooterVisualizer : NetworkBehaviour
         _shooter.DidHitPositive.AddListener(OnDidHitPositive);
         _shooter.DidHitDummyEnemy.AddListener(OnDidHitDummyEnemy);
 
-        _desktopVirtualCamera = GameObject.FindGameObjectWithTag(TAG_DESKTOP_VIRTUAL_CAMERA).GetComponent<CinemachineVirtualCamera>();
+        var dekstopCameraObject = GameObject.FindGameObjectWithTag(TAG_DESKTOP_VIRTUAL_CAMERA);
+        if (dekstopCameraObject != null)
+        {
+            _desktopVirtualCamera = dekstopCameraObject.GetComponent<CinemachineVirtualCamera>();
+        }
+
     }
 
     public override void OnDestroy()

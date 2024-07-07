@@ -5992,7 +5992,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 868914908}
   m_Follow: {fileID: 868914908}
   m_Lens:
-    FieldOfView: 60
+    FieldOfView: 30
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -6018,8 +6018,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 732351548}
   serializedVersion: 2
-  m_LocalRotation: {x: -1.3439483e-10, y: 0.9999645, z: -0.008428587, w: -0.000000015944552}
-  m_LocalPosition: {x: 0, y: 1.8149999, z: 0.8}
+  m_LocalRotation: {x: 4.7677698e-18, y: 0.99998134, z: -0.0061121364, w: 7.8003513e-16}
+  m_LocalPosition: {x: 0, y: 1.81, z: 1.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -10599,7 +10599,7 @@ GameObject:
   - component: {fileID: 1336538604}
   - component: {fileID: 1336538608}
   m_Layer: 5
-  m_Name: Lobby Desktop Canvas
+  m_Name: Desktop Lobby Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13491,7 +13491,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 30
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -13517,8 +13517,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1589224717}
   serializedVersion: 2
-  m_LocalRotation: {x: -1.3439483e-10, y: 0.9999645, z: -0.008428587, w: -0.000000015944552}
-  m_LocalPosition: {x: 0, y: 1.8149999, z: 0.8}
+  m_LocalRotation: {x: 4.7677698e-18, y: 0.99998134, z: -0.0061121364, w: 7.8003513e-16}
+  m_LocalPosition: {x: 0, y: 1.81, z: 1.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -17567,6 +17567,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: XR Player 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720188369106224098, guid: 4e244e30c9e8b4841ae40945252a71cb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3909444158364348615, guid: 4e244e30c9e8b4841ae40945252a71cb,
         type: 3}

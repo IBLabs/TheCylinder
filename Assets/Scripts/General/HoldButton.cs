@@ -78,7 +78,7 @@ public class HoldButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
         outlineTransform.DOLocalMoveZ(targetZ, animationDuration).SetEase(Ease.OutBack);
 
-        if (outlineTransform.TryGetComponent<UIOutline>(out var outline))
+        if (outlineTransform != null && outlineTransform.TryGetComponent<UIOutline>(out var outline))
         {
             outline.DOColor(isHover ? hoverColor : normalColor, animationDuration);
         }

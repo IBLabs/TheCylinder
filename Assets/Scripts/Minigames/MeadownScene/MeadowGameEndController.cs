@@ -26,6 +26,7 @@ public class MeadowGameEndController : MonoBehaviour
     [SerializeField] private RectTransform secondWordRectTransform;
     [SerializeField] private RectTransform alternateWordRectTransform;
     [SerializeField] private CanvasGroup continueButtonCanvasGroup;
+    [SerializeField] private UIOutline continueButtonOutline;
 
     [SerializeField] private GameObject rayLeftController;
     [SerializeField] private GameObject rayRightController;
@@ -58,13 +59,14 @@ public class MeadowGameEndController : MonoBehaviour
         {
             uiPanelMeshRenderer.material.SetColor("_MainColor", winColor);
             overlaySphereMeshRenderer.material.SetColor("_Color_2", sphereWinColor);
+            continueButtonOutline.color = winColor;
         }
         else
         {
             uiPanelMeshRenderer.material.SetColor("_MainColor", loseColor);
             overlaySphereMeshRenderer.material.SetColor("_Color_2", sphereLoseColor);
+            continueButtonOutline.color = loseColor;
         }
-
 
         if (leftDirectInteractor != null) leftDirectInteractor.enabled = false;
         if (rightDirectInteractor != null) rightDirectInteractor.enabled = false;
