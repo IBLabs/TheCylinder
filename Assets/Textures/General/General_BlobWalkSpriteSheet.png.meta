@@ -1,0 +1,2107 @@
+fileFormatVersion: 2
+guid: 5ce2fc44ce67e436ab20e041606b5854
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2160
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3606057fef7a45b2a8e6eef035e0207
+      internalID: 1886170490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 2160
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17932a8294d454bfd9b01bdd4fec4bde
+      internalID: 1529846865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 2160
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a8436055a837494081862625b85160d
+      internalID: -1272561280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 2160
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8d9e357d3ad84a36b43c7a49567516f
+      internalID: 739117244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 2160
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56b84dbc4308a460f8effd19b7bf90c5
+      internalID: 1639597693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 1350
+        y: 2160
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ac09e060354f4487b888b33579c2c30
+      internalID: -1631424050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 2160
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d754ae623658541658f3471e003ef69c
+      internalID: 1956728843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 1890
+        y: 2160
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a602cb92f333a4a48b1491611a35c307
+      internalID: 1308363180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 2160
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 396ac3352b2bf41f183938b1edd2c024
+      internalID: -1103126946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_9
+      rect:
+        serializedVersion: 2
+        x: 2430
+        y: 2160
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e94e83adeffc43878fec3277493193e
+      internalID: 1396983547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1890
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3399d52f824bd4f77bd16ef71d493cb6
+      internalID: 503703269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_11
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 1890
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7aa235814feaa49c69bdbb371ac28c21
+      internalID: -3929872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_12
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 1890
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a50164894acfe4058939d55aa54974cc
+      internalID: -1269798988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_13
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 1890
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a50bb6eef837c4a0aaeff59280266d86
+      internalID: -1715896129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_14
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 1890
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 289ce7efa1d7e46d8a8b063e57f54ed0
+      internalID: -1948266371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_15
+      rect:
+        serializedVersion: 2
+        x: 1350
+        y: 1890
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5f7d392056ff4e4ca74b4739cdd0306
+      internalID: -1102191805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_16
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 1890
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee5201eaa536c4d2f8fc6b5fa412bf81
+      internalID: 881211645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_17
+      rect:
+        serializedVersion: 2
+        x: 1890
+        y: 1890
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05372bf93cea1488ba275d28230b3644
+      internalID: 173452254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_18
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 1890
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4751ebd485d39425dabbe6d29a631d8c
+      internalID: -2108703612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_19
+      rect:
+        serializedVersion: 2
+        x: 2430
+        y: 1890
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a917fbbd920ac4df18ce485cd6dde83e
+      internalID: 1515676619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1620
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae22b393270784a9ca3ba3f1fb83e97b
+      internalID: -1861161357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_21
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 1620
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2db3a48ad63d54617a4d0a1c5a1d26c9
+      internalID: 1467661737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_22
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 1620
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4709eb415a8b946dc88efa49cd4a6cd5
+      internalID: 1142904593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_23
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 1620
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13e92b485bf7f4c51bfea8f84cabe3ff
+      internalID: -2006650367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_24
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 1620
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd5c6e473982c43c680a98a7a903b76e
+      internalID: -974310706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_25
+      rect:
+        serializedVersion: 2
+        x: 1350
+        y: 1620
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95e94689a20ef4b7f84a1500225e2a66
+      internalID: -766265762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_26
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 1620
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a6d3d471fef94482b387aa9ef9beeb4
+      internalID: 835090948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_27
+      rect:
+        serializedVersion: 2
+        x: 1890
+        y: 1620
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa0514e233089450d82c04e68ff002ea
+      internalID: 1774337768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_28
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 1620
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 944669bd98a694f4fa0dfb33ca0eaef4
+      internalID: -656100117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_29
+      rect:
+        serializedVersion: 2
+        x: 2430
+        y: 1620
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc8ebcf97665649c5a19b710072c7679
+      internalID: 1451769735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1350
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f2241f3b890d4bd69e928cc65aed52f
+      internalID: 764958339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_31
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 1350
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d190af5fbc47422b91e0402ab36bff5
+      internalID: -898923501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_32
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 1350
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d65c31ebc2634489b1df2c46b9e0db8
+      internalID: 916977760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_33
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 1350
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dab01a2c444c744b79fb0fdbb0661151
+      internalID: 436730029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_34
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 1350
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6be4722acdec64b4ea07ec4ceb80c640
+      internalID: 1411122298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_35
+      rect:
+        serializedVersion: 2
+        x: 1350
+        y: 1350
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49f9c28e5da37495ba0443aed5cd2e2d
+      internalID: 2092081891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_36
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 1350
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b3b159e8a19c4e89bd11daf29b3edb4
+      internalID: 90906970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_37
+      rect:
+        serializedVersion: 2
+        x: 1890
+        y: 1350
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f7d5c6f144e8445ea649e9c06202c68
+      internalID: 1344540582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_38
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 1350
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 879a3878e2e804fbab88224bbd68422d
+      internalID: 365168879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_39
+      rect:
+        serializedVersion: 2
+        x: 2430
+        y: 1350
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83651bc84c65f4f98ad450b5ad3355c8
+      internalID: -921189330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1080
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f15a001c0fcd4a9eaf00e7ada0c020e
+      internalID: -1590633518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_41
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 1080
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5d92914a56aa4f77932d43d344eccd2
+      internalID: -1158016772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_42
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 1080
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb838f3b41cd14287811fc90b6803e30
+      internalID: -178969689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_43
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 1080
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 406bd53a0af7e46cab0ed09f55f76083
+      internalID: -213685389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_44
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 1080
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf9958691e90d470d85976a34e750571
+      internalID: -1505346416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_45
+      rect:
+        serializedVersion: 2
+        x: 1350
+        y: 1080
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51ea4b532144e4f7a970461dc1561ebf
+      internalID: -1876121083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_46
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 1080
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f757e054c2ecc40f5bdc5a7a8c30b0e1
+      internalID: -1633653530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_47
+      rect:
+        serializedVersion: 2
+        x: 1890
+        y: 1080
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37e064b50440b4a4ca4e3ba18197f42d
+      internalID: 1185722563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_48
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 1080
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85fcce29349374981a4fdbe60c1dbc1f
+      internalID: 1475011718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_49
+      rect:
+        serializedVersion: 2
+        x: 2430
+        y: 1080
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26820f8fe80754921a369f943a869ed1
+      internalID: 1377367202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_50
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 810
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c665c33bf57834a9cb6419295b7e2633
+      internalID: 1377289354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_51
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 810
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c160445665e9d4fc9b59af73211e297c
+      internalID: 1152180317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_52
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 810
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e32eb99270e64564b218826f534d8a1
+      internalID: -1723176217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_53
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 810
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 231f0b23497c64ce3bf2bae21b5c0db6
+      internalID: 2048454528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_54
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 810
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f93ef503d8c484d18948c69429cba155
+      internalID: 771271956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_55
+      rect:
+        serializedVersion: 2
+        x: 1350
+        y: 810
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3cc64a32c5f9453c916e28489b6ea10
+      internalID: -1586514076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_56
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 810
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54c44e58b5a1540b093bbf394daacc39
+      internalID: 1179395278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_57
+      rect:
+        serializedVersion: 2
+        x: 1890
+        y: 810
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5b5bb4fb3877411d876b85f05a17de9
+      internalID: -1039569835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_58
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 810
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44eadf6e2af5b4e7c9c9766b2b470e24
+      internalID: 1580025320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_59
+      rect:
+        serializedVersion: 2
+        x: 2430
+        y: 810
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b5f460675a844de58b123d678a59b3a
+      internalID: -411043177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 540
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc917dc06dc32475182f32e8dfe085b2
+      internalID: -1995983251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_61
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 540
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34f388bd746de44c7827de13a01ecc06
+      internalID: -1226108431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_62
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 540
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f41a3567f263b4725baa34103a2f51a7
+      internalID: -177863594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_63
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 540
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1283c267348fb4cd4a5b88ce5eaf32da
+      internalID: 1498811247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_64
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 540
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53a04f6fc7e664c8e8f40c27e3439de2
+      internalID: -871964667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_65
+      rect:
+        serializedVersion: 2
+        x: 1350
+        y: 540
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2317f91664474f7fac9ac6d4227fa14
+      internalID: 300922486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_66
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 540
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97358bcf82622431f9b82911a8ee2c30
+      internalID: 1180011060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_67
+      rect:
+        serializedVersion: 2
+        x: 1890
+        y: 540
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: faefdb7782ae1499285c024a373ec145
+      internalID: -462064486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_68
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 540
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 081cf26b5537947a796026b6db13463d
+      internalID: 951541427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_69
+      rect:
+        serializedVersion: 2
+        x: 2430
+        y: 540
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c757e0a7ede5434ab49bfe627508f08
+      internalID: -1292401140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_70
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 270
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 379b8013f5e314382b02678b1cf41119
+      internalID: 1710067923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_71
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 270
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf451d341158c4176b3c25140edc4558
+      internalID: -2082626397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_72
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 270
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 125b3e693580244aab37570138a476aa
+      internalID: -863962193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_73
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 270
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d487749f35a1a473a85b1759cd3093d9
+      internalID: -984576316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_74
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 270
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad544109a96d2479f8eae34ff602aa50
+      internalID: -1890936620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_75
+      rect:
+        serializedVersion: 2
+        x: 1350
+        y: 270
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4496b70146b7544ada0acea7b814f07a
+      internalID: 1252976466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_76
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 270
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f54aca4bb4f594856b2f2799efba238a
+      internalID: -509725496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_77
+      rect:
+        serializedVersion: 2
+        x: 1890
+        y: 270
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecf2ba646fc32425f9bf5819e1b821ce
+      internalID: 1087926285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_78
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 270
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9817b4ba60e7d4f9e8a7d3a3f2c748f7
+      internalID: 1427885994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_79
+      rect:
+        serializedVersion: 2
+        x: 2430
+        y: 270
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48d69c5bbc408419790d304effd02d00
+      internalID: 1768658411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_80
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 604c1121e2824481caf6b39c41fe8de2
+      internalID: -1177315128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_81
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 0
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49f82a37808a54c0086ff7b845f94b93
+      internalID: -1922872392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_82
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 0
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 031e689b6ab2448438d0473dc425875d
+      internalID: -52932491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_83
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 0
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adae506d1758b4b5b82813ce8410c155
+      internalID: 478779348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_84
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 0
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 796988be8eb6c400b9a77a09217ca178
+      internalID: -1890595106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_85
+      rect:
+        serializedVersion: 2
+        x: 1350
+        y: 0
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc4b0f7702b5f484d812c8b450a50088
+      internalID: 1315203923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_86
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 0
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a3b4b5967deb4840b851c2c1a96fa89
+      internalID: -1726120227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_87
+      rect:
+        serializedVersion: 2
+        x: 1890
+        y: 0
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc25245ee1eda4a9ba7935aa78a5956b
+      internalID: 1035410873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_88
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 0
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52c4465f2784f42aca1f4dc2aec5686d
+      internalID: 1342378613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_BlobWalkSpriteSheet_89
+      rect:
+        serializedVersion: 2
+        x: 2430
+        y: 0
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79dc02eced1c74e85a15dd92d566a57d
+      internalID: -1512161255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 8a7b0c7a824e844ef895b803dfc31b4e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      General_BlobWalkSpriteSheet_0: 1886170490
+      General_BlobWalkSpriteSheet_1: 1529846865
+      General_BlobWalkSpriteSheet_10: 503703269
+      General_BlobWalkSpriteSheet_11: -3929872
+      General_BlobWalkSpriteSheet_12: -1269798988
+      General_BlobWalkSpriteSheet_13: -1715896129
+      General_BlobWalkSpriteSheet_14: -1948266371
+      General_BlobWalkSpriteSheet_15: -1102191805
+      General_BlobWalkSpriteSheet_16: 881211645
+      General_BlobWalkSpriteSheet_17: 173452254
+      General_BlobWalkSpriteSheet_18: -2108703612
+      General_BlobWalkSpriteSheet_19: 1515676619
+      General_BlobWalkSpriteSheet_2: -1272561280
+      General_BlobWalkSpriteSheet_20: -1861161357
+      General_BlobWalkSpriteSheet_21: 1467661737
+      General_BlobWalkSpriteSheet_22: 1142904593
+      General_BlobWalkSpriteSheet_23: -2006650367
+      General_BlobWalkSpriteSheet_24: -974310706
+      General_BlobWalkSpriteSheet_25: -766265762
+      General_BlobWalkSpriteSheet_26: 835090948
+      General_BlobWalkSpriteSheet_27: 1774337768
+      General_BlobWalkSpriteSheet_28: -656100117
+      General_BlobWalkSpriteSheet_29: 1451769735
+      General_BlobWalkSpriteSheet_3: 739117244
+      General_BlobWalkSpriteSheet_30: 764958339
+      General_BlobWalkSpriteSheet_31: -898923501
+      General_BlobWalkSpriteSheet_32: 916977760
+      General_BlobWalkSpriteSheet_33: 436730029
+      General_BlobWalkSpriteSheet_34: 1411122298
+      General_BlobWalkSpriteSheet_35: 2092081891
+      General_BlobWalkSpriteSheet_36: 90906970
+      General_BlobWalkSpriteSheet_37: 1344540582
+      General_BlobWalkSpriteSheet_38: 365168879
+      General_BlobWalkSpriteSheet_39: -921189330
+      General_BlobWalkSpriteSheet_4: 1639597693
+      General_BlobWalkSpriteSheet_40: -1590633518
+      General_BlobWalkSpriteSheet_41: -1158016772
+      General_BlobWalkSpriteSheet_42: -178969689
+      General_BlobWalkSpriteSheet_43: -213685389
+      General_BlobWalkSpriteSheet_44: -1505346416
+      General_BlobWalkSpriteSheet_45: -1876121083
+      General_BlobWalkSpriteSheet_46: -1633653530
+      General_BlobWalkSpriteSheet_47: 1185722563
+      General_BlobWalkSpriteSheet_48: 1475011718
+      General_BlobWalkSpriteSheet_49: 1377367202
+      General_BlobWalkSpriteSheet_5: -1631424050
+      General_BlobWalkSpriteSheet_50: 1377289354
+      General_BlobWalkSpriteSheet_51: 1152180317
+      General_BlobWalkSpriteSheet_52: -1723176217
+      General_BlobWalkSpriteSheet_53: 2048454528
+      General_BlobWalkSpriteSheet_54: 771271956
+      General_BlobWalkSpriteSheet_55: -1586514076
+      General_BlobWalkSpriteSheet_56: 1179395278
+      General_BlobWalkSpriteSheet_57: -1039569835
+      General_BlobWalkSpriteSheet_58: 1580025320
+      General_BlobWalkSpriteSheet_59: -411043177
+      General_BlobWalkSpriteSheet_6: 1956728843
+      General_BlobWalkSpriteSheet_60: -1995983251
+      General_BlobWalkSpriteSheet_61: -1226108431
+      General_BlobWalkSpriteSheet_62: -177863594
+      General_BlobWalkSpriteSheet_63: 1498811247
+      General_BlobWalkSpriteSheet_64: -871964667
+      General_BlobWalkSpriteSheet_65: 300922486
+      General_BlobWalkSpriteSheet_66: 1180011060
+      General_BlobWalkSpriteSheet_67: -462064486
+      General_BlobWalkSpriteSheet_68: 951541427
+      General_BlobWalkSpriteSheet_69: -1292401140
+      General_BlobWalkSpriteSheet_7: 1308363180
+      General_BlobWalkSpriteSheet_70: 1710067923
+      General_BlobWalkSpriteSheet_71: -2082626397
+      General_BlobWalkSpriteSheet_72: -863962193
+      General_BlobWalkSpriteSheet_73: -984576316
+      General_BlobWalkSpriteSheet_74: -1890936620
+      General_BlobWalkSpriteSheet_75: 1252976466
+      General_BlobWalkSpriteSheet_76: -509725496
+      General_BlobWalkSpriteSheet_77: 1087926285
+      General_BlobWalkSpriteSheet_78: 1427885994
+      General_BlobWalkSpriteSheet_79: 1768658411
+      General_BlobWalkSpriteSheet_8: -1103126946
+      General_BlobWalkSpriteSheet_80: -1177315128
+      General_BlobWalkSpriteSheet_81: -1922872392
+      General_BlobWalkSpriteSheet_82: -52932491
+      General_BlobWalkSpriteSheet_83: 478779348
+      General_BlobWalkSpriteSheet_84: -1890595106
+      General_BlobWalkSpriteSheet_85: 1315203923
+      General_BlobWalkSpriteSheet_86: -1726120227
+      General_BlobWalkSpriteSheet_87: 1035410873
+      General_BlobWalkSpriteSheet_88: 1342378613
+      General_BlobWalkSpriteSheet_89: -1512161255
+      General_BlobWalkSpriteSheet_9: 1396983547
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
