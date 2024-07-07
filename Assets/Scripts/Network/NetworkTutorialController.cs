@@ -20,6 +20,8 @@ public class NetworkTutorialController : NetworkBehaviour
 
     [SerializeField] private PlayableDirector xrDirector;
 
+    [SerializeField] private MeshRenderer xrSphereMeshRenderer;
+
     [Header("Desktop Components")]
     [SerializeField] private CanvasGroup desktopInstructionsGroup;
     [SerializeField] private CanvasGroup desktopCountdownGroup;
@@ -64,6 +66,8 @@ public class NetworkTutorialController : NetworkBehaviour
     {
         FadeOutInstructionsClientRpc();
 
+        xrSphereMeshRenderer.material.DOColor(Color.black, "_Color_1", .3f).SetDelay(.15f);
+
         yield return xrInstructionsGroup.DOFade(0, .3f).WaitForCompletion();
 
         yield return new WaitForSeconds(.5f);
@@ -99,6 +103,8 @@ public class NetworkTutorialController : NetworkBehaviour
     private void FadeOutInstructionsClientRpc()
     {
         if (IsServer) return;
+
+        desktopDirector.Stop();
 
         desktopInstructionsGroup.DOFade(0, .3f);
     }
