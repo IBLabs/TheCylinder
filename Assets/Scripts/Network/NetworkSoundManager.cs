@@ -21,6 +21,19 @@ public class NetworkSoundManager : NetworkBehaviour
         }
     }
 
+    public void RequestPlaySound(string soundName, Vector3 position)
+    {
+        var hasNetworkAccess = NetworkManager.Singleton != null;
+        if (hasNetworkAccess)
+        {
+            PlaySoundServerRpc(soundName, position);
+        }
+        else
+        {
+            AudioManager.Instance.PlaySound(soundName, position);
+        }
+    }
+
     [ServerRpc(RequireOwnership = false)]
     public void PlaySoundServerRpc(string soundName, Vector3 position)
     {

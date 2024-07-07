@@ -12,55 +12,39 @@ public class HoldButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     public Image progressBar;
     public AudioSource sfxAudioSource;
     public AudioClip holdSound;
+    public AudioClip hoverSound;
     public float holdTime = 2f;
     public Color normalColor = Color.white;
     public Color hoverColor = Color.gray;
-    public float transitionDuration = 0.2f;
-    public Graphic[] graphics;
+
+    [SerializeField] private RectTransform outlineTransform;
 
     public UnityEvent OnAction;
 
     private float _timer;
-    private bool _isHeld;
-    private bool _didFireAction;
+    private bool _isButtonHeld;
+    private bool _didInvokeAction;
 
     void Start()
     {
         progressBar.fillAmount = 0f;
-        SetGraphicsColor(normalColor);
+
+        SetHover(false);
     }
 
     void Update()
     {
-        if (!_didFireAction)
+        if (!_didInvokeAction)
         {
-            if (_isHeld)
-            {
-                _timer += Time.deltaTime;
-
-                if (_timer >= holdTime)
-                {
-                    sfxAudioSource.DOPitch(.1f, 0.2f).onComplete = () =>
-                    {
-                        sfxAudioSource.Stop();
-                        sfxAudioSource.pitch = 1f;
-                    };
-
-                    ButtonAction();
-                }
-            }
-            else if (_timer > 0f)
-            {
-                _timer -= Time.deltaTime;
-            }
+            HandleButton();
         }
 
-        if (!_didFireAction && _timer > 0f) progressBar.fillAmount = _timer / holdTime;
+        UpdateProgressBar();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        _isHeld = true;
+        _isButtonHeld = true;
 
         sfxAudioSource.clip = holdSound;
         sfxAudioSource.Play();
@@ -68,56 +52,81 @@ public class HoldButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        _isHeld = false;
+        _isButtonHeld = false;
 
-        sfxAudioSource.DOPitch(.1f, 0.2f).onComplete = () =>
-        {
-            sfxAudioSource.Stop();
-            sfxAudioSource.pitch = 1f;
-        };
+        PitchDownSFX();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        SetGraphicsColor(hoverColor);
+        sfxAudioSource.PlayOneShot(hoverSound);
+
+        SetHover(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        SetGraphicsColor(normalColor);
+        SetHover(false);
     }
 
-    private void ButtonAction()
+    private void SetHover(bool isHover)
     {
-        _didFireAction = true;
+        float animationDuration = .2f;
+
+        float targetZ = isHover ? -.25f : 0f;
+        float targetAlpha = isHover ? 1f : 0f;
+
+        outlineTransform.DOLocalMoveZ(targetZ, animationDuration).SetEase(Ease.OutBack);
+
+        if (outlineTransform.TryGetComponent<UIOutline>(out var outline))
+        {
+            outline.DOColor(isHover ? hoverColor : normalColor, animationDuration);
+        }
+    }
+
+    private void HandleButton()
+    {
+        if (_isButtonHeld)
+        {
+            _timer += Time.deltaTime;
+
+            if (_timer >= holdTime)
+            {
+                _timer = holdTime;
+
+                PitchDownSFX();
+                InvokeAction();
+            }
+        }
+        else if (_timer > 0f)
+        {
+            _timer -= Time.deltaTime;
+            _timer = Mathf.Max(_timer, 0f);
+        }
+    }
+
+    private void UpdateProgressBar()
+    {
+        if (_didInvokeAction) return;
+
+        progressBar.fillAmount = _timer / holdTime;
+    }
+
+    private void InvokeAction()
+    {
+        _didInvokeAction = true;
 
         Debug.Log("Button held long enough!");
 
         OnAction?.Invoke();
     }
 
-    private void SetGraphicsColor(Color targetColor)
+    private void PitchDownSFX()
     {
-        StopAllCoroutines();
-
-        foreach (var graphic in graphics)
+        sfxAudioSource.DOPitch(.1f, 0.2f).onComplete = () =>
         {
-            StartCoroutine(FadeToColor(graphic, targetColor, transitionDuration));
-        }
-    }
-
-    private IEnumerator FadeToColor(Graphic graphic, Color targetColor, float duration)
-    {
-        Color startColor = graphic.color;
-        float time = 0;
-
-        while (time < duration)
-        {
-            graphic.color = Color.Lerp(startColor, targetColor, time / duration);
-            time += Time.deltaTime;
-            yield return null;
-        }
-
-        graphic.color = targetColor;
+            sfxAudioSource.Stop();
+            sfxAudioSource.pitch = 1f;
+        };
     }
 }

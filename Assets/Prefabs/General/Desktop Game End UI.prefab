@@ -419,8 +419,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: WAITING FOR VR PLAYER
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9fed7996617804f4f9d26dced6e29cd4, type: 2}
-  m_sharedMaterial: {fileID: 7161561657727961435, guid: 9fed7996617804f4f9d26dced6e29cd4,
+  m_fontAsset: {fileID: 11400000, guid: acfa3a9a4bb1c4a86b215d953bdff559, type: 2}
+  m_sharedMaterial: {fileID: 5985995617003335507, guid: acfa3a9a4bb1c4a86b215d953bdff559,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

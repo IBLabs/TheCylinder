@@ -909,6 +909,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8758352362053454230, guid: 39d21601a4e3d4105870981c3d1fb5b9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.64
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1717,6 +1722,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 41a929da6f62845b2aaccb17889fd370, type: 3}
   - {fileID: 8300000, guid: 768b63bb81540445fa29d909faeeae6e, type: 3}
   - {fileID: 8300000, guid: f7ca69e4d494843e894ecea9cccf7d60, type: 3}
+  attachedAudioSource: {fileID: 0}
   muteAction:
     m_UseReference: 1
     m_Action:

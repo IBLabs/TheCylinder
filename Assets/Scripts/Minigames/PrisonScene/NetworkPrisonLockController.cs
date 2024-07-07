@@ -21,6 +21,9 @@ public class NetworkPrisonLockController : NetworkBehaviour
 
     [SerializeField] private ParticleSystem unlockParticles;
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip unlockAudioClip;
+
     public UnityEvent OnUnlock;
 
     private Coroutine _unlockCoroutine;
@@ -55,9 +58,18 @@ public class NetworkPrisonLockController : NetworkBehaviour
         base.OnNetworkSpawn();
     }
 
+    public void PlayUnlockSound()
+    {
+        if (audioSource != null && unlockAudioClip != null)
+        {
+            audioSource.PlayOneShot(unlockAudioClip);
+        }
+    }
+
     public void PlayUnlockParticles()
     {
         unlockParticles.Play();
+        PlayUnlockSound();
     }
 
     public void TurnOn()
