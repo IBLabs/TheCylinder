@@ -13,33 +13,24 @@ public class TableSwitchController : NetworkBehaviour
 {
     public bool IsActivated { get; private set; }
 
-    [SerializeField] private Transform internalPartTransform;
 
     [Header("Configuration")]
-    [SerializeField] private float yMoveOffset = -0.012f;
 
-    [ColorUsage(true, true)]
-    [SerializeField] private Color activatedColor = Color.green;
 
     [Header("Events")]
     public UnityEvent<TableSwitchController> OnSwitchActivated;
 
-    private MeshRenderer _meshRenderer;
 
     private bool _isSwitchEnabled = true;
 
     void Start()
     {
-        _meshRenderer = internalPartTransform.GetComponent<MeshRenderer>();
-
         SetInitialState();
     }
 
     public void SetInitialState()
     {
         IsActivated = false;
-        _meshRenderer.material.SetColor("_EmissionColor", Color.black);
-        internalPartTransform.localPosition = Vector3.zero;
     }
 
     public void SetSwitchEnabled(bool isEnabled)
@@ -59,6 +50,7 @@ public class TableSwitchController : NetworkBehaviour
                 SetSwitchPressed();
                 return;
             }
+
             SetSwitchPressedServerRpc();
         }
     }
@@ -75,6 +67,7 @@ public class TableSwitchController : NetworkBehaviour
                 SetSwitchUnpressed();
                 return;
             }
+
             SetSwitchUnpressedServerRpc();
         }
     }
@@ -83,18 +76,12 @@ public class TableSwitchController : NetworkBehaviour
     {
         IsActivated = true;
 
-        internalPartTransform.DOLocalMoveY(yMoveOffset, 0.5f);
-        _meshRenderer.material.DOColor(activatedColor, "_EmissionColor", 0.2f);
-
         OnSwitchActivated?.Invoke(this);
     }
 
     private void SetSwitchUnpressed()
     {
         IsActivated = false;
-
-        internalPartTransform.DOLocalMoveY(0f, 0.5f);
-        _meshRenderer.material.DOColor(Color.black, "_EmissionColor", 0.2f);
     }
 
     [ServerRpc(RequireOwnership = false)]
