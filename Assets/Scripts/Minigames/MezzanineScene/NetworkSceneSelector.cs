@@ -4,6 +4,7 @@ using Unity.Collections;
 using Unity.Netcode;
 
 using UnityEngine;
+using UnityEngine.Events;
 
 public class NetworkSceneSelector : NetworkBehaviour
 {
@@ -13,6 +14,8 @@ public class NetworkSceneSelector : NetworkBehaviour
 
     [SerializeField] private DekstopLevelCanvasController desktopLevelCanvasController;
     [SerializeField] private XRLevelCanvasController xrLevelCanvasController;
+
+    public UnityEvent<string> DidSelectScene;
 
     private readonly NetworkVariable<FixedString32Bytes> _selectedSceneId = new NetworkVariable<FixedString32Bytes>();
 
@@ -117,5 +120,7 @@ public class NetworkSceneSelector : NetworkBehaviour
 
         if (xrLevelCanvasController.gameObject.activeInHierarchy)
             xrLevelCanvasController.SetActiveScene(targetDescriptor);
+
+        DidSelectScene?.Invoke(sceneId);
     }
 }
