@@ -19178,6 +19178,11 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3841353416
       objectReference: {fileID: 0}
+    - target: {fileID: 5714637796585899089, guid: 4e244e30c9e8b4841ae40945252a71cb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1973887748
+      objectReference: {fileID: 0}
     - target: {fileID: 6996337097449263326, guid: 4e244e30c9e8b4841ae40945252a71cb,
         type: 3}
       propertyPath: TransitionWillStart.m_PersistentCalls.m_Calls.Array.size

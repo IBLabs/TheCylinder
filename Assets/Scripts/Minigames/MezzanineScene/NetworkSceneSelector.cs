@@ -8,7 +8,7 @@ using UnityEngine.Events;
 
 public class NetworkSceneSelector : NetworkBehaviour
 {
-    private const string DEFAULT_SCENE_ID = "prison";
+    public static readonly string DEFAULT_SCENE_ID = "oval";
 
     [SerializeField] private SceneDescriptor[] sceneDescriptors;
 
