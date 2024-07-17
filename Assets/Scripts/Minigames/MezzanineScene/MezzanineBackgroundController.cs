@@ -12,6 +12,8 @@ public class MezzanineBackgroundController : MonoBehaviour
 
     [SerializeField] private MeshRenderer backgroundMeshRenderer;
     [SerializeField] private ParticleSystem debrisParticleSystem;
+    [SerializeField] private ParticleSystem meshParticleSystem;
+
 
     private NetworkSceneSelector _sceneSelector;
 
@@ -45,11 +47,13 @@ public class MezzanineBackgroundController : MonoBehaviour
             return;
         }
 
-        // backgroundMeshRenderer.material.color = backgroundConfiguration.backgroundColor;
         backgroundMeshRenderer.material.DOColor(backgroundConfiguration.backgroundColor, "_BaseColor", .5f);
 
         var particlesMain = debrisParticleSystem.main;
         particlesMain.startColor = backgroundConfiguration.particlesColor;
+
+        var meshParticlesMain = meshParticleSystem.main;
+        meshParticlesMain.startColor = backgroundConfiguration.meshParticleColor;
     }
 
     [Serializable]
@@ -58,5 +62,6 @@ public class MezzanineBackgroundController : MonoBehaviour
         public string sceneId;
         public Color backgroundColor;
         public Color particlesColor;
+        public Color meshParticleColor;
     }
 }
