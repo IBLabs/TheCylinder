@@ -7,6 +7,8 @@ class NetworkAgentSpawner : NetworkBehaviour
 {
     public GameObject[] SpawnedAgents => _spawnedAgents;
 
+    public Material LevelAgentMaterial;
+
     [SerializeField] private GameObject agentPrefab;
     [SerializeField] private bool autoLoad = false;
     [SerializeField] private int autoLoadAmount = 10;

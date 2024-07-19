@@ -10722,7 +10722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c56e1700801554906895400a4edb1918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 3275039670206567717, guid: a939153c623934257a8265ce469fdba2,
+  playerPrefab: {fileID: 4656821232982483535, guid: 7306e33697dd5451c8377b59e90b8ea8,
     type: 3}
   spawnPoints:
   - {fileID: 538791002}
@@ -24905,7 +24905,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff847dd0b9c704431974ae07e854a3d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentPrefab: {fileID: 8900986546660586475, guid: dc33b864593df4fd8b17da9940d63bc5,
+  LevelAgentMaterial: {fileID: 2100000, guid: 63f0576c793504b638d8e767d9594711, type: 2}
+  agentPrefab: {fileID: 1788162174896036249, guid: 85ba7d97fa6744b0d85f21dba4effe39,
     type: 3}
   autoLoad: 1
   autoLoadAmount: 18

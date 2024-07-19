@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 using DG.Tweening;
 
 using Unity.Netcode;
+using Unity.VisualScripting;
 
 using UnityEngine;
 
@@ -58,7 +60,22 @@ public class NetworkEnemyHitVisualizer : NetworkBehaviour
     {
         if (_renderer == null) yield break;
 
-        yield return _renderer.material.DOColor(Color.black, "_EmissionColor", 0.33f).From(Color.white).WaitForCompletion();
+        var targetMaterialsNames = new List<string> { "General_EnemyMat (Instance)", "General_EnemySecondaryMat (Instance)" };
+
+        var targetMaterials = _renderer.materials.Where(m => targetMaterialsNames.Contains(m.name)).ToList();
+
+        Debug.Log("found " + targetMaterials.Count + " materials");
+        Debug.Log("materials in renderer materials list: " + string.Join(", ", _renderer.materials.Select(m => m.name).ToArray()));
+
+        for (int i = 0; i < targetMaterials.Count; i++)
+        {
+            var material = targetMaterials[i];
+            var tweener = material.DOColor(Color.black, "_EmissionColor", 0.33f).From(Color.white);
+            if (i == targetMaterials.Count - 1)
+            {
+                yield return tweener.WaitForCompletion();
+            }
+        }
 
         if (NetworkSoundManager.Instance != null)
         {
@@ -67,7 +84,15 @@ public class NetworkEnemyHitVisualizer : NetworkBehaviour
 
         // TODO: show thinking animation
 
-        yield return _renderer.material.DOColor(Color.black, "_EmissionColor", 0.1f).From(Color.red).SetLoops(2).WaitForCompletion();
+        for (int i = 0; i < targetMaterials.Count; i++)
+        {
+            var material = targetMaterials[i];
+            var tweener = material.DOColor(Color.black, "_EmissionColor", 0.1f).From(Color.red).SetLoops(2);
+            if (i == targetMaterials.Count - 1)
+            {
+                yield return tweener.WaitForCompletion();
+            }
+        }
 
         if (_delegate != null) _delegate.Invoke();
     }

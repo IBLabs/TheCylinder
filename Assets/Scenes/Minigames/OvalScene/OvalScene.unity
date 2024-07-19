@@ -1174,8 +1174,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 216908171}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.30826765, y: -0.00000002835094, z: 0.000000009187092, w: 0.95129967}
-  m_LocalPosition: {x: 0, y: 4.284, z: -6.506}
+  m_LocalRotation: {x: 0.3316487, y: -0.000000028115613, z: 0.000000009883906, w: 0.94340295}
+  m_LocalPosition: {x: 0, y: 5.03, z: -6.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -3815,7 +3815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c56e1700801554906895400a4edb1918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 3275039670206567717, guid: a939153c623934257a8265ce469fdba2,
+  playerPrefab: {fileID: 4656821232982483535, guid: 7306e33697dd5451c8377b59e90b8ea8,
     type: 3}
   spawnPoints:
   - {fileID: 964635178}
@@ -9910,7 +9910,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff847dd0b9c704431974ae07e854a3d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentPrefab: {fileID: 8900986546660586475, guid: dc33b864593df4fd8b17da9940d63bc5,
+  LevelAgentMaterial: {fileID: 2100000, guid: c53988f1af62c4ffcac5ab9f20a96a65, type: 2}
+  agentPrefab: {fileID: 1788162174896036249, guid: 85ba7d97fa6744b0d85f21dba4effe39,
     type: 3}
   autoLoad: 1
   autoLoadAmount: 22
@@ -11200,8 +11201,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1868945616}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.30826765, y: -0.00000002835094, z: 0.000000009187092, w: 0.95129967}
-  m_LocalPosition: {x: -0, y: 4.284, z: -6.506}
+  m_LocalRotation: {x: 0.3316487, y: -0.000000028115613, z: 0.000000009883906, w: 0.94340295}
+  m_LocalPosition: {x: -0, y: 5.03, z: -6.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
