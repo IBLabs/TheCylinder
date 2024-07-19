@@ -12,7 +12,10 @@ Material:
   m_Parent: {fileID: 2100000, guid: 5f914ad2882334b01b127fa1d7c1ad51, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _METALLICSPECGLOSSMAP
   - _NORMALMAP
+  - _PARALLAXMAP
+  - _SPECULAR_SETUP
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -27,24 +30,42 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 129cafd328d8b4f95bd61be58f83b65a, type: 3}
         m_Scale: {x: 4.83, y: 6.53}
-        m_Offset: {x: 0.05, y: -0.15}
+        m_Offset: {x: -0.25, y: 0.09}
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: 3fc936d5bc7174606b190258f556e505, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 129cafd328d8b4f95bd61be58f83b65a, type: 3}
         m_Scale: {x: 4.83, y: 6.53}
-        m_Offset: {x: 0.05, y: -0.15}
+        m_Offset: {x: -0.25, y: 0.09}
     - _MetallicGlossMap:
+        m_Texture: {fileID: 2800000, guid: 471028d0f2d594d0abb7b4e7cc3cad4a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 2800000, guid: e0ad59d00128b4058a496c4567a6fda9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 2800000, guid: 329f1ad809b5b44348720ae5b027b1da, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BumpScale: 0.1
-    - _Smoothness: 0.348
+    - _Smoothness: 0.037
+    - _SmoothnessTextureChannel: 0
+    - _WorkflowMode: 0
     m_Colors:
-    - _BaseColor: {r: 0.37900499, g: 0.45565218, b: 0.4811321, a: 1}
-    - _Color: {r: 0.37900496, g: 0.45565218, b: 0.4811321, a: 1}
+    - _BaseColor: {r: 0.3183962, g: 0.39899132, b: 0.5, a: 1}
+    - _Color: {r: 0.31839618, g: 0.3989913, b: 0.5, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &7344705891575558622

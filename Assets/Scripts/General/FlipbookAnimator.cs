@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class FlipbookAnimator : MonoBehaviour
 {
+    [SerializeField] private bool randomizeOffset = true;
+    [SerializeField] private Renderer targetRenderer;
+    [SerializeField] private int materialIndex = 0;
+
     public Material material; // The material to animate
     public int totalFrames = 16; // Total number of frames in the texture
     public int rows = 4; // Number of rows in the texture
@@ -14,14 +18,24 @@ public class FlipbookAnimator : MonoBehaviour
 
     void Start()
     {
-        if (material == null)
+        if (targetRenderer != null)
         {
-            Debug.LogError("Material is not assigned.");
+            if (materialIndex < 0 || materialIndex >= targetRenderer.materials.Length)
+            {
+                Debug.LogError("Material index is out of range.");
+                return;
+            }
+
+            material = targetRenderer.materials[materialIndex];
+        }
+        else if (material == null)
+        {
+            Debug.LogError("Material is not set.");
             return;
         }
 
         frameTime = 1f / framesPerSecond;
-        currentFrame = 0;
+        currentFrame = randomizeOffset ? Random.Range(0, totalFrames) : 0;
         timer = 0f;
     }
 
