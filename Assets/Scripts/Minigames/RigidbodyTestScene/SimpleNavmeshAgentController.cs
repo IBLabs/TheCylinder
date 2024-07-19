@@ -5,6 +5,7 @@ using UnityEngine.AI;
 public class SimpleNavmeshAgentController : MonoBehaviour
 {
     private const string IS_WALKING = "isWalking";
+    private const string IS_RUNNING = "isRunning";
 
     public bool IsPaused => _isPaused;
 
@@ -14,6 +15,11 @@ public class SimpleNavmeshAgentController : MonoBehaviour
     [SerializeField] private float minWanderTimer = 1f;
     [SerializeField] private float maxWanderTimer = 3f;
     [SerializeField] private float rotationSpeed = 3f;
+
+    [SerializeField] private float walkSpeed = 0.25f;
+    [SerializeField] private float runSpeed = .75f;
+
+    private bool _shouldRun;
 
     private NavMeshAgent agent;
     private float _timer;
@@ -40,8 +46,14 @@ public class SimpleNavmeshAgentController : MonoBehaviour
 
             if (_timer >= _currentTime)
             {
-                Vector3 newPos = RandomNavmeshLocation(wanderRadius);
+                _shouldRun = Random.value > 0.95f;
+
+                float targetRadius = _shouldRun ? wanderRadius * 2 : wanderRadius;
+                Vector3 newPos = RandomNavmeshLocation(targetRadius);
                 agent.SetDestination(newPos);
+
+                agent.speed = _shouldRun ? runSpeed : walkSpeed;
+
                 _timer = 0f;
                 _currentTime = Random.Range(minWanderTimer, maxWanderTimer);
             }
@@ -53,12 +65,15 @@ public class SimpleNavmeshAgentController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
         }
 
-        if (agent.velocity.magnitude > 0.01f)
+        if (agent.velocity.magnitude > 0.1f)
         {
+            if (_shouldRun) animator.SetBool(IS_RUNNING, true);
             animator.SetBool(IS_WALKING, true);
+
         }
         else
         {
+            animator.SetBool(IS_RUNNING, false);
             animator.SetBool(IS_WALKING, false);
         }
     }

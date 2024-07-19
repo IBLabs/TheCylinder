@@ -28,6 +28,8 @@ public class MezzanineBackgroundController : MonoBehaviour
 
         _sceneSelector = sceneSelector;
         sceneSelector.DidSelectScene.AddListener(OnDidSelectScene);
+
+        OnDidSelectScene(NetworkSceneSelector.DEFAULT_SCENE_ID);
     }
 
     void OnDestroy()
