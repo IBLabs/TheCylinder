@@ -70,6 +70,18 @@ public class NetworkSceneSelector : NetworkBehaviour
         SetSceneWithIdServerRpc("follow");
     }
 
+    public void SetBasicScene()
+    {
+        var hasNetworkAccess = NetworkManager.Singleton != null;
+        if (!hasNetworkAccess)
+        {
+            SetActiveScene("basic");
+            return;
+        }
+
+        SetSceneWithIdServerRpc("basic");
+    }
+
     public void LaunchSelectdScene()
     {
         var sceneDescriptor = sceneDescriptors.FirstOrDefault(descriptor => descriptor.sceneId == _selectedSceneId.Value);

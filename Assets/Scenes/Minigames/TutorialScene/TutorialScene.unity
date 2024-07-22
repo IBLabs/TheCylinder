@@ -777,7 +777,6 @@ MonoBehaviour:
   - {fileID: 1589518521}
   - {fileID: 732628841}
   - {fileID: 1605009652}
-  - {fileID: 47674606}
   OnPlatformDetected:
     m_PersistentCalls:
       m_Calls:
@@ -878,7 +877,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &47674607
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,9 +7,10 @@ public class BuildConfigurator : MonoBehaviour
     private static readonly string[] scenes = new string[] {
         "Assets/Scenes/Utilities/NetworkBootstrapScene.unity",
         "Assets/Scenes/Minigames/TutorialScene/TutorialScene.unity",
-        "Assets/Scenes/Minigames/PrisonScene/PrisonScene.unity",
+        "Assets/Scenes/Minigames/BasicScene/BasicScene.unity",
         "Assets/Scenes/Minigames/MezzanineScene/MezzanineScene.unity",
-        "Assets/Scenes/Minigames/OvalScene/OvalScene.unity",
+        "Assets/Scenes/Minigames/PrisonScene/PrisonScene.unity",
+        "Assets/Scenes/Minigames/OvalScene/OvalScene.unity"
         // "Assets/Scenes/Minigames/FollowScene/FollowScene.unity",
         // "Assets/Scenes/Minigames/RigidbodyTestScene/RigidbodyTestScene.unity",
      };
@@ -72,9 +73,9 @@ public class BuildConfigurator : MonoBehaviour
 
     private static void SetPlayerSettingsForDesktopBuild()
     {
-        PlayerSettings.fullScreenMode = FullScreenMode.Windowed;
-        PlayerSettings.defaultScreenWidth = 720;
-        PlayerSettings.defaultScreenHeight = 1280;
+        PlayerSettings.fullScreenMode = FullScreenMode.MaximizedWindow;
+        PlayerSettings.defaultScreenWidth = 1920;
+        PlayerSettings.defaultScreenHeight = 1080;
         PlayerSettings.resizableWindow = true;
     }
 
